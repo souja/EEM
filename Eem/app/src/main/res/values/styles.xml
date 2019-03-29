@@ -1,0 +1,32 @@
+<resources>
+
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="ThemeApp" parent="AppBaseTheme">
+        <!--<item name="android:windowBackground">@drawable/ic_init</item>-->
+    </style>
+
+    <style name="ThemeSplash" parent="AppBaseTheme">
+        <!--<item name="android:windowExitAnimation">@anim/fade_out</item>-->
+        <!--<item name="android:windowBackground">@drawable/ic_init</item>-->
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="ThemeDetail" parent="AppBaseTheme">
+        <!--<item name="colorPrimaryDark">@color/black</item>-->
+    </style>
+
+    <style name="ThemeTranslucent" parent="AppBaseTheme" />
+
+    <style name="ThemeFullScreen" parent="AppBaseTheme">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="ThemeBlack" parent="AppBaseTheme" />
+
+    <style name="ThemeWhite" parent="AppBaseTheme" />
+</resources>
