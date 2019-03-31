@@ -1,13 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".act.ActMain">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
 
-</FrameLayout>
+    <!--底部导航-->
+    <LinearLayout
+        android:id="@+id/layout_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="150px"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white">
+
+        <com.souja.lib.widget.MCheckBox
+            style="@style/cbNavi"
+            app:mDrawable="@drawable/navi_a_selector"
+            app:mDrawableHeight="65px"
+            app:mDrawableWidth="69px"
+            app:mSelfControl="true"
+            app:mText="找医生"
+            app:mTxtColor="@color/grey_c4"
+            app:mTxtColorFocus="@color/main_color"
+            app:noBg="true" />
+
+        <com.souja.lib.widget.MCheckBox
+            style="@style/cbNavi"
+            app:mDrawable="@drawable/navi_b_selector"
+            app:mDrawableHeight="60px"
+            app:mDrawableWidth="66px"
+            app:mSelfControl="true"
+            app:mText="消息"
+            app:mTxtColor="@color/grey_c4"
+            app:mTxtColorFocus="@color/main_color"
+            app:noBg="true" />
+
+        <com.souja.lib.widget.MCheckBox
+            style="@style/cbNavi"
+            app:mDrawable="@drawable/navi_c_selector"
+            app:mDrawableHeight="62px"
+            app:mDrawableWidth="63px"
+            app:mSelfControl="true"
+            app:mText="产品"
+            app:mTxtColor="@color/grey_c4"
+            app:mTxtColorFocus="@color/main_color"
+            app:noBg="true" />
+
+        <com.souja.lib.widget.MCheckBox
+            style="@style/cbNavi"
+            app:mDrawable="@drawable/navi_d_selector"
+            app:mDrawableHeight="66px"
+            app:mDrawableWidth="62px"
+            app:mSelfControl="true"
+            app:mText="我的"
+            app:mTxtColor="@color/grey_c4"
+            app:mTxtColorFocus="@color/main_color"
+            app:noBg="true" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_above="@id/layout_navigation"
+        android:background="@color/line_dc" />
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/divider" />
+</RelativeLayout>

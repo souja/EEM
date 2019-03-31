@@ -69,8 +69,8 @@ public class ActLogin extends BaseActEd {
         });
 
         login.setOnClickListener(view -> {
-            sendLogin();
-//            testGo();
+//            sendLogin();
+            testGo();
         });
 
     }

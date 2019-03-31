@@ -2,20 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
     android:paddingLeft="42px"
     android:paddingRight="42px">
 
     <TextView
         style="@style/text_54px"
+        android:layout_height="120px"
         android:layout_gravity="center_horizontal"
+        android:gravity="center"
         android:text="登录" />
 
     <ImageView
         android:layout_width="840px"
         android:layout_height="150px"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="300px"
+        android:layout_marginTop="285px"
         android:background="@drawable/ic_logo" />
 
     <TextView

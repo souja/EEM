@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/page_bg"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/text_54px"
+        android:layout_height="120px"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="个人中心" />
+
+    <TextView
+        android:id="@+id/scan"
+        style="@style/text_45px"
+        android:layout_width="match_parent"
+        android:layout_height="120px"
+        android:layout_marginTop="120px"
+        android:gravity="center"
+        android:text="扫一扫" />
+
+    <TextView
+        android:id="@+id/myProjects"
+        style="@style/text_45px"
+        android:layout_width="match_parent"
+        android:layout_height="120px"
+        android:layout_marginTop="120px"
+        android:gravity="center"
+        android:text="我的项目" />
+
+    <TextView
+        android:id="@+id/myProfile"
+        style="@style/text_45px"
+        android:layout_width="match_parent"
+        android:layout_height="120px"
+        android:layout_marginTop="120px"
+        android:gravity="center"
+        android:text="我的资料" />
+
+    <TextView
+        android:id="@+id/aboutSys"
+        style="@style/text_45px"
+        android:layout_width="match_parent"
+        android:layout_height="120px"
+        android:layout_marginTop="120px"
+        android:gravity="center"
+        android:text="关于系统" />
+</LinearLayout>
