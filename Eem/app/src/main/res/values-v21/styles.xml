@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ThemeBlack" parent="AppBaseTheme">
+        <item name="android:statusBarColor">@color/black</item>
+    </style>
+
+    <style name="ThemeWhite" parent="AppBaseTheme">
+        <item name="android:statusBarColor">@color/white</item>
+    </style>
+
+    <style name="ThemeApp" parent="AppBaseTheme">
+        <item name="android:windowBackground">@drawable/ic_init</item>
+    </style>
+
+    <style name="ThemeTranslucent" parent="AppBaseTheme">
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+    <style name="ThemeSplash" parent="AppBaseTheme">
+        <item name="android:windowExitAnimation">@anim/fade_out</item>
+        <item name="android:windowBackground">@drawable/ic_init</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+</resources>

@@ -12,9 +12,9 @@ public class ScreenUtil {
 
     // Screen Params
     public static final int BASE_SCREEN_WIDTH = 1080;
-    public static final int BASE_SCREEN_HEIGHT = 1920;
+//    public static final int BASE_SCREEN_HEIGHT = 1334;
     public static float mScale = 1;
-    public static float mScaleH = 1;
+//    public static float mScaleH = 1;
 
     /**
      * Set the screen scale value
@@ -30,7 +30,7 @@ public class ScreenUtil {
         width = displayMetrics.widthPixels;
         height = displayMetrics.heightPixels;
         mScale = (float) width / BASE_SCREEN_WIDTH;
-        mScaleH = (float) height / BASE_SCREEN_HEIGHT;
+//        mScaleH = (float) height / BASE_SCREEN_HEIGHT;
     }
 
     public static ViewGroup.LayoutParams scaleParams(ViewGroup.LayoutParams params) {

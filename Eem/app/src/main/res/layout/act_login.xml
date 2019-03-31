@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="42px"
+    android:paddingRight="42px">
+
+    <TextView
+        style="@style/text_54px"
+        android:layout_gravity="center_horizontal"
+        android:text="登录" />
+
+    <ImageView
+        android:layout_width="840px"
+        android:layout_height="150px"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="300px"
+        android:background="@drawable/ic_logo" />
+
+    <TextView
+        style="@style/text_48px"
+        android:layout_marginLeft="12px"
+        android:layout_marginTop="210px"
+        android:text="登录账号" />
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/ed_account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:digits="@string/accountDigits"
+        android:hint="请输入登录账号"
+        android:imeOptions="actionNext"
+        android:singleLine="true"
+        android:textSize="45px" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/text_48px"
+            android:layout_marginLeft="12px"
+            android:layout_marginTop="21px"
+            android:text="密码" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/ed_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="90px"
+            android:hint="请输入密码"
+            android:imeOptions="actionGo"
+            android:inputType="textPassword"
+            android:singleLine="true"
+            android:textSize="45px" />
+
+        <ImageButton
+            android:id="@+id/ib_pwdVisible"
+            android:layout_width="180px"
+            android:layout_height="120px"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="24px"
+            android:background="@color/transparent"
+            android:src="@drawable/ic_eye_close" />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/forgetPwd"
+        style="@style/text_42px"
+        android:layout_gravity="right"
+        android:paddingTop="12px"
+        android:paddingRight="15px"
+        android:paddingBottom="12px"
+        android:text="忘记密码?"
+        android:textColor="@color/blue_4b9" />
+
+    <TextView
+        android:id="@+id/login"
+        android:layout_width="524px"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="150px"
+        android:background="@drawable/login_btn_bg_selector"
+        android:gravity="center_horizontal"
+        android:paddingTop="36px"
+        android:text="登录"
+        android:textColor="@color/white"
+        android:textSize="42px" />
+</LinearLayout>
