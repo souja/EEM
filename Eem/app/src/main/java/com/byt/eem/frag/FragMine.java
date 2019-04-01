@@ -3,6 +3,7 @@ package com.byt.eem.frag;
 import android.view.LayoutInflater;
 
 import com.byt.eem.R;
+import com.byt.eem.act.ActMyProjects;
 import com.byt.eem.base.MBaseLazyFragmentB;
 
 public class FragMine extends MBaseLazyFragmentB {
@@ -14,8 +15,8 @@ public class FragMine extends MBaseLazyFragmentB {
 
         //扫一扫
 //        _contentView.findViewById(R.id.scan).setOnClickListener(view -> );
-        //我的项目
-//        _contentView.findViewById(R.id.scan).setOnClickListener(view -> );
+//        我的项目
+        _contentView.findViewById(R.id.myProjects).setOnClickListener(view -> ActMyProjects.Companion.launch(mBaseActivity));
         //我的资料
 //        _contentView.findViewById(R.id.scan).setOnClickListener(view -> );
         //关于系统
