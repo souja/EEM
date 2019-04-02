@@ -14,8 +14,8 @@ import java.util.ArrayList;
 
 public class GsonUtil {
 
-    // 将对象编译成json
-    public static String objToJson(Object m) {
+    // 将对象编译成jsonString
+    public static String objToJsonString(Object m) {
         return new Gson().toJson(m);
     }
 

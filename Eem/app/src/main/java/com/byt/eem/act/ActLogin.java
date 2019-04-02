@@ -13,10 +13,12 @@ import com.byt.eem.base.BaseActEd;
 import com.byt.eem.model.UserInfo;
 import com.byt.eem.util.HttpUtil;
 import com.byt.eem.util.MConstants;
-import com.google.gson.JsonObject;
 import com.souja.lib.inter.IHttpCallBack;
+import com.souja.lib.models.BaseModel;
 import com.souja.lib.models.ODataPage;
 import com.souja.lib.widget.LoadingDialog;
+
+import org.xutils.common.util.LogUtil;
 
 import java.util.ArrayList;
 
@@ -69,8 +71,8 @@ public class ActLogin extends BaseActEd {
         });
 
         login.setOnClickListener(view -> {
-//            sendLogin();
-            testGo();
+            sendLogin();
+//            testGo();
         });
 
     }
@@ -91,17 +93,13 @@ public class ActLogin extends BaseActEd {
             showToast("请输入密码");
             return;
         }
-        JsonObject obj = new JsonObject();
-        obj.addProperty("UserId", phone);
-        obj.addProperty("PassWord", pwd);
-//        String deviceInfo = SPHelper.getString("deviceInfo");
-//        obj.addProperty("hardware", deviceInfo);
-
         Post(new LoadingDialog(_this), MConstants.URL.LOGIN,
-                HttpUtil.formatParams(obj.toString()), UserInfo.class, new IHttpCallBack() {
+                HttpUtil.formatParams(new LoginParam(phone, pwd).toString()),
+                UserInfo.class, new IHttpCallBack() {
                     @Override
                     public <T> void OnSuccess(String msg, ODataPage page, ArrayList<T> dataList) {
                         UserInfo userInfo = (UserInfo) dataList.get(0);
+                        LogUtil.e(userInfo.getUserName() + " " + userInfo.getRoleName());
                         EApp.setUserInfo(userInfo);
                         EApp.updateUserInfoCache();
 //                        SPHelper.putString("lastLogin", userInfo.getPhone());
@@ -117,6 +115,16 @@ public class ActLogin extends BaseActEd {
                         showToast(msg);
                     }
                 });
+    }
+
+    class LoginParam extends BaseModel {
+        String UserId;
+        String PassWord;
+
+        public LoginParam(String userId, String passWord) {
+            UserId = userId;
+            PassWord = passWord;
+        }
     }
 
 }

@@ -7,17 +7,18 @@ import com.google.gson.JsonElement;
 import com.souja.lib.enums.EnumExceptions;
 import com.souja.lib.inter.IHttpCallBack;
 import com.souja.lib.models.BaseModel;
+import com.souja.lib.models.ODataPage;
+import com.souja.lib.utils.GsonUtil;
 import com.souja.lib.utils.MTool;
 import com.souja.lib.utils.SPHelper;
 
 import org.xutils.common.Callback;
-import org.xutils.common.task.PriorityExecutor;
 import org.xutils.common.util.LogUtil;
 import org.xutils.http.HttpMethod;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
-import java.io.File;
+import java.util.ArrayList;
 
 /**
  * Created by Souja on 2018/3/6 0006.
@@ -75,17 +76,14 @@ public class HttpUtil {
 
     public static RequestParams formatParams(String paramJStr) {
         RequestParams paramJson = new RequestParams();
-        paramJson.setAsJsonContent(true);
-        LogUtil.e("===Request params===" + paramJStr);
+//        paramJson.setAsJsonContent(true);
         if (!MTool.isEmpty(paramJStr)) {
-            paramJson.setBodyContent(paramJStr);
+            String finalStr = "\"" + paramJStr.replace("\"", "\\\"") + "\"";
+            LogUtil.e("===Request params===" + paramJStr);
+            paramJson.setBodyContent(finalStr);
         }
         paramJson.addHeader("Content-Type", "application/json");
         return paramJson;
-    }
-
-    private static boolean isNull(JsonElement element) {
-        return element == null || element.isJsonNull();
     }
 
     private static <T> void handleOnRequestSuccess(String result, RequestParams params,
@@ -94,16 +92,24 @@ public class HttpUtil {
         if (result == null) {
             callBack.OnFailure("服务器异常");
         }
-       /* Result resultObj = (Result) GsonUtil.getObj(result, Result.class);
-        int code = resultObj.code;
+        Result resultObj = (Result) GsonUtil.getObj(result, Result.class);
+        boolean success = resultObj.isSucess;
         String msg = resultObj.msg;
-        if (code == M_HTTP_SUCCESS) {
-            ODataPage pageObj;//分页
-            if (isNull(resultObj.pagination)) pageObj = new ODataPage();
-            else
-                pageObj = (ODataPage) GsonUtil.getObj(resultObj.pagination.toString(), ODataPage.class);
+        if (success) {
+//            ODataPage pageObj;//分页
+//            if (isNull(resultObj.pagination)) pageObj = new ODataPage();
+//            else
+//                pageObj = (ODataPage) GsonUtil.getObj(resultObj.pagination.toString(), ODataPage.class);
+            ODataPage pageObj = new ODataPage();
+            String dataString = resultObj.dataJsonStr;
+            if (TextUtils.isEmpty(dataString)) {
+                callBack.OnSuccess("数据为空", pageObj, new ArrayList<>());
+                return;
+            }
+            String formatDataStr = dataString.replace("\\\"", "'");
+            callBack.OnSuccess(msg, pageObj, GsonUtil.getArr(formatDataStr, dataClass));
 
-            if (isNull(resultObj.data) || ((JsonArray) resultObj.data).size() == 0) {
+           /* if (isNull(resultObj.data) || ((JsonArray) resultObj.data).size() == 0) {
                 callBack.OnSuccess(msg, pageObj, new ArrayList<>());
             } else if (resultObj.data.isJsonArray()) {
                 String dataArr = resultObj.data.toString();
@@ -135,11 +141,12 @@ public class HttpUtil {
                 ArrayList<T> dataList = new ArrayList<>();
                 dataList.add(new Gson().fromJson(dataStr, dataClass));
                 callBack.OnSuccess(msg, pageObj, dataList);
-            }
+            }*/
         } else {
-            if (code == M_MULT_LOGIN) loginOutDate();
-            else callBack.OnFailure(msg == null ? "服务器异常" : msg);
-        }*/
+//            if (code == M_MULT_LOGIN) loginOutDate();
+//            else callBack.OnFailure(msg == null ? "服务器异常" : msg);
+            callBack.OnFailure(msg == null ? "抱歉，服务器开小差了~" : msg);
+        }
 
     }
 
@@ -268,6 +275,18 @@ public class HttpUtil {
 
     class Result extends BaseModel {
 
+        /**
+         * isSucess : true
+         * msg : null
+         * dataJsonStr : [{"Id":12,"ParentId":0,"ParentTUserId":null,"PassWord":"1","UserId":"user","UserName":"体验用户","TRoleId":1,"Phone":null,"PlatFormName":"智慧消防平台","CompanyLogo":"/UpLoad/峰泰logo1副本.jpg","CompanyName":"成都峰泰电气有限公司","RoleName":"超级管理员"}]
+         * outId : 0
+         */
+
+        public boolean isSucess;
+        public String msg;
+        public String dataJsonStr;
+        public int outId;
+
     }
 /*
     public static Callback.Cancelable UploadImage(ProgressDialog dialog, RequestParams params, IUploadImageCallBack callBack) {
@@ -339,6 +358,10 @@ public class HttpUtil {
         });
     }
 */
+
+//    private static boolean isNull(JsonElement element) {
+//        return element == null || element.isJsonNull();
+//    }
 
 //    private static void loginOutDate() {
 //        if (ActMain.get() != null) {

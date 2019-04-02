@@ -89,7 +89,7 @@ public class EApp extends MultiDexApplication {
 
     //更新登录用户信息缓存
     public static void updateUserInfoCache() {
-        SPHelper.putString(MConstants.USERINFO_KEY, GsonUtil.objToJson(mUserInfo));
+        SPHelper.putString(MConstants.USERINFO_KEY, GsonUtil.objToJsonString(mUserInfo));
     }
 
 }

@@ -194,20 +194,20 @@ abstract class BaseParams {
      * @param name
      * @param value
      */
-    public void addBodyParameter(String name, String value) {
+  /*  public void addBodyParameter(String name, String value) {
         if (!MTool.isEmpty(name)) {
             this.bodyParams.add(new KeyValue(name, value));
         } else {
             this.bodyContent = value;
         }
-    }
+    }*/
 
     /**
      * 添加body参数
      */
-    public void addBodyParameter(String name, File value) {
+    /*public void addBodyParameter(String name, File value) {
         addBodyParameter(name, value, null, null);
-    }
+    }*/
 
     /**
      * 添加body参数
@@ -216,9 +216,9 @@ abstract class BaseParams {
      * @param value       可以是String, File, InputStream 或 byte[]
      * @param contentType 可为null
      */
-    public void addBodyParameter(String name, Object value, String contentType) {
+  /*  public void addBodyParameter(String name, Object value, String contentType) {
         addBodyParameter(name, value, contentType, null);
-    }
+    }*/
 
     /**
      * 添加body参数
@@ -228,13 +228,13 @@ abstract class BaseParams {
      * @param contentType 可为null
      * @param fileName    服务端看到的文件名
      */
-    public void addBodyParameter(String name, Object value, String contentType, String fileName) {
+   /* public void addBodyParameter(String name, Object value, String contentType, String fileName) {
         if (MTool.isEmpty(contentType) && MTool.isEmpty(fileName)) {
             this.fileParams.add(new KeyValue(name, value));
         } else {
             this.fileParams.add(new KeyValue(name, new BodyItemWrapper(value, contentType, fileName)));
         }
-    }
+    }*/
 
     public void setBodyContent(String content) {
         this.bodyContent = content;
@@ -246,12 +246,12 @@ abstract class BaseParams {
     }
 
     public List<Header> getHeaders() {
-        return new ArrayList<Header>(headers);
+        return new ArrayList<>(headers);
     }
 
     public List<KeyValue> getQueryStringParams() {
         checkBodyParams();
-        return new ArrayList<KeyValue>(queryStringParams);
+        return new ArrayList<>(queryStringParams);
     }
 
     public List<KeyValue> getBodyParams() {
