@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.byt.eem.*
 import com.byt.eem.base.BaseAct
+import com.souja.lib.widget.TitleBar
 import kotlinx.android.synthetic.main.activity_act_my_projects.*
 import kotlinx.android.synthetic.main.item_project.view.*
 
@@ -25,6 +26,9 @@ class ActMyProjects : BaseAct() {
     override fun initMain() {
         recycler_project.layoutManager = LinearLayoutManager(_this)
         recycler_project.adapter = ProjectAdapter()
+        findViewById<TitleBar>(R.id.m_title)?.setRightClick{
+            ActNewProject.launch(_this)
+        }
     }
 
 }
@@ -37,7 +41,7 @@ class ProjectAdapter:RecyclerView.Adapter<ProjectAdapter.ProjectHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =  ProjectHolder(parent.inflate(R.layout.item_project))
 
     override fun getItemCount(): Int {
-        return 40
+        return 20
     }
 
     override fun onBindViewHolder(holder: ProjectHolder, position: Int) {

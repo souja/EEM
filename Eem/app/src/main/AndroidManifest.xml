@@ -37,6 +37,8 @@
             android:theme="@style/ThemeWhite"/>
         <activity android:name=".act.ActMyProjects">
         </activity>
+        <activity android:name=".act.ActNewProject">
+        </activity>
     </application>
 
 </manifest>

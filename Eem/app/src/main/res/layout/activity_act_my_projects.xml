@@ -9,6 +9,7 @@
     tools:context=".act.ActMyProjects">
 
     <com.souja.lib.widget.TitleBar
+        android:id="@+id/tool_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:mRightText="新建"
