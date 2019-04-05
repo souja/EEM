@@ -110,6 +110,12 @@ public class ActMain extends BaseAct {
             return;
         }
         bClick = true;
+        if(preNaviIndex==0){
+            mFragHome.pauseFlipper();
+        }
+        if(naviIndex==0){
+            mFragHome.resumeFlipper();
+        }
 //        if (naviIndex != 0) {
 //            mFragFindDoctor.pauseBanner();
 //        } else {

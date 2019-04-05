@@ -188,7 +188,7 @@ public class FragHome extends MBaseFragment {
         if (flipperIndex >= mListDeviceWarn.size()) flipperIndex = 0;
         ODeviceWarn currentWarn = mListDeviceWarn.get(flipperIndex);
         int showIndex = flipperIndex % 2;
-        LogUtil.e("showIndex:" + (showIndex == 0 ? "第一个" : "第二个"));
+//        LogUtil.e("showIndex:" + (showIndex == 0 ? "第一个" : "第二个"));
         switch (showIndex) {
             case 0:
                 tvEquipName1.setText(currentWarn.getDeviceName());
@@ -242,6 +242,20 @@ public class FragHome extends MBaseFragment {
 
         public Param(int pageIndex) {
             this.pageIndex = pageIndex;
+        }
+    }
+
+    public void pauseFlipper() {
+        if (flipper != null && flipper.isFlipping()) {
+//            LogUtil.e("flipper stop");
+            flipper.stopFlipping();
+        }
+    }
+
+    public void resumeFlipper() {
+        if (flipper != null && mListDeviceWarn != null && mListDeviceWarn.size() > 0) {
+//            LogUtil.e("flipper resume");
+            flipper.startFlipping();
         }
     }
 }
