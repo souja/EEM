@@ -16,6 +16,8 @@ public class MConstants {
 
     public static final int RX_UP_XS_LIST = 400;//更新学术列表
 
+    //Rui Constants↓
+
 
     public interface URL {
         //登录
@@ -26,6 +28,11 @@ public class MConstants {
         String GET_DEVICE_WARN_BY_REAL_TIME = "/Home/GetDeviceWarnByRealTime";
         //获取各省项目汇总(如每个省有多少个项目)
         String GET_PROJECTS_GROUP_BY_PROVINCE = "/Home/GetProjectsGroupByProvince";
+        //获取各类型消息的汇总(只获取告警消息)
+        String GET_ALARM_STATISTICS = "/Message/GetAlarmStatistics";
+
+        //Rui Url↓
+
     }
 
 }
