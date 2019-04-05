@@ -103,96 +103,77 @@
         <item name="android:layout_height">match_parent</item>
     </style>
 
-    <style name="text_27px">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="text_30px" parent="wrapContent">
         <item name="android:textColor">@color/grey_80</item>
-        <item name="android:textSize">27px</item>
-    </style>
-
-    <style name="text_30px">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/grey_80</item>
+        <item name="android:includeFontPadding">false</item>
         <item name="android:textSize">30px</item>
     </style>
 
-    <style name="text_33px">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="text_33px" parent="wrapContent">
         <item name="android:textColor">@color/grey_80</item>
+        <item name="android:includeFontPadding">false</item>
         <item name="android:textSize">33px</item>
     </style>
 
-    <style name="text_36px">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="text_36px" parent="wrapContent">
         <item name="android:textSize">36px</item>
         <item name="android:textColor">@color/grey_80</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
-    <style name="text_39px">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="text_39px" parent="wrapContent">
         <item name="android:textSize">39px</item>
         <item name="android:textColor">@color/grey_80</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
-    <style name="text_42px">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="text_42px" parent="wrapContent">
         <item name="android:textSize">42px</item>
         <item name="android:textColor">@color/black_33</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
-    <style name="text_45px">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="text_45px" parent="wrapContent">
         <item name="android:textSize">45px</item>
         <item name="android:textColor">@color/black_33</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
-    <style name="text_48px">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="text_48px" parent="wrapContent">
         <item name="android:textSize">48px</item>
         <item name="android:textColor">@color/black_33</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
-    <style name="text_51px">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="text_51px" parent="wrapContent">
         <item name="android:textSize">51px</item>
         <item name="android:textColor">@color/black_33</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
-    <style name="text_54px">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="text_54px" parent="wrapContent">
         <item name="android:textSize">54px</item>
         <item name="android:textColor">@color/black_33</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
-    <style name="text_57px">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="text_57px" parent="wrapContent">
         <item name="android:textSize">57px</item>
         <item name="android:textColor">@color/black_33</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
-    <style name="text_60px">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="text_60px" parent="wrapContent">
         <item name="android:textSize">60px</item>
         <item name="android:textColor">@color/black_33</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
-    <style name="text_common">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="text_common" parent="wrapContent">
         <item name="android:textSize">48px</item>
         <item name="android:textColor">@color/black_33</item>
         <item name="android:textColorHint">@color/grey_99</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="text_commonB">

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".act.ActMain">
 
 
@@ -21,7 +21,7 @@
             app:mDrawableHeight="65px"
             app:mDrawableWidth="69px"
             app:mSelfControl="true"
-            app:mText="找医生"
+            app:mText="首页"
             app:mTxtColor="@color/grey_c4"
             app:mTxtColorFocus="@color/main_color"
             app:noBg="true" />
@@ -43,7 +43,7 @@
             app:mDrawableHeight="62px"
             app:mDrawableWidth="63px"
             app:mSelfControl="true"
-            app:mText="产品"
+            app:mText="周报"
             app:mTxtColor="@color/grey_c4"
             app:mTxtColorFocus="@color/main_color"
             app:noBg="true" />
@@ -54,7 +54,7 @@
             app:mDrawableHeight="66px"
             app:mDrawableWidth="62px"
             app:mSelfControl="true"
-            app:mText="我的"
+            app:mText="个人"
             app:mTxtColor="@color/grey_c4"
             app:mTxtColorFocus="@color/main_color"
             app:noBg="true" />

@@ -19,6 +19,19 @@ public abstract class MBaseFragment extends BaseFragment {
         addRequest(HttpUtil.Post(dialog, url, params, dataClass, callBack));
     }
 
+    public <T> void Post(String url, final Class<T> dataClass, IHttpCallBack callBack) {
+        Post(null, url, new RequestParams(), dataClass, callBack);
+    }
+
+    public <T> void Post(String url, RequestParams params, final Class<T> dataClass, IHttpCallBack callBack) {
+        Post(null, url, params, dataClass, callBack);
+    }
+
+    public <T> void Post(ProgressDialog dialog, String url,
+                         final Class<T> dataClass, IHttpCallBack callBack) {
+        Post(dialog, url, new RequestParams(), dataClass, callBack);
+    }
+
     public <T> void Get(ProgressDialog dialog, String url, RequestParams params,
                         final Class<T> dataClass, IHttpCallBack callBack) {
         addRequest(HttpUtil.Get(dialog, url, params, dataClass, callBack));
