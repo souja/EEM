@@ -45,7 +45,7 @@ public class DialogMenuList extends ProgressDialog {
         mAdapter = new AdapterDialogMenuList(mContext, mMenuList, position -> {
             //最后一个是取消，不响应
             if (noCancel || position != mMenuList.size() - 1) {
-                mListener.onItemClick(position);
+                mListener.onClick(position);
             }
             dismiss();
         }, itemRes);
@@ -62,7 +62,7 @@ public class DialogMenuList extends ProgressDialog {
             dismiss();
             //最后一个是取消，不响应
             if (noCancel || position != mMenuList.size() - 1) {
-                mListener.onItemClick(position);
+                mListener.onClick(position);
             }
         }, itemRes);
     }

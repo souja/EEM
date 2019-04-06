@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12px"
+        android:background="@drawable/shape_prov_proj_item"
+        android:paddingLeft="36px"
+        android:paddingTop="24px"
+        android:paddingRight="36px">
+
+        <TextView
+            android:id="@+id/tv_number"
+            style="@style/text_36px"
+            android:layout_marginBottom="24px"
+            android:text="设备编号  1"
+            android:textColor="@color/black_33"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_status"
+            style="@style/text_36px"
+            android:layout_alignParentRight="true"
+            android:text="正常"
+            android:textColor="@android:color/holo_green_dark"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/line1"
+            style="@style/lineEb"
+            android:layout_below="@id/tv_number"
+            android:layout_marginBottom="24px" />
+
+        <com.souja.lib.widget.CircularImageView
+            android:id="@+id/civ_icon"
+            android:layout_width="166px"
+            android:layout_height="166px"
+            android:layout_below="@id/line1"
+            android:layout_marginRight="24px"
+            app:civ_border_color="@color/transparent"
+            app:civ_border_width="1px"
+            tools:background="@mipmap/ic_launcher_round" />
+
+        <TextView
+            android:id="@+id/tv_deviceName"
+            style="@style/text_45px"
+            android:layout_marginTop="24px"
+            android:layout_below="@id/line1"
+            android:layout_toRightOf="@id/civ_icon"
+            android:text="1楼配电箱"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_deviceNo"
+            style="@style/text_36px"
+            android:layout_below="@id/tv_deviceName"
+            android:layout_toRightOf="@id/civ_icon"
+            android:text="teswd2018"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            style="@style/text_36px"
+            android:layout_below="@id/tv_deviceNo"
+            android:layout_toRightOf="@id/civ_icon"
+            android:text="15:29 2019-03-14"
+            android:textColor="@color/black" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/line1"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="60px"
+            android:layout_marginRight="12px"
+            android:background="@drawable/ic_arrow_36" />
+
+        <View
+            android:id="@+id/line2"
+            style="@style/lineEb"
+            android:layout_below="@id/civ_icon"
+            android:layout_marginTop="24px"
+            android:layout_marginBottom="24px" />
+
+        <TextView
+            android:id="@+id/tv_address"
+            style="@style/text_36px"
+            android:layout_below="@id/line2"
+            android:layout_marginBottom="24px"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="地址：神仙树神仙树神仙树神仙树神仙树神仙树神仙树神仙树神仙树" />
+    </RelativeLayout>
+</LinearLayout>

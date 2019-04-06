@@ -5,5 +5,5 @@ package com.souja.lib.inter;
  */
 
 public interface CommonItemClickListener {
-    void onItemClick(int position);
+    void onClick(int position);
 }

@@ -1,6 +1,7 @@
 package com.byt.eem.act;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -10,7 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.byt.eem.R;
-import com.byt.eem.base.BaseAct;
+import com.byt.eem.base.BaseActEd;
 import com.byt.eem.base.BaseHolder;
 import com.byt.eem.util.HttpUtil;
 import com.byt.eem.util.MConstants;
@@ -20,6 +21,7 @@ import com.souja.lib.inter.CommonItemClickListener;
 import com.souja.lib.inter.IHttpCallBack;
 import com.souja.lib.models.BaseModel;
 import com.souja.lib.models.ODataPage;
+import com.souja.lib.widget.TitleBar;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,7 +30,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ActProvinceProjects extends BaseAct {
+//xx省项目列表
+public class ActProvinceProjects extends BaseActEd {
     @BindView(R.id.ed_search)
     EditText edSearch;
     @BindView(R.id.rv_projects)
@@ -50,10 +53,12 @@ public class ActProvinceProjects extends BaseAct {
         ButterKnife.bind(this);
 
         provinceId = getIntent().getIntExtra("id", 0);
+        String provinceStr = getIntent().getStringExtra("str");
+        ((TitleBar) findViewById(R.id.m_title)).setTitle(provinceStr + "项目总览");
         mList = new ArrayList<>();
-        mAdapter = new AdapterProvProj(_this, new ArrayList<>(), position -> {
-
-        });
+        mAdapter = new AdapterProvProj(_this, new ArrayList<>(), position ->
+                NEXT(new Intent(_this, ActDeviceList.class)
+                        .putExtra("id", mList.get(position).getProjectId())));
         rvProjects.setAdapter(mAdapter);
         smartRefresh.setEnableLoadMore(false);
         smartRefresh.setOnRefreshListener(refreshLayout -> getList());
@@ -95,11 +100,13 @@ public class ActProvinceProjects extends BaseAct {
                             mList.addAll((Collection<? extends ProvProj>) data);
                         }
                         mAdapter.setDataList(mList);
+                        smartRefresh.finishRefresh();
                     }
 
                     @Override
                     public void OnFailure(String msg) {
                         showToast(msg);
+                        smartRefresh.finishRefresh();
                     }
                 });
     }
@@ -126,6 +133,8 @@ public class ActProvinceProjects extends BaseAct {
             mHolder.tvOnlineCount.setText(String.valueOf("在线  " + model.getProperlyCount()));
             mHolder.tvOfflineCount.setText(String.valueOf("离线  " + model.getOffLineCount()));
             mHolder.tvWarnCount.setText(String.valueOf("告警  " + model.getWarnCount()));
+
+            mHolder.itemView.setOnClickListener(view -> mItemClickListener.onClick(position));
         }
 
         public void setDataList(List<ProvProj> tempList) {

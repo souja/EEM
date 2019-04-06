@@ -22,6 +22,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".act.ActSplash"
+            android:screenOrientation="portrait"
             android:theme="@style/ThemeSplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,19 +32,41 @@
         </activity>
         <activity
             android:name=".act.ActMain"
+            android:screenOrientation="portrait"
             android:theme="@style/ThemeWhite" />
         <activity
             android:name=".act.ActLogin"
+            android:screenOrientation="portrait"
             android:theme="@style/ThemeWhite" />
         <activity
             android:name=".act.ActProvinceProjects"
+            android:screenOrientation="portrait"
             android:theme="@style/ThemeWhite"
             android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".act.ActDeviceList"
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeWhite"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".act.ActDeviceInfo"
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeWhite" />
+        <activity
+            android:name=".act.ActDeviceInfoHistory"
+            android:screenOrientation="landscape"
+            android:theme="@style/ThemeFullScreen" />
 
 
         <!--Rui acts↓-->
-        <activity android:name=".act.ActMyProjects"></activity>
-        <activity android:name=".act.ActNewProject"></activity>
+        <activity
+            android:name=".act.ActMyProjects"
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeWhite" />
+        <activity
+            android:name=".act.ActNewProject"
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeWhite" />
     </application>
 
 </manifest>

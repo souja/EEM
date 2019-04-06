@@ -1,6 +1,8 @@
 package com.byt.eem.frag;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.animation.Animation;
@@ -75,9 +77,12 @@ public class FragHome extends MBaseFragment {
     public void initMain() {
         unbinder = ButterKnife.bind(this, _rootView);
         mList = new ArrayList<>();
-        mAdapter = new AdapterHomeProj(mBaseActivity, mList, position ->
-                NEXT(new Intent(mBaseActivity, ActProvinceProjects.class)
-                        .putExtra("id", mList.get(position).getProvinceId())));
+        mAdapter = new AdapterHomeProj(mBaseActivity, mList, position -> {
+            OHomeProj model = mList.get(position);
+            NEXT(new Intent(mBaseActivity, ActProvinceProjects.class)
+                    .putExtra("str", model.getProvinceName())
+                    .putExtra("id", model.getProvinceId()));
+        });
         rvProjects.setAdapter(mAdapter);
         mRefreshLayout.setEnableLoadMore(false);
         mRefreshLayout.setOnRefreshListener(refreshLayout -> getData());
@@ -114,10 +119,28 @@ public class FragHome extends MBaseFragment {
     }
 
     private void getData() {
+        ready1 = false;
+        ready2 = false;
+        ready3 = false;
         getDeviceStateCount();
         getDeviceWarnByRealTime();
         getProjectsGroupByProvince();
     }
+
+    private boolean ready1, ready2, ready3;
+    private Handler mHandler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message message) {
+            switch (message.what) {
+                case 123:
+                    if (ready1 && ready2 && ready3) {
+                        mRefreshLayout.finishRefresh();
+                    }
+                    break;
+            }
+            return false;
+        }
+    });
 
     //在线、离线、报警设备数
     private void getDeviceStateCount() {
@@ -129,12 +152,16 @@ public class FragHome extends MBaseFragment {
                     for (HomeData homeData : list) {
                         setupWarningParams(homeData);
                     }
+                    ready1 = true;
+                    mHandler.sendEmptyMessage(123);
                 }
             }
 
             @Override
             public void OnFailure(String msg) {
                 showToast(msg);
+                ready1 = true;
+                mHandler.sendEmptyMessage(123);
             }
         });
     }
@@ -163,11 +190,15 @@ public class FragHome extends MBaseFragment {
                         }
                         flipperIndex = 0;
                         initDeviceWarn();
+                        ready2 = true;
+                        mHandler.sendEmptyMessage(123);
                     }
 
                     @Override
                     public void OnFailure(String msg) {
                         showToast(msg);
+                        ready2 = true;
+                        mHandler.sendEmptyMessage(123);
                     }
                 });
     }
@@ -215,11 +246,15 @@ public class FragHome extends MBaseFragment {
                 //todo 只有省名、总设备数，缺少各省下面的各状态设备数
                 //?参数是否需要再传入一个省相关的字段，只靠state如何区分各省
                 //1:根据状态获取设备信息 参数:string state（正常/告警/离线）;接口地址: http://localhost:56721/api/Home/GetDevicesByState
+                ready3 = true;
+                mHandler.sendEmptyMessage(123);
             }
 
             @Override
             public void OnFailure(String msg) {
                 showToast(msg);
+                ready3 = true;
+                mHandler.sendEmptyMessage(123);
             }
         });
     }

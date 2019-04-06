@@ -9,7 +9,7 @@
     <com.souja.lib.widget.TitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:mTitle="四川省项目总览" />
+        app:mTitle="设备列表" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/transparent"
-            android:hint="搜索项目名称"
+            android:hint="搜索设备编号或名称"
             android:imeOptions="actionDone"
             android:paddingLeft="15px"
             android:paddingRight="45px"
@@ -46,7 +46,7 @@
         android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_projects"
+            android:id="@+id/rv_devices"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager" />

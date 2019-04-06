@@ -34,6 +34,12 @@ public class MConstants {
         String GET_PROJECT_STATISTICS = "/Weekly/GetProjectStatistics";
         //按周查询各项目的汇总信息
         String GET_PROJECTS_BY_PROVINCE = "/Home/GetProjectsByProvince?provinceId=";
+        //根据项目查询设备
+        String GET_DEVICES_BY_PROJECT = "/Home/GetDevicesByProject?projectId=";
+        //获取设备当前状态
+        String GET_DEVICES_STATE_BY_DEVICEID = "/Home/GetDeviceStateByDeviceId?deviceId=";
+        //获取当前设备的历史记录 Id beginTime endTime
+        String GET_DEVICES_HISTORY_STATE = "/Home/GetDeviceHisState";
 
 
         //Rui Url↓

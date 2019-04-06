@@ -40,7 +40,7 @@ public class AdapterDialogMenuList extends MBaseAdapter<String> {
         mHolder.tvItemName.setText(menuStr);
         if (menuStr.equals("取消"))
             mHolder.tvItemName.setTextColor(colorGray);
-        mHolder.itemView.setOnClickListener(v -> mListener.onItemClick(position));
+        mHolder.itemView.setOnClickListener(v -> mListener.onClick(position));
     }
 
     static class HolderListDialog extends RecyclerView.ViewHolder{

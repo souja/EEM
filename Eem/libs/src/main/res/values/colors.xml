@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">@color/main_color</color>
     <color name="colorAccent">@color/main_color</color>
 
-    <color name="main_color">#5d5ff0</color>
+    <color name="main_color">#ffaa66cc</color>
     <color name="red_tag">#FB2B52</color>
     <color name="red_border">#f3585a</color>
     <color name="red_text">#ff535b</color>
@@ -57,7 +57,7 @@
     <color name="line_dc">#dcdcdc</color>
     <color name="line_dd">#dddddd</color>
 
-    <color name="page_bg">#f7f6f6</color>
+    <color name="page_bg">#fafafa</color>
     <color name="textHint">#aeaeae</color>
 
     <color name="grey_200">#eeeeee</color>

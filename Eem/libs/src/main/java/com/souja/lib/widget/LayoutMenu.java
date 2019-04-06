@@ -2,7 +2,6 @@ package com.souja.lib.widget;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.res.Resources;
 import android.os.Build;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -75,7 +74,7 @@ public class LayoutMenu extends LinearLayout {
         findViewById(R.id.tv_cancel).setOnClickListener(v -> close());
         viewTop.setOnClickListener(v -> close());
         findViewById(R.id.layout_save).setOnClickListener(v -> {
-            if (mListener != null) mListener.onItemClick(0);
+            if (mListener != null) mListener.onClick(0);
         });
 
     }
