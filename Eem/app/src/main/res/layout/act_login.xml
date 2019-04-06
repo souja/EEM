@@ -9,7 +9,7 @@
 
     <TextView
         style="@style/text_54px"
-        android:layout_height="120px"
+        android:layout_height="129px"
         android:layout_gravity="center_horizontal"
         android:gravity="center"
         android:text="登录" />
@@ -18,7 +18,7 @@
         android:layout_width="840px"
         android:layout_height="150px"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="285px"
+        android:layout_marginTop="255px"
         android:background="@drawable/ic_logo" />
 
     <TextView

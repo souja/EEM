@@ -3,7 +3,6 @@ package com.byt.eem.util;
 import android.app.ProgressDialog;
 import android.text.TextUtils;
 
-import com.google.gson.JsonElement;
 import com.souja.lib.enums.EnumExceptions;
 import com.souja.lib.inter.IHttpCallBack;
 import com.souja.lib.models.BaseModel;
@@ -82,6 +81,19 @@ public class HttpUtil {
             LogUtil.e("===Request params===" + paramJStr);
             paramJson.setBodyContent(finalStr);
         }
+        paramJson.addHeader("Content-Type", "application/json");
+        return paramJson;
+    }
+
+    public static RequestParams defaultParam(String key, String value) {
+        RequestParams paramJson = new RequestParams();
+        paramJson.addQueryStringParameter(key, value);
+        paramJson.addHeader("Content-Type", "application/json");
+        return paramJson;
+    }
+
+    public static RequestParams defaultParam() {
+        RequestParams paramJson = new RequestParams();
         paramJson.addHeader("Content-Type", "application/json");
         return paramJson;
     }

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="232px"
+        android:layout_margin="12px"
+        android:background="@drawable/shape_prov_proj_item"
+        android:paddingLeft="42px"
+        android:paddingTop="36px"
+        android:paddingRight="42px">
+
+        <TextView
+            android:id="@+id/tv_name"
+            style="@style/text_45px"
+            android:layout_marginBottom="15px"
+            android:text="军区总医院" />
+
+        <ImageView
+            android:layout_width="24px"
+            android:layout_height="30px"
+            android:layout_below="@id/tv_name"
+            android:layout_marginTop="3px"
+            android:background="@drawable/ic_loc_black_s" />
+
+        <TextView
+            android:id="@+id/tv_loc"
+            style="@style/text_33px"
+            android:layout_below="@id/tv_name"
+            android:layout_marginLeft="30px"
+            android:text="成都" />
+
+        <TextView
+            android:id="@+id/tv_count"
+            style="@style/text_33px"
+            android:layout_below="@id/tv_loc"
+            android:layout_marginTop="15px"
+            android:text="设备数  9" />
+
+        <TextView
+            android:id="@+id/tv_onlineCount"
+            style="@style/text_33px"
+            android:layout_below="@id/tv_loc"
+            android:layout_marginLeft="24px"
+            android:layout_marginTop="6px"
+            android:layout_toRightOf="@id/tv_count"
+            android:background="@drawable/shape_prov_proj_online"
+            android:gravity="center"
+            android:paddingLeft="18px"
+            android:paddingTop="9px"
+            android:paddingRight="18px"
+            android:paddingBottom="9px"
+            android:text="在线 12345"
+            android:textColor="@android:color/holo_green_dark" />
+
+        <TextView
+            android:id="@+id/tv_offlineCount"
+            style="@style/text_33px"
+            android:layout_below="@id/tv_loc"
+            android:layout_marginLeft="24px"
+            android:layout_marginTop="6px"
+            android:layout_toRightOf="@id/tv_onlineCount"
+            android:background="@drawable/shape_prov_proj_offline"
+            android:gravity="center"
+            android:paddingLeft="18px"
+            android:paddingTop="9px"
+            android:paddingRight="18px"
+            android:paddingBottom="9px"
+            android:text="离线 12345"
+            android:textColor="@android:color/holo_orange_dark" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="36px"
+            android:background="@drawable/ic_arrow_36" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="33px"
+                android:layout_height="33px"
+                android:background="@drawable/ic_bell" />
+
+            <TextView
+                android:id="@+id/tv_warnCount"
+                style="@style/text_36px"
+                android:layout_marginLeft="9px"
+                android:text="告警  2"
+                android:textColor="@android:color/holo_red_dark" />
+
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

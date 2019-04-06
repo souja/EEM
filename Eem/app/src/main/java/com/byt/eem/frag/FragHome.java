@@ -1,5 +1,6 @@
 package com.byt.eem.frag;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.animation.Animation;
@@ -7,6 +8,7 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.byt.eem.R;
+import com.byt.eem.act.ActProvinceProjects;
 import com.byt.eem.adapter.AdapterHomeProj;
 import com.byt.eem.base.MBaseFragment;
 import com.byt.eem.model.ODeviceWarn;
@@ -17,8 +19,6 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.souja.lib.inter.IHttpCallBack;
 import com.souja.lib.models.BaseModel;
 import com.souja.lib.models.ODataPage;
-
-import org.xutils.common.util.LogUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -75,9 +75,9 @@ public class FragHome extends MBaseFragment {
     public void initMain() {
         unbinder = ButterKnife.bind(this, _rootView);
         mList = new ArrayList<>();
-        mAdapter = new AdapterHomeProj(mBaseActivity, mList, position -> {
-
-        });
+        mAdapter = new AdapterHomeProj(mBaseActivity, mList, position ->
+                NEXT(new Intent(mBaseActivity, ActProvinceProjects.class)
+                        .putExtra("id", mList.get(position).getProvinceId())));
         rvProjects.setAdapter(mAdapter);
         mRefreshLayout.setEnableLoadMore(false);
         mRefreshLayout.setOnRefreshListener(refreshLayout -> getData());

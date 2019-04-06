@@ -3,10 +3,49 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/grey_fa"
     android:orientation="vertical">
 
     <com.souja.lib.widget.TitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:mTitle="四川省项目总览" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120px"
+        android:layout_marginLeft="87px"
+        android:layout_marginTop="30px"
+        android:layout_marginRight="87px"
+        android:layout_marginBottom="30px"
+        android:background="@drawable/shape_search_bg"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="30px"
+            android:layout_height="33px"
+            android:layout_marginLeft="45px"
+            android:background="@drawable/ic_search" />
+
+        <EditText
+            android:id="@+id/ed_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            android:hint="搜索项目名称"
+            android:paddingLeft="15px"
+            android:textSize="42px" />
+    </LinearLayout>
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/smartRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_projects"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

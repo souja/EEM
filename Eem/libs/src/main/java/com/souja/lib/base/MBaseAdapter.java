@@ -16,7 +16,7 @@ public abstract class MBaseAdapter<T> extends RecyclerView.Adapter<RecyclerView.
     protected Context mContext;
     protected List<T> mList;
     protected LayoutInflater mInflater;
-    protected CommonItemClickListener mCommonItemClickListener;
+    protected CommonItemClickListener mItemClickListener;
 
     public MBaseAdapter(Context context, List<T> list) {
         this(context, list, null);
@@ -26,7 +26,7 @@ public abstract class MBaseAdapter<T> extends RecyclerView.Adapter<RecyclerView.
         mContext = context;
         mList = list;
         if (listener != null)
-            mCommonItemClickListener = listener;
+            mItemClickListener = listener;
         mInflater = LayoutInflater.from(mContext);
     }
 

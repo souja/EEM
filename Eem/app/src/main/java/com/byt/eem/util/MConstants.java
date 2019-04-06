@@ -5,7 +5,7 @@ package com.byt.eem.util;
  */
 
 public class MConstants {
-    public static String  HTTP ="https://testpay.chftne.cn/api";//pro
+    public static String HTTP = "https://testpay.chftne.cn/api";//pro
 
     //用户信息缓存KEY
     public static final String USERINFO_KEY = "eemUserInfo";
@@ -32,7 +32,8 @@ public class MConstants {
         String GET_ALARM_STATISTICS = "/Message/GetAlarmStatistics";
         //按周查询各项目的汇总信息
         String GET_PROJECT_STATISTICS = "/Weekly/GetProjectStatistics";
-
+        //按周查询各项目的汇总信息
+        String GET_PROJECTS_BY_PROVINCE = "/Home/GetProjectsByProvince?provinceId=";
 
 
         //Rui Url↓

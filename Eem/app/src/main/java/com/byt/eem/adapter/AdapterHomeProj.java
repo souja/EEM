@@ -44,6 +44,8 @@ public class AdapterHomeProj extends MBaseAdapter<OHomeProj> {
 
         if (isLastItem(position)) mHolder.vBot.setVisibility(View.GONE);
         else mHolder.vBot.setVisibility(View.VISIBLE);
+
+        mHolder.itemView.setOnClickListener(view -> mItemClickListener.onItemClick(position));
     }
 
     static class HolderProj extends BaseHolder {
