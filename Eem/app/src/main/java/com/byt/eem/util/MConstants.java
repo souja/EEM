@@ -30,6 +30,10 @@ public class MConstants {
         String GET_PROJECTS_GROUP_BY_PROVINCE = "/Home/GetProjectsGroupByProvince";
         //获取各类型消息的汇总(只获取告警消息)
         String GET_ALARM_STATISTICS = "/Message/GetAlarmStatistics";
+        //按周查询各项目的汇总信息
+        String GET_PROJECT_STATISTICS = "/Weekly/GetProjectStatistics";
+
+
 
         //Rui Url↓
 
