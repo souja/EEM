@@ -35,6 +35,12 @@
         <activity
             android:name=".act.ActLogin"
             android:theme="@style/ThemeWhite"/>
+        <activity
+            android:name=".act.ActProvinceProjects"
+            android:theme="@style/ThemeWhite"/>
+
+
+        <!--Rui acts↓-->
         <activity android:name=".act.ActMyProjects">
         </activity>
         <activity android:name=".act.ActNewProject">
