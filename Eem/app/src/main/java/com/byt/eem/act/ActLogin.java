@@ -95,10 +95,11 @@ public class ActLogin extends BaseActEd {
         }
         Post(new LoadingDialog(_this), MConstants.URL.LOGIN,
                 HttpUtil.formatParams(new LoginParam(phone, pwd).toString()),
-                UserInfo.class, new IHttpCallBack() {
+                UserInfo.class, new IHttpCallBack<UserInfo>() {
+
                     @Override
-                    public <T> void OnSuccess(String msg, ODataPage page, ArrayList<T> dataList) {
-                        UserInfo userInfo = (UserInfo) dataList.get(0);
+                    public void OnSuccess(String msg, ODataPage page, ArrayList<UserInfo> data) {
+                        UserInfo userInfo = data.get(0);
                         LogUtil.e(userInfo.getUserName() + " " + userInfo.getRoleName());
                         EApp.setUserInfo(userInfo);
                         EApp.updateUserInfoCache();

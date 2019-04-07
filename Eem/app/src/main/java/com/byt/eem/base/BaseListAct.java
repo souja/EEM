@@ -69,38 +69,38 @@ public abstract class BaseListAct extends BaseAct implements IListPage {
 
     protected void getList(boolean retry) {
         if (retry) mLoadingDialog.setRetryDefaultTip();
-        request = HttpUtil.Request(null, getRequestUrl(pageIndex),
-                isGet() ? HttpMethod.GET : HttpMethod.POST,
-                getRequestParams(), getResultClass(), new IHttpCallBack() {
-                    @Override
-                    public <T> void OnSuccess(String msg, ODataPage page, ArrayList<T> data) {
-                        smartRefresh.finishRefresh();
-                        smartRefresh.finishLoadMore();
-                        if (pageIndex == 1) {
-                            clearList();
-                            pageAmount = page.getTotalPages();
-                        }
-
-                        if (data.size() > 0) {
-                            addItems(data);
-                        }
-                        smartRefresh.setEnableLoadMore(pageIndex < pageAmount);
-                        notifyAdapter();
-                    }
-
-                    @Override
-                    public void OnFailure(String msg) {
-                        if (mLoadingDialog.isShowing()) {
-                            mLoadingDialog.setErrMsgRetry(msg);
-                            mLoadingDialog.setMClick(() -> getList(true));
-                        } else {
-                            smartRefresh.finishRefresh();
-                            smartRefresh.finishLoadMore();
-                            showToast(msg);
-                            if (pageIndex > 1) pageIndex--;
-                        }
-                    }
-                });
+//        request = HttpUtil.Request(null, getRequestUrl(pageIndex),
+//                isGet() ? HttpMethod.GET : HttpMethod.POST,
+//                getRequestParams(), getResultClass(), new IHttpCallBack() {
+//                    @Override
+//                    public <T> void OnSuccess(String msg, ODataPage page, ArrayList<T> data) {
+//                        smartRefresh.finishRefresh();
+//                        smartRefresh.finishLoadMore();
+//                        if (pageIndex == 1) {
+//                            clearList();
+//                            pageAmount = page.getTotalPages();
+//                        }
+//
+//                        if (data.size() > 0) {
+//                            addItems(data);
+//                        }
+//                        smartRefresh.setEnableLoadMore(pageIndex < pageAmount);
+//                        notifyAdapter();
+//                    }
+//
+//                    @Override
+//                    public void OnFailure(String msg) {
+//                        if (mLoadingDialog.isShowing()) {
+//                            mLoadingDialog.setErrMsgRetry(msg);
+//                            mLoadingDialog.setMClick(() -> getList(true));
+//                        } else {
+//                            smartRefresh.finishRefresh();
+//                            smartRefresh.finishLoadMore();
+//                            showToast(msg);
+//                            if (pageIndex > 1) pageIndex--;
+//                        }
+//                    }
+//                });
     }
 
     public void hideLoading() {

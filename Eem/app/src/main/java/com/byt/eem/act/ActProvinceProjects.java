@@ -92,12 +92,13 @@ public class ActProvinceProjects extends BaseActEd {
 
     private void getList() {
         Post(MConstants.URL.GET_PROJECTS_BY_PROVINCE + provinceId,
-                HttpUtil.defaultParam(), ProvProj.class, new IHttpCallBack() {
+                HttpUtil.defaultParam(), ProvProj.class, new IHttpCallBack<ProvProj>() {
+
                     @Override
-                    public <T> void OnSuccess(String msg, ODataPage page, ArrayList<T> data) {
+                    public void OnSuccess(String msg, ODataPage page, ArrayList<ProvProj> data) {
                         mList.clear();
                         if (data.size() > 0) {
-                            mList.addAll((Collection<? extends ProvProj>) data);
+                            mList.addAll(data);
                         }
                         mAdapter.setDataList(mList);
                         smartRefresh.finishRefresh();

@@ -103,9 +103,10 @@ public class ActDeviceInfoHistory extends BaseAct {
     private void getHistory() {
         Post(MConstants.URL.GET_DEVICES_HISTORY_STATE,
                 HttpUtil.formatParams(new Param(deviceId, "2019-01-01 11:01", "2019-01-02 11:01").toString()),
-                History.class, new IHttpCallBack() {
+                History.class, new IHttpCallBack<History>() {
+
                     @Override
-                    public <T> void OnSuccess(String msg, ODataPage page, ArrayList<T> data) {
+                    public void OnSuccess(String msg, ODataPage page, ArrayList<History> data) {
 
                     }
 

@@ -47,11 +47,12 @@ public class ActDeviceInfo extends BaseAct {
 
     private void getDeviceInfo() {
         Post(MConstants.URL.GET_DEVICES_STATE_BY_DEVICEID + deviceId, HttpUtil.defaultParam(),
-                DeviceInfo.class, new IHttpCallBack() {
+                DeviceInfo.class, new IHttpCallBack<DeviceInfo>() {
+
                     @Override
-                    public <T> void OnSuccess(String msg, ODataPage page, ArrayList<T> data) {
+                    public void OnSuccess(String msg, ODataPage page, ArrayList<DeviceInfo> data) {
                         if (data.size() > 0) {
-                            mDeviceInfo = (DeviceInfo) data.get(0);
+                            mDeviceInfo = data.get(0);
                         }
                         initPage();
                     }

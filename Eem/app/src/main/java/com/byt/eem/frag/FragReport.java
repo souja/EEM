@@ -66,12 +66,13 @@ public class FragReport extends MBaseLazyFragmentB {
     private void getReports() {
         Post(MConstants.URL.GET_PROJECT_STATISTICS,
                 HttpUtil.formatParams(new Param(startTime, endTime).toString()),
-                Report.class, new IHttpCallBack() {
+                Report.class, new IHttpCallBack<Report>() {
+
                     @Override
-                    public <T> void OnSuccess(String msg, ODataPage page, ArrayList<T> data) {
+                    public void OnSuccess(String msg, ODataPage page, ArrayList<Report> data) {
                         mList.clear();
                         if (data.size() > 0) {
-                            mList.addAll((Collection<? extends Report>) data);
+                            mList.addAll(data);
                         }
                         mAdapter.notifyDataSetChanged();
                     }

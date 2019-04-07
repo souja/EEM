@@ -94,12 +94,13 @@ public class ActDeviceList extends BaseActEd {
 
     private void getList() {
         Post(MConstants.URL.GET_DEVICES_BY_PROJECT + projectId, HttpUtil.defaultParam(),
-                Device.class, new IHttpCallBack() {
+                Device.class, new IHttpCallBack<Device>() {
+
                     @Override
-                    public <T> void OnSuccess(String msg, ODataPage page, ArrayList<T> data) {
+                    public void OnSuccess(String msg, ODataPage page, ArrayList<Device> data) {
                         mList.clear();
                         if (data.size() > 0) {
-                            mList.addAll((Collection<? extends Device>) data);
+                            mList.addAll(data);
                         }
                         mAdapter.setDataList(mList);
                         smartRefresh.finishRefresh();

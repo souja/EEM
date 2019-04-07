@@ -99,7 +99,7 @@ public class HttpUtil {
     }
 
     private static <T> void handleOnRequestSuccess(String result, RequestParams params,
-                                                   final Class<T> dataClass, IHttpCallBack callBack) {
+                                                   final Class<T> dataClass, IHttpCallBack<T> callBack) {
         LogUtil.e("===" + params.getUri() + "===\nresponse===>>>" + result);
         if (result == null) {
             callBack.OnFailure("服务器异常");
@@ -175,22 +175,22 @@ public class HttpUtil {
     }
 
     public static <T> Callback.Cancelable Post(ProgressDialog dialog, String url, RequestParams mParams,
-                                               final Class<T> dataClass, IHttpCallBack callBack) {
+                                               final Class<T> dataClass, IHttpCallBack<T> callBack) {
         return Request(dialog, url, HttpMethod.POST, mParams, dataClass, callBack);
     }
 
     public static <T> Callback.Cancelable Get(ProgressDialog dialog, String url, RequestParams mParams,
-                                              final Class<T> dataClass, IHttpCallBack callBack) {
+                                              final Class<T> dataClass, IHttpCallBack<T> callBack) {
         return Request(dialog, url, HttpMethod.GET, mParams, dataClass, callBack);
     }
 
     public static <T> Callback.Cancelable Delete(ProgressDialog dialog, String url, RequestParams mParams,
-                                                 final Class<T> dataClass, IHttpCallBack callBack) {
+                                                 final Class<T> dataClass, IHttpCallBack<T> callBack) {
         return Request(dialog, url, HttpMethod.DELETE, mParams, dataClass, callBack);
     }
 
     public static <T> Callback.Cancelable Request(ProgressDialog dialog, String url, HttpMethod method, RequestParams mParams,
-                                                  final Class<T> dataClass, IHttpCallBack callBack) {
+                                                  final Class<T> dataClass, IHttpCallBack<T> callBack) {
         if (!NetWorkUtils.isNetworkAvailable()) {
             callBack.OnFailure(EnumExceptions.NO_INTERNET.getDesc());
             return null;

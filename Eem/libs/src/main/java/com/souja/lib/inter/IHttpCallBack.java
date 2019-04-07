@@ -7,9 +7,9 @@ import java.util.ArrayList;
 /**
  * Created by Yangdz on 2016/8/18 0018.
  */
-public interface IHttpCallBack {
+public interface IHttpCallBack<T> {
 
-    <T> void OnSuccess(String msg, ODataPage page, ArrayList<T> data);
+    void OnSuccess(String msg, ODataPage page, ArrayList<T> data);
 
     void OnFailure(String msg);
 }

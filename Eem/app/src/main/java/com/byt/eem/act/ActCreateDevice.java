@@ -227,10 +227,10 @@ public class ActCreateDevice extends BaseAct {
         param.setIotCardDisableDate(seTime);
 
         Post(new LoadingDialog(_this, "数据保存中..."), MConstants.URL.GET_SAVE_DEVICE_INFO,
-                HttpUtil.formatParams(param.toString()), new IHttpCallBack() {
+                HttpUtil.formatParams(param.toString()), new IHttpCallBack<Object>() {
 
                     @Override
-                    public <T> void OnSuccess(String msg, ODataPage page, ArrayList<T> data) {
+                    public void OnSuccess(String msg, ODataPage page, ArrayList<Object> data) {
                         showToast("保存成功");
                         finish();
                     }
@@ -253,13 +253,14 @@ public class ActCreateDevice extends BaseAct {
     private void getUserProjects() {
         Post(new LoadingDialog(_this, ""),
                 MConstants.URL.GET_MY_AND_MYCHILD_PROJECTS + EApp.getUserInfo().getId(),
-                HttpUtil.defaultParam(), Project.class, new IHttpCallBack() {
+                HttpUtil.defaultParam(), Project.class, new IHttpCallBack<Project>() {
+
                     @Override
-                    public <T> void OnSuccess(String msg, ODataPage page, ArrayList<T> data) {
+                    public void OnSuccess(String msg, ODataPage page, ArrayList<Project> data) {
                         if (mListProject == null) mListProject = new ArrayList<>();
                         else mListProject.clear();
                         if (data.size() > 0) {
-                            mListProject.addAll((Collection<? extends Project>) data);
+                            mListProject.addAll(data);
                             initProjectWheel();
                         } else showToast("暂无可选项目");
                     }
@@ -273,13 +274,14 @@ public class ActCreateDevice extends BaseAct {
 
     private void getDeviceType() {
         Post(new LoadingDialog(_this, ""), MConstants.URL.GET_ALL_DEVICE_TYPE,
-                HttpUtil.defaultParam(), DeviceType.class, new IHttpCallBack() {
+                HttpUtil.defaultParam(), DeviceType.class, new IHttpCallBack<DeviceType>() {
+
                     @Override
-                    public <T> void OnSuccess(String msg, ODataPage page, ArrayList<T> data) {
+                    public void OnSuccess(String msg, ODataPage page, ArrayList<DeviceType> data) {
                         if (mListDeviceType == null) mListDeviceType = new ArrayList<>();
                         else mListDeviceType.clear();
                         if (data.size() > 0) {
-                            mListDeviceType.addAll((Collection<? extends DeviceType>) data);
+                            mListDeviceType.addAll(data);
                             initDeviceTypeWheel();
                         } else showToast("暂无可选设备类型");
                     }

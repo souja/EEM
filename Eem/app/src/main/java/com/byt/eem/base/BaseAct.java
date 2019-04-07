@@ -20,34 +20,34 @@ public abstract class BaseAct extends ActBase {
     }
 
     public <T> void Post(ProgressDialog dialog, String url, RequestParams params,
-                         final Class<T> dataClass, IHttpCallBack callBack) {
+                         final Class<T> dataClass, IHttpCallBack<T> callBack) {
         addRequest(HttpUtil.Post(dialog, url, params, dataClass, callBack));
     }
 
-    public <T> void Post(ProgressDialog dialog, String url, RequestParams params, IHttpCallBack callBack) {
+    public void Post(ProgressDialog dialog, String url, RequestParams params, IHttpCallBack<Object> callBack) {
         addRequest(HttpUtil.Post(dialog, url, params, Object.class, callBack));
     }
 
-    public <T> void Post(String url, final Class<T> dataClass, IHttpCallBack callBack) {
+    public <T> void Post(String url, final Class<T> dataClass, IHttpCallBack<T> callBack) {
         Post(null, url, new RequestParams(), dataClass, callBack);
     }
 
-    public <T> void Post(String url, RequestParams params, final Class<T> dataClass, IHttpCallBack callBack) {
+    public <T> void Post(String url, RequestParams params, final Class<T> dataClass, IHttpCallBack<T> callBack) {
         Post(null, url, params, dataClass, callBack);
     }
 
     public <T> void Post(ProgressDialog dialog, String url,
-                         final Class<T> dataClass, IHttpCallBack callBack) {
+                         final Class<T> dataClass, IHttpCallBack<T> callBack) {
         Post(dialog, url, new RequestParams(), dataClass, callBack);
     }
 
     public <T> void Get(ProgressDialog dialog, String url, RequestParams params,
-                        final Class<T> dataClass, IHttpCallBack callBack) {
+                        final Class<T> dataClass, IHttpCallBack<T> callBack) {
         addRequest(HttpUtil.Get(dialog, url, params, dataClass, callBack));
     }
 
     public <T> void Delete(ProgressDialog dialog, String url, RequestParams params,
-                           final Class<T> dataClass, IHttpCallBack callBack) {
+                           final Class<T> dataClass, IHttpCallBack<T> callBack) {
         addRequest(HttpUtil.Delete(dialog, url, params, dataClass, callBack));
     }
 }

@@ -125,16 +125,16 @@ public class FragHome extends MBaseFragment {
 
     //在线、离线、报警设备数
     private void getDeviceStateCount() {
-        Post(MConstants.URL.GET_DEVICE_STATE_COUNT, HomeData.class, new IHttpCallBack() {
+        Post(MConstants.URL.GET_DEVICE_STATE_COUNT, HomeData.class, new IHttpCallBack<HomeData>() {
+
             @Override
-            public <T> void OnSuccess(String msg, ODataPage page, ArrayList<T> data) {
-                if (data.size() > 0) {
-                    ArrayList<HomeData> list = (ArrayList<HomeData>) data;
-                    for (HomeData homeData : list) {
-                        setupWarningParams(homeData);
-                    }
-                    getDeviceWarnByRealTime();
+            public void OnSuccess(String msg, ODataPage page, ArrayList<HomeData> data) {
+            if (data.size() > 0) {
+                for (HomeData homeData : data) {
+                    setupWarningParams(homeData);
                 }
+                getDeviceWarnByRealTime();
+            }
             }
 
             @Override
@@ -158,13 +158,14 @@ public class FragHome extends MBaseFragment {
     private void getDeviceWarnByRealTime() {
         if (mParam == null) mParam = new Param(pageIndex);
         Post(MConstants.URL.GET_DEVICE_WARN_BY_REAL_TIME, HttpUtil.formatParams(mParam.toString()),
-                ODeviceWarn.class, new IHttpCallBack() {
+                ODeviceWarn.class, new IHttpCallBack<ODeviceWarn>() {
+
                     @Override
-                    public <T> void OnSuccess(String msg, ODataPage page, ArrayList<T> data) {
+                    public void OnSuccess(String msg, ODataPage page, ArrayList<ODeviceWarn> data) {
                         if (mListDeviceWarn == null) mListDeviceWarn = new ArrayList<>();
                         else mListDeviceWarn.clear();
                         if (data.size() > 0) {
-                            mListDeviceWarn.addAll((Collection<? extends ODeviceWarn>) data);
+                            mListDeviceWarn.addAll(data);
                         }
                         flipperIndex = 0;
                         initDeviceWarn();
@@ -210,12 +211,13 @@ public class FragHome extends MBaseFragment {
 
     //省项目
     private void getProjectsGroupByProvince() {
-        Post(MConstants.URL.GET_PROJECTS_GROUP_BY_PROVINCE, OHomeProj.class, new IHttpCallBack() {
+        Post(MConstants.URL.GET_PROJECTS_GROUP_BY_PROVINCE, OHomeProj.class, new IHttpCallBack<OHomeProj>() {
+
             @Override
-            public <T> void OnSuccess(String msg, ODataPage page, ArrayList<T> data) {
+            public void OnSuccess(String msg, ODataPage page, ArrayList<OHomeProj> data) {
                 mList.clear();
                 if (data.size() > 0) {
-                    mList.addAll((Collection<? extends OHomeProj>) data);
+                    mList.addAll(data);
                 }
                 mAdapter.notifyDataSetChanged();
                 //todo 只有省名、总设备数，缺少各省下面的各状态设备数

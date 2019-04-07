@@ -54,12 +54,13 @@ public class FragMsg extends MBaseLazyFragmentB {
     }
 
     private void getMsgList() {
-        Post(MConstants.URL.GET_ALARM_STATISTICS, Msg.class, new IHttpCallBack() {
+        Post(MConstants.URL.GET_ALARM_STATISTICS, Msg.class, new IHttpCallBack<Msg>() {
+
             @Override
-            public <T> void OnSuccess(String msg, ODataPage page, ArrayList<T> data) {
+            public void OnSuccess(String msg, ODataPage page, ArrayList<Msg> data) {
                 mList.clear();
                 if (data.size() > 0) {
-                    mList.addAll((Collection<? extends Msg>) data);
+                    mList.addAll(data);
                 }
                 mAdapter.notifyDataSetChanged();
             }
