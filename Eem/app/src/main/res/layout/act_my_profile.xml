@@ -1,6 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/page_bg"
+    android:orientation="vertical">
 
+    <com.souja.lib.widget.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:mTitle="我的资料" />
+
+    <View
+        style="@style/lineDc"
+        android:layout_marginTop="45px" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="135px"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingLeft="42px"
+        android:paddingRight="42px">
+
+        <TextView
+            style="@style/text_48px"
+            android:layout_weight="1"
+            android:text="用户名称" />
+
+        <TextView
+            android:id="@+id/tv_userName"
+            style="@style/text_48px"
+            android:textColor="@color/grey_80"
+            tools:text="测试用户" />
+    </LinearLayout>
+
+    <View style="@style/lineDc" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="135px"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingLeft="42px"
+        android:paddingRight="42px">
+
+        <TextView
+            style="@style/text_48px"
+            android:layout_weight="1"
+            android:text="用户ID" />
+
+        <TextView
+            android:id="@+id/tv_userId"
+            style="@style/text_48px"
+            android:textColor="@color/grey_80"
+            tools:text="user1" />
+    </LinearLayout>
+
+    <View style="@style/lineDc" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="135px"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingLeft="42px"
+        android:paddingRight="42px">
+
+        <TextView
+            style="@style/text_48px"
+            android:layout_weight="1"
+            android:text="所属公司" />
+
+        <TextView
+            android:id="@+id/tv_companyName"
+            style="@style/text_48px"
+            android:textColor="@color/grey_80"
+            tools:text="智慧消防系统" />
+    </LinearLayout>
+
+    <View style="@style/lineDc" />
+
+    <TextView
+        android:id="@+id/tv_logout"
+        android:layout_width="524px"
+        android:layout_height="174px"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="90px"
+        android:background="@drawable/login_btn_bg_selector"
+        android:gravity="center_horizontal"
+        android:paddingTop="30px"
+        android:text="退出系统"
+        android:textColor="@color/white"
+        android:textSize="48px" />
 </LinearLayout>

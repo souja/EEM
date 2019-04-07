@@ -85,7 +85,7 @@
     <TextView
         android:id="@+id/login"
         android:layout_width="524px"
-        android:layout_height="wrap_content"
+        android:layout_height="174px"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="150px"
         android:background="@drawable/login_btn_bg_selector"

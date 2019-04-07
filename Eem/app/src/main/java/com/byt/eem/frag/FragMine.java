@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 
 import com.byt.eem.R;
+import com.byt.eem.act.ActAboutUs;
 import com.byt.eem.act.ActCreateDevice;
+import com.byt.eem.act.ActMyProfile;
 import com.byt.eem.act.ActMyProjects;
 import com.byt.eem.act.ActScanQRCode;
 import com.byt.eem.base.MBaseLazyFragmentB;
@@ -32,29 +34,15 @@ public class FragMine extends MBaseLazyFragmentB {
             };
             addAction(MConstants.RX_SCAN_QR_CODE, onScanBack);
             GO(ActScanQRCode.class);
-//            startActivityForResult(new Intent(mBaseActivity, CaptureActivity.class), 12345);
         });
-//        我的项目
+        //我的项目
         _contentView.findViewById(R.id.myProjects).setOnClickListener(view -> ActMyProjects.Companion.launch(mBaseActivity));
         //添加设备
         _contentView.findViewById(R.id.addDevice).setOnClickListener(view -> GO(ActCreateDevice.class));
         //我的资料
-//        _contentView.findViewById(R.id.scan).setOnClickListener(view ->);
+        _contentView.findViewById(R.id.myProfile).setOnClickListener(view ->GO(ActMyProfile.class));
         //关于系统
-//        _contentView.findViewById(R.id.scan).setOnClickListener(view -> );
+        _contentView.findViewById(R.id.aboutSys).setOnClickListener(view -> GO(ActAboutUs.class));
     }
 
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (resultCode == mBaseActivity.RESULT_OK
-//                && requestCode == 12345
-//                && data != null) {
-//
-//            String result = data.getStringExtra("CODE");
-//
-//            LogUtil.e("Scan Result:" + result);
-//
-//        }
-//    }
 }

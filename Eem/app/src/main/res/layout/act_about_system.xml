@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <com.souja.lib.widget.TitleBar
         android:layout_width="match_parent"
-        app:mTitle="关于系统"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        app:mTitle="关于系统" />
 
+    <ImageView
+        android:layout_width="840px"
+        android:layout_height="150px"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="155px"
+        android:background="@drawable/ic_logo" />
+
+    <TextView
+        style="@style/text_45px"
+        android:layout_marginLeft="48px"
+        android:layout_marginTop="120px"
+        android:layout_marginRight="48px"
+        android:lineSpacingExtra="4dp"
+        android:text="@string/aboutSys"
+        android:textColor="@color/grey_66" />
 </LinearLayout>
