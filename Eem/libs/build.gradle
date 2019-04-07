@@ -40,6 +40,7 @@ dependencies {
     api 'com.facebook.fresco:fresco:1.7.1'
     api 'top.zibin:Luban:1.1.8'
     api 'com.just.agentweb:agentweb:4.0.2'
+    api 'com.google.zxing:core:3.2.1'
 }
 
 tasks.withType(JavaCompile) {

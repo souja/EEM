@@ -4,6 +4,7 @@ package com.souja.lib.widget;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -47,6 +48,9 @@ public class LoadingDialog extends ProgressDialog {
     }
 
     public void setMsg(String msg) {
-        tvMsg.setText(msg);
+        if(!TextUtils.isEmpty(msg)){
+            tvMsg.setVisibility(View.VISIBLE);
+            tvMsg.setText(msg);
+        }else tvMsg.setVisibility(View.GONE);
     }
 }

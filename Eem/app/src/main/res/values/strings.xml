@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Eem</string>
     <string name="accountDigits">0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM~!@#$%-=.+_</string>
+    <string name="deviceCodeDigits">0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM</string>
 </resources>

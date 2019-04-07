@@ -58,6 +58,7 @@
         <item name="android:background">@drawable/trans_half_trans_bg_selector</item>
         <item name="android:scaleType">center</item>
     </style>
+
     <style name="title_img_btn_style_hor">
         <item name="android:layout_width">81px</item>
         <item name="android:layout_height">match_parent</item>
@@ -83,6 +84,13 @@
         <item name="android:layout_height">2px</item>
         <item name="android:background">@color/line_eb</item>
     </style>
+
+    <style name="lineDc">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">2px</item>
+        <item name="android:background">@color/line_dc</item>
+    </style>
+
     <style name="lineEbMargin">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">2px</item>

@@ -15,8 +15,6 @@ import io.reactivex.functions.Consumer;
 
 public class MGlobal {
 
-    public static final String CACHE_CITY = "cacheCity";//缓存城市
-
     private static MGlobal instance;
 
     public static MGlobal get() {

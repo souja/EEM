@@ -7,44 +7,182 @@
 
     <TextView
         style="@style/text_54px"
-        android:layout_height="120px"
+        android:layout_width="match_parent"
+        android:layout_height="129px"
         android:layout_gravity="center_horizontal"
+        android:background="@color/white"
         android:gravity="center"
         android:text="个人中心" />
 
-    <TextView
+    <View
+        style="@style/lineEb"
+        android:layout_marginTop="36px"
+        android:background="@color/line_dc" />
+
+    <LinearLayout
         android:id="@+id/scan"
-        style="@style/text_45px"
         android:layout_width="match_parent"
-        android:layout_height="120px"
-        android:layout_marginTop="120px"
-        android:gravity="center"
-        android:text="扫一扫" />
+        android:layout_height="144px"
+        android:gravity="center_vertical">
 
-    <TextView
+        <ImageView
+            android:layout_width="72px"
+            android:layout_height="72px"
+            android:layout_marginLeft="42px"
+            android:background="@mipmap/ic_launcher_round" />
+
+        <TextView
+            style="@style/text_48px"
+            android:layout_marginLeft="36px"
+            android:layout_weight="1"
+            android:text="扫一扫" />
+
+        <ImageView
+            android:layout_width="27px"
+            android:layout_height="45px"
+            android:layout_marginRight="42px"
+            android:background="@drawable/ic_arrow_51" />
+    </LinearLayout>
+
+    <View
+        style="@style/lineEb"
+        android:background="@color/line_dc" />
+
+
+    <View
+        style="@style/lineEb"
+        android:layout_marginTop="36px"
+        android:background="@color/line_dc" />
+
+    <LinearLayout
+        android:id="@+id/addDevice"
+        android:layout_width="match_parent"
+        android:layout_height="144px"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="72px"
+            android:layout_height="72px"
+            android:layout_marginLeft="42px"
+            android:background="@mipmap/ic_launcher_round" />
+
+        <TextView
+            style="@style/text_48px"
+            android:layout_marginLeft="36px"
+            android:layout_weight="1"
+            android:text="添加设备" />
+
+        <ImageView
+            android:layout_width="27px"
+            android:layout_height="45px"
+            android:layout_marginRight="42px"
+            android:background="@drawable/ic_arrow_51" />
+    </LinearLayout>
+
+    <View
+        style="@style/lineEb"
+        android:background="@color/line_dc" />
+
+    <View
+        style="@style/lineEb"
+        android:layout_marginTop="36px"
+        android:background="@color/line_dc" />
+
+    <LinearLayout
         android:id="@+id/myProjects"
-        style="@style/text_45px"
         android:layout_width="match_parent"
-        android:layout_height="120px"
-        android:layout_marginTop="120px"
-        android:gravity="center"
-        android:text="我的项目" />
+        android:layout_height="144px"
+        android:gravity="center_vertical">
 
-    <TextView
+        <ImageView
+            android:layout_width="72px"
+            android:layout_height="72px"
+            android:layout_marginLeft="42px"
+            android:background="@mipmap/ic_launcher_round" />
+
+        <TextView
+            style="@style/text_48px"
+            android:layout_marginLeft="36px"
+            android:layout_weight="1"
+            android:text="我的项目" />
+
+        <ImageView
+            android:layout_width="27px"
+            android:layout_height="45px"
+            android:layout_marginRight="42px"
+            android:background="@drawable/ic_arrow_51" />
+    </LinearLayout>
+
+    <View
+        style="@style/lineEb"
+        android:background="@color/line_dc" />
+
+    <View
+        style="@style/lineEb"
+        android:layout_marginTop="36px"
+        android:background="@color/line_dc" />
+
+    <LinearLayout
         android:id="@+id/myProfile"
-        style="@style/text_45px"
         android:layout_width="match_parent"
-        android:layout_height="120px"
-        android:layout_marginTop="120px"
-        android:gravity="center"
-        android:text="我的资料" />
+        android:layout_height="144px"
+        android:gravity="center_vertical">
 
-    <TextView
+        <ImageView
+            android:layout_width="72px"
+            android:layout_height="72px"
+            android:layout_marginLeft="42px"
+            android:background="@mipmap/ic_launcher_round" />
+
+        <TextView
+            style="@style/text_48px"
+            android:layout_marginLeft="36px"
+            android:layout_weight="1"
+            android:text="我的资料" />
+
+        <ImageView
+            android:layout_width="27px"
+            android:layout_height="45px"
+            android:layout_marginRight="42px"
+            android:background="@drawable/ic_arrow_51" />
+    </LinearLayout>
+
+    <View
+        style="@style/lineEb"
+        android:background="@color/line_dc" />
+
+    <View
+        style="@style/lineEb"
+        android:layout_marginTop="36px"
+        android:background="@color/line_dc" />
+
+    <LinearLayout
         android:id="@+id/aboutSys"
-        style="@style/text_45px"
         android:layout_width="match_parent"
-        android:layout_height="120px"
-        android:layout_marginTop="120px"
-        android:gravity="center"
-        android:text="关于系统" />
+        android:layout_height="144px"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="72px"
+            android:layout_height="72px"
+            android:layout_marginLeft="42px"
+            android:background="@mipmap/ic_launcher_round" />
+
+        <TextView
+            style="@style/text_48px"
+            android:layout_marginLeft="36px"
+            android:layout_weight="1"
+            android:text="关于系统" />
+
+        <ImageView
+            android:layout_width="27px"
+            android:layout_height="45px"
+            android:layout_marginRight="42px"
+            android:background="@drawable/ic_arrow_51" />
+    </LinearLayout>
+
+    <View
+        style="@style/lineEb"
+        android:background="@color/line_dc" />
+
 </LinearLayout>

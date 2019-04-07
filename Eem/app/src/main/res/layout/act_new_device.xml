@@ -1,0 +1,622 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/page_bg">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.souja.lib.widget.TitleBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:mRightText="保存"
+            app:mTitle="添加设备" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="123px"
+                    android:layout_marginTop="3px"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="36px"
+                    android:paddingRight="36px">
+
+                    <TextView
+                        style="@style/text_45px"
+                        android:layout_width="270px"
+                        android:text="选择项目："
+                        android:textColor="@color/grey_66" />
+
+                    <TextView
+                        android:id="@+id/tv_project"
+                        style="@style/text_45px"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="12px"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:hint="请选择"
+                        android:singleLine="true"
+                        tools:text="军区总医院" />
+
+                    <ImageView
+                        android:layout_width="24px"
+                        android:layout_height="45px"
+                        android:background="@drawable/ic_arrow_51" />
+                </LinearLayout>
+
+                <View style="@style/lineDc" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="123px"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="36px"
+                    android:paddingRight="36px">
+
+                    <TextView
+                        style="@style/text_45px"
+                        android:layout_width="270px"
+                        android:text="设备类型："
+                        android:textColor="@color/grey_66" />
+
+                    <TextView
+                        android:id="@+id/tv_deviceType"
+                        style="@style/text_45px"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="12px"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:hint="请选择"
+                        android:singleLine="true"
+                        tools:text="火灾监控" />
+
+                    <ImageView
+                        android:layout_width="24px"
+                        android:layout_height="45px"
+                        android:background="@drawable/ic_arrow_51" />
+                </LinearLayout>
+
+                <View style="@style/lineDc" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="123px"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="36px">
+
+                    <TextView
+                        style="@style/text_45px"
+                        android:layout_width="270px"
+                        android:text="设备编码："
+                        android:textColor="@color/grey_66" />
+
+                    <EditText
+                        android:id="@+id/ed_deviceCode"
+                        style="@style/text_45px"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="12px"
+                        android:layout_marginRight="30px"
+                        android:layout_weight="1"
+                        android:background="@color/transparent"
+                        android:gravity="center_vertical"
+                        android:hint="请输入"
+                        android:imeOptions="actionDone"
+                        android:maxLength="50"
+                        android:maxLines="1"
+                        tools:text="1234567890" />
+
+                    <ImageButton
+                        android:id="@+id/ib_scan"
+                        android:layout_width="123px"
+                        android:layout_height="match_parent"
+                        android:background="@color/transparent"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_scan" />
+                </LinearLayout>
+
+                <View style="@style/lineDc" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="36px">
+
+                    <TextView
+                        style="@style/text_45px"
+                        android:layout_width="270px"
+                        android:text="设备名称："
+                        android:textColor="@color/grey_66" />
+
+                    <EditText
+                        android:id="@+id/ed_deviceName"
+                        style="@style/text_45px"
+                        android:layout_marginLeft="12px"
+                        android:layout_marginRight="30px"
+                        android:layout_weight="1"
+                        android:background="@color/transparent"
+                        android:gravity="center_vertical"
+                        android:hint="请输入"
+                        android:imeOptions="actionDone"
+                        android:maxLength="50"
+                        android:maxLines="3"
+                        android:minHeight="123px"
+                        android:paddingTop="15px"
+                        android:paddingBottom="15px"
+                        tools:text="新设备001新设备001" />
+
+                </LinearLayout>
+
+                <View style="@style/lineDc" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="36px">
+
+                    <TextView
+                        style="@style/text_45px"
+                        android:layout_width="270px"
+                        android:text="部署地址："
+                        android:textColor="@color/grey_66" />
+
+                    <EditText
+                        android:id="@+id/ed_deployAddress"
+                        style="@style/text_45px"
+                        android:layout_marginLeft="12px"
+                        android:layout_marginRight="30px"
+                        android:layout_weight="1"
+                        android:background="@color/transparent"
+                        android:gravity="center_vertical"
+                        android:hint="请输入"
+                        android:imeOptions="actionDone"
+                        android:maxLength="100"
+                        android:maxLines="3"
+                        android:minHeight="123px"
+                        android:paddingTop="15px"
+                        android:paddingBottom="15px"
+                        tools:text="中国四川成都中国四川成都" />
+
+                </LinearLayout>
+
+                <View style="@style/lineDc" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="123px"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="36px"
+                    android:paddingRight="36px">
+
+                    <TextView
+                        style="@style/text_45px"
+                        android:layout_width="270px"
+                        android:text="启用时间："
+                        android:textColor="@color/grey_66" />
+
+                    <TextView
+                        android:id="@+id/tv_startTime"
+                        style="@style/text_45px"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="12px"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:hint="请选择"
+                        android:singleLine="true"
+                        tools:text="2019-11-11" />
+
+                    <ImageView
+                        android:layout_width="24px"
+                        android:layout_height="45px"
+                        android:background="@drawable/ic_arrow_51" />
+                </LinearLayout>
+
+                <View style="@style/lineDc" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="123px"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="36px"
+                    android:paddingRight="36px">
+
+                    <TextView
+                        style="@style/text_45px"
+                        android:layout_width="270px"
+                        android:text="截止时间："
+                        android:textColor="@color/grey_66" />
+
+                    <TextView
+                        android:id="@+id/tv_endTime"
+                        style="@style/text_45px"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="12px"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:hint="请选择"
+                        android:singleLine="true"
+                        tools:text="2019-12-12" />
+
+                    <ImageView
+                        android:layout_width="24px"
+                        android:layout_height="45px"
+                        android:background="@drawable/ic_arrow_51" />
+                </LinearLayout>
+
+                <View style="@style/lineDc" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="123px"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="36px">
+
+                    <TextView
+                        style="@style/text_45px"
+                        android:layout_width="270px"
+                        android:text="卡号："
+                        android:textColor="@color/grey_66" />
+
+                    <EditText
+                        android:id="@+id/ed_simNo"
+                        style="@style/text_45px"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="12px"
+                        android:layout_marginRight="30px"
+                        android:layout_weight="1"
+                        android:background="@color/transparent"
+                        android:gravity="center_vertical"
+                        android:hint="请输入"
+                        android:imeOptions="actionDone"
+                        android:maxLength="15"
+                        android:maxLines="1"
+                        tools:text="13344445555" />
+
+                </LinearLayout>
+
+                <View style="@style/lineDc" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="123px"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="36px">
+
+                    <TextView
+                        style="@style/text_45px"
+                        android:layout_width="270px"
+                        android:text="卡类型："
+                        android:textColor="@color/grey_66" />
+
+                    <TextView
+                        android:id="@+id/tv_simType"
+                        style="@style/text_45px"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="12px"
+                        android:layout_marginRight="30px"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:hint="请选择"
+                        android:singleLine="true"
+                        tools:text="中国联通" />
+
+                    <ImageView
+                        android:layout_width="24px"
+                        android:layout_height="45px"
+                        android:layout_marginRight="36px"
+                        android:background="@drawable/ic_arrow_51" />
+
+                </LinearLayout>
+
+                <View style="@style/lineDc" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="123px"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="36px"
+                    android:paddingRight="36px">
+
+                    <TextView
+                        style="@style/text_45px"
+                        android:layout_width="270px"
+                        android:text="卡激活日期："
+                        android:textColor="@color/grey_66" />
+
+                    <TextView
+                        android:id="@+id/tv_simStartTime"
+                        style="@style/text_45px"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="12px"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:hint="请选择"
+                        android:singleLine="true"
+                        tools:text="2019-11-11" />
+
+                    <ImageView
+                        android:layout_width="24px"
+                        android:layout_height="45px"
+                        android:background="@drawable/ic_arrow_51" />
+                </LinearLayout>
+
+                <View style="@style/lineDc" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="123px"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="36px">
+
+                    <TextView
+                        style="@style/text_45px"
+                        android:layout_width="270px"
+                        android:text="有效期(天)："
+                        android:textColor="@color/grey_66" />
+
+                    <EditText
+                        android:id="@+id/ed_simEffPeriodTime"
+                        style="@style/text_45px"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="12px"
+                        android:layout_marginRight="36px"
+                        android:layout_weight="1"
+                        android:background="@color/transparent"
+                        android:gravity="center_vertical"
+                        android:hint="请输入"
+                        android:imeOptions="actionDone"
+                        android:maxLength="8"
+                        android:maxLines="1"
+                        tools:text="123" />
+
+                </LinearLayout>
+
+                <View style="@style/lineDc" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="123px"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="36px"
+                    android:paddingRight="36px">
+
+                    <TextView
+                        style="@style/text_45px"
+                        android:layout_width="270px"
+                        android:text="卡截止日期："
+                        android:textColor="@color/grey_66" />
+
+                    <TextView
+                        android:id="@+id/tv_simEndTime"
+                        style="@style/text_45px"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="12px"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:hint="请选择"
+                        android:singleLine="true"
+                        tools:text="2019-11-11" />
+
+                    <ImageView
+                        android:layout_width="24px"
+                        android:layout_height="45px"
+                        android:background="@drawable/ic_arrow_51" />
+                </LinearLayout>
+
+                <View style="@style/lineDc" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/projects"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_50per"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="129px"
+            android:background="@color/white">
+
+            <TextView
+                style="@style/text_48px"
+                android:layout_centerInParent="true"
+                android:text="选择项目" />
+
+            <TextView
+                android:id="@+id/tv_cancel1"
+                style="@style/text_42px"
+                android:layout_width="210px"
+                android:layout_height="match_parent"
+                android:background="@drawable/main_grey_btn_bg_selector"
+                android:gravity="center"
+                android:text="取消"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/tv_confirm1"
+                style="@style/text_42px"
+                android:layout_width="210px"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/main_grey_btn_bg_selector"
+                android:gravity="center"
+                android:text="确定"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+
+        <View style="@style/lineDc" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="60px"
+            android:background="@color/white" />
+
+        <com.weigan.loopview.LoopView
+            android:id="@+id/wheelView1"
+            android:layout_width="match_parent"
+            android:layout_height="600px"
+            android:background="@color/white"
+            app:awv_textsize="18" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="60px"
+            android:background="@color/white" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/deviceType"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_50per"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="129px"
+            android:background="@color/white">
+
+            <TextView
+                style="@style/text_48px"
+                android:layout_centerInParent="true"
+                android:text="选择设备类型" />
+
+            <TextView
+                android:id="@+id/tv_cancel2"
+                style="@style/text_42px"
+                android:layout_width="210px"
+                android:layout_height="match_parent"
+                android:background="@drawable/main_grey_btn_bg_selector"
+                android:gravity="center"
+                android:text="取消"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/tv_confirm2"
+                style="@style/text_42px"
+                android:layout_width="210px"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/main_grey_btn_bg_selector"
+                android:gravity="center"
+                android:text="确定"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+
+        <View style="@style/lineDc" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="60px"
+            android:background="@color/white" />
+
+        <com.weigan.loopview.LoopView
+            android:id="@+id/wheelView2"
+            android:layout_width="match_parent"
+            android:layout_height="600px"
+            android:background="@color/white"
+            app:awv_textsize="18" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="60px"
+            android:background="@color/white" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/simCardType"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_50per"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="129px"
+            android:background="@color/white">
+
+            <TextView
+                style="@style/text_48px"
+                android:layout_centerInParent="true"
+                android:text="选择卡类型" />
+
+            <TextView
+                android:id="@+id/tv_cancel3"
+                style="@style/text_42px"
+                android:layout_width="210px"
+                android:layout_height="match_parent"
+                android:background="@drawable/main_grey_btn_bg_selector"
+                android:gravity="center"
+                android:text="取消"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/tv_confirm3"
+                style="@style/text_42px"
+                android:layout_width="210px"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/main_grey_btn_bg_selector"
+                android:gravity="center"
+                android:text="确定"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+
+        <View style="@style/lineDc" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="60px"
+            android:background="@color/white" />
+
+        <com.weigan.loopview.LoopView
+            android:id="@+id/wheelView3"
+            android:layout_width="match_parent"
+            android:layout_height="450px"
+            android:background="@color/white"
+            app:awv_textsize="18" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="60px"
+            android:background="@color/white" />
+
+    </LinearLayout>
+
+</FrameLayout>

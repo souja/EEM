@@ -14,7 +14,7 @@ public class MConstants {
 
     public static String VERSION = "";//接口版本,v1,v2...
 
-    public static final int RX_UP_XS_LIST = 400;//更新学术列表
+    public static final int RX_SCAN_QR_CODE = 100;//扫描二维码
 
     //Rui Constants↓
 
@@ -40,6 +40,10 @@ public class MConstants {
         String GET_DEVICES_STATE_BY_DEVICEID = "/Home/GetDeviceStateByDeviceId?deviceId=";
         //获取当前设备的历史记录 Id beginTime endTime
         String GET_DEVICES_HISTORY_STATE = "/Home/GetDeviceHisState";
+        //获取当前用户的所有项目包含其子用户的项目，用于设备新增的时候的项目选择
+        String GET_MY_AND_MYCHILD_PROJECTS = "/Operate/GetMyAndChildProject?UID=";
+        //获取所有设备类型
+        String GET_ALL_DEVICE_TYPE = "/Operate/GetAllDeviceType";
 
 
         //Rui Url↓

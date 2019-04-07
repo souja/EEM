@@ -84,7 +84,7 @@ public class TitleBar extends RelativeLayout {
                 mLeftImageBtn.setImageResource(leftSrc);
             } else if (defaultBackIcon) {
                 mLeftImageBtn.setVisibility(VISIBLE);
-                mLeftImageBtn.setImageResource(R.drawable.ic_back_blue);
+                mLeftImageBtn.setImageResource(R.drawable.icon_back);
             }
             //点击左边的按钮，关闭页面
             boolean goBack = a.getBoolean(R.styleable.TitleBar_mGoBack, true);

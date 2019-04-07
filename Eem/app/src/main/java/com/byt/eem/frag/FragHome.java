@@ -119,28 +119,9 @@ public class FragHome extends MBaseFragment {
     }
 
     private void getData() {
-        ready1 = false;
-        ready2 = false;
-        ready3 = false;
         getDeviceStateCount();
-        getDeviceWarnByRealTime();
-        getProjectsGroupByProvince();
     }
 
-    private boolean ready1, ready2, ready3;
-    private Handler mHandler = new Handler(new Handler.Callback() {
-        @Override
-        public boolean handleMessage(Message message) {
-            switch (message.what) {
-                case 123:
-                    if (ready1 && ready2 && ready3) {
-                        mRefreshLayout.finishRefresh();
-                    }
-                    break;
-            }
-            return false;
-        }
-    });
 
     //在线、离线、报警设备数
     private void getDeviceStateCount() {
@@ -152,16 +133,13 @@ public class FragHome extends MBaseFragment {
                     for (HomeData homeData : list) {
                         setupWarningParams(homeData);
                     }
-                    ready1 = true;
-                    mHandler.sendEmptyMessage(123);
+                    getDeviceWarnByRealTime();
                 }
             }
 
             @Override
             public void OnFailure(String msg) {
                 showToast(msg);
-                ready1 = true;
-                mHandler.sendEmptyMessage(123);
             }
         });
     }
@@ -190,15 +168,12 @@ public class FragHome extends MBaseFragment {
                         }
                         flipperIndex = 0;
                         initDeviceWarn();
-                        ready2 = true;
-                        mHandler.sendEmptyMessage(123);
+                        getProjectsGroupByProvince();
                     }
 
                     @Override
                     public void OnFailure(String msg) {
                         showToast(msg);
-                        ready2 = true;
-                        mHandler.sendEmptyMessage(123);
                     }
                 });
     }
@@ -246,15 +221,13 @@ public class FragHome extends MBaseFragment {
                 //todo 只有省名、总设备数，缺少各省下面的各状态设备数
                 //?参数是否需要再传入一个省相关的字段，只靠state如何区分各省
                 //1:根据状态获取设备信息 参数:string state（正常/告警/离线）;接口地址: http://localhost:56721/api/Home/GetDevicesByState
-                ready3 = true;
-                mHandler.sendEmptyMessage(123);
+                mRefreshLayout.finishRefresh();
             }
 
             @Override
             public void OnFailure(String msg) {
+                mRefreshLayout.finishRefresh();
                 showToast(msg);
-                ready3 = true;
-                mHandler.sendEmptyMessage(123);
             }
         });
     }
@@ -292,5 +265,17 @@ public class FragHome extends MBaseFragment {
 //            LogUtil.e("flipper resume");
             flipper.startFlipping();
         }
+    }
+
+    @Override
+    public void onPause() {
+        pauseFlipper();
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        resumeFlipper();
+        super.onResume();
     }
 }

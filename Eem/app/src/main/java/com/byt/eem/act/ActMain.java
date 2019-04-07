@@ -98,17 +98,7 @@ public class ActMain extends BaseAct {
     }
 
     private void hanldeOnNaviClick(int naviIndex) {
-        if (preNaviIndex == naviIndex) {
-            switch (naviIndex) {
-                case 0:
-//                    mFragFindDoctor.scrollTop();
-                    break;
-                case 2:
-//                    mFragProduct.scrollTop();
-                    break;
-            }
-            return;
-        }
+        if (preNaviIndex == naviIndex) return;
         bClick = true;
         if (preNaviIndex == 0) {
             mFragHome.pauseFlipper();
@@ -116,17 +106,6 @@ public class ActMain extends BaseAct {
         if (naviIndex == 0) {
             mFragHome.resumeFlipper();
         }
-//        if (naviIndex != 0) {
-//            mFragFindDoctor.pauseBanner();
-//        } else {
-//            mFragFindDoctor.continueBanner();
-//        }
-//        if (naviIndex != 3 && preNaviIndex == 3) {
-//            MTool.setStatusBarTextColor(getWindow(), true);
-//        }
-//        if (naviIndex == 3) {
-//            MTool.setStatusBarTextColor(getWindow(), false);
-//        }
         viewpager.setCurrentItem(naviIndex);
 
         ((MCheckBox) layoutNavigation.getChildAt(preNaviIndex)).doBlur();
