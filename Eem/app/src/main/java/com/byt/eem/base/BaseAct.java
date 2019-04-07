@@ -24,6 +24,10 @@ public abstract class BaseAct extends ActBase {
         addRequest(HttpUtil.Post(dialog, url, params, dataClass, callBack));
     }
 
+    public <T> void Post(ProgressDialog dialog, String url, RequestParams params, IHttpCallBack callBack) {
+        addRequest(HttpUtil.Post(dialog, url, params, Object.class, callBack));
+    }
+
     public <T> void Post(String url, final Class<T> dataClass, IHttpCallBack callBack) {
         Post(null, url, new RequestParams(), dataClass, callBack);
     }

@@ -15,9 +15,8 @@
         android:text="个人中心" />
 
     <View
-        style="@style/lineEb"
-        android:layout_marginTop="36px"
-        android:background="@color/line_dc" />
+        style="@style/lineDc"
+        android:layout_marginTop="36px" />
 
     <LinearLayout
         android:id="@+id/scan"
@@ -44,15 +43,12 @@
             android:background="@drawable/ic_arrow_51" />
     </LinearLayout>
 
-    <View
-        style="@style/lineEb"
-        android:background="@color/line_dc" />
+    <View style="@style/lineDc" />
 
 
     <View
-        style="@style/lineEb"
-        android:layout_marginTop="36px"
-        android:background="@color/line_dc" />
+        style="@style/lineDc"
+        android:layout_marginTop="36px" />
 
     <LinearLayout
         android:id="@+id/addDevice"
@@ -79,14 +75,11 @@
             android:background="@drawable/ic_arrow_51" />
     </LinearLayout>
 
-    <View
-        style="@style/lineEb"
-        android:background="@color/line_dc" />
+    <View style="@style/lineDc" />
 
     <View
-        style="@style/lineEb"
-        android:layout_marginTop="36px"
-        android:background="@color/line_dc" />
+        style="@style/lineDc"
+        android:layout_marginTop="36px" />
 
     <LinearLayout
         android:id="@+id/myProjects"
@@ -113,14 +106,11 @@
             android:background="@drawable/ic_arrow_51" />
     </LinearLayout>
 
-    <View
-        style="@style/lineEb"
-        android:background="@color/line_dc" />
+    <View style="@style/lineDc" />
 
     <View
-        style="@style/lineEb"
-        android:layout_marginTop="36px"
-        android:background="@color/line_dc" />
+        style="@style/lineDc"
+        android:layout_marginTop="36px" />
 
     <LinearLayout
         android:id="@+id/myProfile"
@@ -147,14 +137,11 @@
             android:background="@drawable/ic_arrow_51" />
     </LinearLayout>
 
-    <View
-        style="@style/lineEb"
-        android:background="@color/line_dc" />
+    <View style="@style/lineDc" />
 
     <View
-        style="@style/lineEb"
-        android:layout_marginTop="36px"
-        android:background="@color/line_dc" />
+        style="@style/lineDc"
+        android:layout_marginTop="36px" />
 
     <LinearLayout
         android:id="@+id/aboutSys"
@@ -181,8 +168,6 @@
             android:background="@drawable/ic_arrow_51" />
     </LinearLayout>
 
-    <View
-        style="@style/lineEb"
-        android:background="@color/line_dc" />
+    <View style="@style/lineDc" />
 
 </LinearLayout>

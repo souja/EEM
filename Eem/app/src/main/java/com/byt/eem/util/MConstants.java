@@ -44,6 +44,8 @@ public class MConstants {
         String GET_MY_AND_MYCHILD_PROJECTS = "/Operate/GetMyAndChildProject?UID=";
         //获取所有设备类型
         String GET_ALL_DEVICE_TYPE = "/Operate/GetAllDeviceType";
+        //保存设备信息
+        String GET_SAVE_DEVICE_INFO = "/ProjectAndDevice/SaveDeviceInfo";
 
 
         //Rui Url↓
