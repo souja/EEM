@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_layout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".act.ActScanQRCode">
+    android:layout_height="match_parent">
 
     <com.dlazaro66.qrcodereaderview.QRCodeReaderView
         android:id="@+id/qrDecoderView"
@@ -32,8 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="#99000000"
-        android:checked="false"
-        android:padding="16dp"
+        android:padding="45px"
         android:text="打开/关闭 闪光灯"
         android:textColor="#ffffff"
         android:textSize="42px" />
@@ -58,7 +55,7 @@
         android:layout_above="@id/flashlight_checkbox"
         android:background="#55000000"
         android:gravity="center"
-        android:textColor="#ffffff"/>
+        android:textColor="#ffffff" />
 
     <View
         android:layout_width="120px"
@@ -74,4 +71,15 @@
         android:layout_below="@id/top"
         android:layout_alignParentRight="true"
         android:background="#55000000" />
+
+    <com.souja.lib.widget.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:mBgColor="@color/transparent"
+        app:mLeftSrc="@drawable/ic_back_white"
+        app:mNoLine="true"
+        app:mRightText="手动输入"
+        app:mRightTextColor="@color/white"
+        app:mTitle="扫一扫"
+        app:mTitleColor="@color/white" />
 </RelativeLayout>

@@ -65,16 +65,15 @@
             android:paddingBottom="6px">
 
             <ImageView
-                android:layout_width="36px"
-                android:layout_height="27px"
+                android:layout_width="39px"
+                android:layout_height="30px"
                 android:scaleType="center"
-                android:src="@drawable/ic_msg_notice"
-                android:tint="@color/white" />
+                android:src="@drawable/ic_notice_white" />
 
             <TextView
                 android:id="@+id/tv_msgCount"
                 style="@style/text_33px"
-                android:layout_marginLeft="12px"
+                android:layout_marginLeft="9px"
                 android:text="0"
                 android:textColor="@color/white"
                 tools:text="123" />

@@ -63,7 +63,7 @@
         <activity
             android:name=".act.ActScanQRCode"
             android:screenOrientation="portrait"
-            android:theme="@style/ThemeFullScreen" />
+            android:theme="@style/ThemeScanQrCode" />
         <activity
             android:name=".act.ActCreateDevice"
             android:screenOrientation="portrait"
@@ -75,6 +75,10 @@
             android:theme="@style/ThemeWhite" />
         <activity
             android:name=".act.ActMyProfile"
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeWhite" />
+        <activity
+            android:name=".act.ActMsgCenter"
             android:screenOrientation="portrait"
             android:theme="@style/ThemeWhite" />
 

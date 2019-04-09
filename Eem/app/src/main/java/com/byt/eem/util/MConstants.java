@@ -27,7 +27,7 @@ public class MConstants {
         //获取实时告警信息
         String GET_DEVICE_WARN_BY_REAL_TIME = "/Home/GetDeviceWarnByRealTime";
         //获取各省项目汇总(如每个省有多少个项目)
-        String GET_PROJECTS_GROUP_BY_PROVINCE = "/Home/GetProjectsGroupByProvince";
+        String GET_PROJECTS_GROUP_BY_PROVINCE = "/Home/GetProjectsGroupByProvinceEx";
         //获取各类型消息的汇总(只获取告警消息)
         String GET_ALARM_STATISTICS = "/Message/GetAlarmStatistics";
         //按周查询各项目的汇总信息
@@ -46,6 +46,8 @@ public class MConstants {
         String GET_ALL_DEVICE_TYPE = "/Operate/GetAllDeviceType";
         //保存设备信息
         String GET_SAVE_DEVICE_INFO = "/ProjectAndDevice/SaveDeviceInfo";
+        //保存设备信息
+//        String GET_ALARM_STATISTICS = "/Message/GetAlarmStatistics";
 
 
         //Rui Url↓

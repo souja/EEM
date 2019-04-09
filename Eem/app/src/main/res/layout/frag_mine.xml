@@ -25,10 +25,10 @@
         android:gravity="center_vertical">
 
         <ImageView
-            android:layout_width="72px"
-            android:layout_height="72px"
+            android:layout_width="66px"
+            android:layout_height="66px"
             android:layout_marginLeft="42px"
-            android:background="@mipmap/ic_launcher_round" />
+            android:background="@drawable/ic_scan_mine" />
 
         <TextView
             style="@style/text_48px"
@@ -89,13 +89,13 @@
 
         <ImageView
             android:layout_width="72px"
-            android:layout_height="72px"
-            android:layout_marginLeft="42px"
-            android:background="@mipmap/ic_launcher_round" />
+            android:layout_height="66px"
+            android:layout_marginLeft="39px"
+            android:background="@drawable/ic_my_pros" />
 
         <TextView
             style="@style/text_48px"
-            android:layout_marginLeft="36px"
+            android:layout_marginLeft="33px"
             android:layout_weight="1"
             android:text="我的项目" />
 
@@ -119,14 +119,14 @@
         android:gravity="center_vertical">
 
         <ImageView
-            android:layout_width="72px"
-            android:layout_height="72px"
+            android:layout_width="60px"
+            android:layout_height="60px"
             android:layout_marginLeft="42px"
-            android:background="@mipmap/ic_launcher_round" />
+            android:background="@drawable/ic_my_profile" />
 
         <TextView
             style="@style/text_48px"
-            android:layout_marginLeft="36px"
+            android:layout_marginLeft="42px"
             android:layout_weight="1"
             android:text="我的资料" />
 
@@ -150,14 +150,14 @@
         android:gravity="center_vertical">
 
         <ImageView
-            android:layout_width="72px"
-            android:layout_height="72px"
+            android:layout_width="60px"
+            android:layout_height="60px"
             android:layout_marginLeft="42px"
-            android:background="@mipmap/ic_launcher_round" />
+            android:background="@drawable/ic_about_sys" />
 
         <TextView
             style="@style/text_48px"
-            android:layout_marginLeft="36px"
+            android:layout_marginLeft="42px"
             android:layout_weight="1"
             android:text="关于系统" />
 

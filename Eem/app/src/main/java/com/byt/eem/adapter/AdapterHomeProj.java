@@ -40,7 +40,11 @@ public class AdapterHomeProj extends MBaseAdapter<OHomeProj> {
         mHolder.tvSortNumber.setText(sortStr);
 
         mHolder.tvAreaName.setText(model.getProvinceName());
-        mHolder.tvTotalProjects.setText(String.valueOf("共" + model.getCounts() + "个项目"));
+        mHolder.tvTotalProjects.setText(String.valueOf("共" + model.getProjectCount() + "个项目"));
+        mHolder.tvOnlineCount.setText(String.valueOf("在线  " + model.getProperlyCount()));
+        mHolder.tvOfflineCount.setText(String.valueOf("离线  " + model.getOffLineCount()));
+        mHolder.tvWarnCount.setText(String.valueOf("报警  " + model.getWarnCount()));
+
 
         if (isLastItem(position)) mHolder.vBot.setVisibility(View.GONE);
         else mHolder.vBot.setVisibility(View.VISIBLE);

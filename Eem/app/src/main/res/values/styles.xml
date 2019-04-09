@@ -23,8 +23,14 @@
 
     <style name="ThemeTranslucent" parent="AppBaseTheme" />
 
+
     <style name="ThemeFullScreen" parent="AppBaseTheme">
         <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="ThemeScanQrCode" parent="ThemeFullScreen">
+        <item name="android:windowFullscreen">true</item>
+        <item name="colorAccent">@color/white</item>
     </style>
 
     <style name="ThemeBlack" parent="AppBaseTheme" />

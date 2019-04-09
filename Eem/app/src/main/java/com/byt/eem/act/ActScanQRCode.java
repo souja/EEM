@@ -18,6 +18,7 @@ import com.dlazaro66.qrcodereaderview.QRCodeReaderView;
 import com.dlazaro66.qrcodereaderview.QRCodeReaderView.OnQRCodeReadListener;
 import com.souja.lib.models.BaseModel;
 import com.souja.lib.utils.ScreenUtil;
+import com.souja.lib.widget.TitleBar;
 
 //扫描二维码
 public class ActScanQRCode extends BaseAct
@@ -26,7 +27,7 @@ public class ActScanQRCode extends BaseAct
     private static final int MY_PERMISSION_REQUEST_CAMERA = 0;
 
     private ViewGroup mainLayout;
-
+    TitleBar mTitleBar;
     private QRCodeReaderView qrCodeReaderView;
 
     @Override
@@ -37,6 +38,8 @@ public class ActScanQRCode extends BaseAct
     @Override
     protected void initMain() {
         mainLayout = findViewById(R.id.main_layout);
+        mTitleBar = findViewById(R.id.m_title);
+        mTitleBar.setRightClick(view -> GO(ActScanQRCode.class));
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                 == PackageManager.PERMISSION_GRANTED) {
             initQRCodeReaderView();
@@ -106,7 +109,7 @@ public class ActScanQRCode extends BaseAct
     public void onQRCodeRead(String text, PointF[] points) {
 //        resultTextView.setText(text);
 //        pointsOverlayView.setPoints(points);
-        addSubscription(new RxScanResult(text,_this),getAction(MConstants.RX_SCAN_QR_CODE));
+        addSubscription(new RxScanResult(text, _this), getAction(MConstants.RX_SCAN_QR_CODE));
     }
 
     public static class RxScanResult extends BaseModel {
