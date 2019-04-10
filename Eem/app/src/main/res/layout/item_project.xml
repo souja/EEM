@@ -67,7 +67,7 @@
 
             <TextView
                 android:layout_gravity="center_vertical"
-                android:text="赵敏"
+                android:id="@+id/tv_user_name"
                 style="@style/text_39px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -90,7 +90,7 @@
 
             <TextView
                 android:layout_gravity="center_vertical"
-                android:text="赵敏"
+                android:id="@+id/tv_count"
                 style="@style/text_39px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -113,7 +113,7 @@
 
             <TextView
                 android:layout_gravity="center_vertical"
-                android:text="赵敏"
+                android:id="@+id/tv_contact"
                 style="@style/text_39px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -136,7 +136,7 @@
 
             <TextView
                 android:layout_gravity="center_vertical"
-                android:text="赵敏"
+                android:id="@+id/tv_phone"
                 style="@style/text_39px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -160,7 +160,7 @@
 
             <TextView
                 android:layout_gravity="center_vertical"
-                android:text="赵敏"
+                android:id="@+id/tv_addres"
                 style="@style/text_39px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>

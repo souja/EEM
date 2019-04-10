@@ -51,7 +51,7 @@ public class MConstants {
 
 
         //Rui Url↓
-        String GET_MY_PROJECTS = "/ProjectAndDevice/GetAllProject";
+        String GET_MY_PROJECTS = "/Operate/GetMyProject";
 
     }
 

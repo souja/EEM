@@ -1,5 +1,6 @@
 package com.byt.eem.act
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
@@ -11,7 +12,7 @@ import com.byt.eem.R
 import com.byt.eem.base.BaseAct
 import com.byt.eem.inflate
 import com.byt.eem.isVisible
-import com.byt.eem.model.MyProject
+import com.byt.eem.model.MyProjectBean
 import com.byt.eem.setVisibility
 import com.byt.eem.util.MConstants
 import com.souja.lib.inter.IHttpCallBack
@@ -36,12 +37,13 @@ class ActMyProjects : BaseAct() {
     override fun initMain() {
         recycler_project.layoutManager = LinearLayoutManager(_this)
         mAdapter = ProjectAdapter()
+        mAdapter!!.setHasStableIds(true)
         recycler_project.adapter = mAdapter
         findViewById<TitleBar>(R.id.m_title)?.setRightClick {
             ActNewProject.launch(_this)
         }
-        Post(MConstants.URL.GET_MY_PROJECTS, MyProject::class.java, object : IHttpCallBack<MyProject> {
-            override fun OnSuccess(msg: String?, page: ODataPage?, data: ArrayList<MyProject>?) {
+        Post(MConstants.URL.GET_MY_PROJECTS, MyProjectBean::class.java, object : IHttpCallBack<MyProjectBean> {
+            override fun OnSuccess(msg: String?, page: ODataPage?, data: ArrayList<MyProjectBean>?) {
                 mAdapter?.setData(data!!)
             }
 
@@ -57,7 +59,7 @@ class ActMyProjects : BaseAct() {
 class ProjectAdapter : RecyclerView.Adapter<ProjectAdapter.ProjectHolder>() {
 
     private val arr = SparseBooleanArray()
-    private val mDataList = ArrayList<MyProject>()
+    private val mDataList = ArrayList<MyProjectBean>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ProjectHolder(parent.inflate(R.layout.item_project))
 
@@ -66,37 +68,68 @@ class ProjectAdapter : RecyclerView.Adapter<ProjectAdapter.ProjectHolder>() {
     }
 
     override fun onBindViewHolder(holder: ProjectHolder, position: Int) {
-        holder.bindView(mDataList.get(position), arr.get(position, false))
-        holder.itemView.iv_toggle.setOnClickListener {
-            if (holder.itemView.ll_content_drawer.isVisible()) {
-                arr.delete(position)
-            } else {
-                arr.put(position, true)
-            }
-            notifyItemChanged(position)
-        }
-
+        holder.bindView(mDataList[position], position)
     }
 
-    fun setData(data: ArrayList<MyProject>) {
+    override fun onBindViewHolder(holder: ProjectHolder, position: Int, payloads: MutableList<Any>) {
+        if (payloads.isEmpty()) {
+            super.onBindViewHolder(holder, position, payloads)
+        } else {
+            holder.itemView.apply {
+                val open = payloads[0] == true
+                if (open) {
+                    ObjectAnimator.ofFloat(iv_toggle, "rotation", 0f, 90f)
+                            .apply {
+                                duration = 400
+                            }.start()
+                    ll_content_drawer.setVisibility(true)
+                } else {
+                    ObjectAnimator.ofFloat(iv_toggle, "rotation", 90f, 0f)
+                            .apply {
+                                duration = 400
+                            }.start()
+                    ll_content_drawer.setVisibility(false, true)
+                }
+            }
+        }
+    }
+
+    override fun getItemId(position: Int) = position.toLong()
+
+    fun setData(data: ArrayList<MyProjectBean>) {
         mDataList.clear()
         mDataList.addAll(data)
         notifyDataSetChanged()
     }
 
-    class ProjectHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class ProjectHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         init {
             ScreenUtil.initScale(itemView)
+            itemView.iv_toggle.setOnClickListener {
+                val pos = itemView.iv_toggle.tag as Int
+                var open = false
+                if (itemView.ll_content_drawer.isVisible()) {
+                    arr.delete(pos)
+                } else {
+                    open = true
+                    arr.put(pos, true)
+                }
+                notifyItemChanged(pos, open)
+            }
         }
 
-        fun bindView(data: MyProject, open: Boolean) {
-            if (open) {
-                itemView.ll_content_drawer.setVisibility(true)
-            } else {
-                itemView.ll_content_drawer.setVisibility(false, true)
+        fun bindView(data: MyProjectBean, position: Int) {
+            itemView.apply {
+                iv_toggle.tag = position
+                ll_content_drawer.setVisibility(false, true)
+                tv_project_name.text = data.tProjectName
+                tv_user_name.text = data.userName
+                tv_count.text = data.counts.toString()
+                tv_contact.text = data.contactName
+                tv_phone.text = data.phone
+                tv_addres.text = data.address
             }
-            itemView.tv_project_name.text = data.projectName
         }
 
     }
