@@ -52,6 +52,7 @@ public class MConstants {
 
         //Rui Url↓
         String GET_MY_PROJECTS = "/Operate/GetMyProject";
+        String DELETE_PROJECT = "/Operate/DeleteProject?projectId=";
 
     }
 

@@ -2,7 +2,6 @@
 <LinearLayout
     android:paddingTop="32px"
     android:paddingLeft="32px"
-    android:paddingRight="32px"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -23,12 +22,14 @@
             android:layout_height="wrap_content"/>
 
         <ImageView
+            android:id="@+id/iv_edit"
             style="?attr/actionButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_edit"/>
 
         <ImageView
+            android:id="@+id/iv_delete"
             style="?attr/actionButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

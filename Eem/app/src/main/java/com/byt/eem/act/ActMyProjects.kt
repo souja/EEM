@@ -2,27 +2,59 @@ package com.byt.eem.act
 
 import android.animation.ObjectAnimator
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.SparseBooleanArray
 import android.view.View
 import android.view.ViewGroup
-import com.byt.eem.R
+import com.byt.eem.*
 import com.byt.eem.base.BaseAct
-import com.byt.eem.inflate
-import com.byt.eem.isVisible
 import com.byt.eem.model.MyProjectBean
-import com.byt.eem.setVisibility
 import com.byt.eem.util.MConstants
 import com.souja.lib.inter.IHttpCallBack
 import com.souja.lib.models.ODataPage
 import com.souja.lib.utils.ScreenUtil
+import com.souja.lib.widget.LoadingDialog
 import com.souja.lib.widget.TitleBar
 import kotlinx.android.synthetic.main.activity_act_my_projects.*
 import kotlinx.android.synthetic.main.item_project.view.*
 
-class ActMyProjects : BaseAct() {
+
+class ActMyProjects : BaseAct(), ProjectAdapter.OnItemClickListener {
+
+    override fun onDeleteClick(projectBean: MyProjectBean, position: Int) {
+        CommonAlertDialog
+                .newInstance("确认删除吗?", null, null)
+                .apply {
+                    setPositiveClickListener(DialogInterface.OnClickListener { _, _ ->
+                        deleteProject(projectBean.id, position)
+                    })
+                }
+                .show(supportFragmentManager, "delete")
+    }
+
+    private fun deleteProject(id: Int, position: Int) {
+        Post(LoadingDialog(_this, "删除中..."),
+                MConstants.URL.DELETE_PROJECT + id,
+                Any::class.java,
+                object : IHttpCallBack<Any> {
+                    override fun OnSuccess(msg: String?, page: ODataPage?, data: ArrayList<Any>?) {
+                        showToast("删除成功")
+                        mAdapter!!.delete(position)
+                    }
+
+                    override fun OnFailure(msg: String?) {
+                        showToast("删除失败")
+                    }
+
+                })
+    }
+
+    override fun onEditClick(projectBean: MyProjectBean, position: Int) {
+        ActNewProject.launch(this)
+    }
 
     companion object {
         fun launch(context: Context) {
@@ -38,11 +70,12 @@ class ActMyProjects : BaseAct() {
         recycler_project.layoutManager = LinearLayoutManager(_this)
         mAdapter = ProjectAdapter()
         mAdapter!!.setHasStableIds(true)
+        mAdapter!!.setOnItemClickListener(this)
         recycler_project.adapter = mAdapter
         findViewById<TitleBar>(R.id.m_title)?.setRightClick {
             ActNewProject.launch(_this)
         }
-        Post(MConstants.URL.GET_MY_PROJECTS, MyProjectBean::class.java, object : IHttpCallBack<MyProjectBean> {
+        Post(LoadingDialog(_this, "正在加载..."), MConstants.URL.GET_MY_PROJECTS, MyProjectBean::class.java, object : IHttpCallBack<MyProjectBean> {
             override fun OnSuccess(msg: String?, page: ODataPage?, data: ArrayList<MyProjectBean>?) {
                 mAdapter?.setData(data!!)
             }
@@ -60,6 +93,16 @@ class ProjectAdapter : RecyclerView.Adapter<ProjectAdapter.ProjectHolder>() {
 
     private val arr = SparseBooleanArray()
     private val mDataList = ArrayList<MyProjectBean>()
+    private var mOnItemClickListener: OnItemClickListener? = null
+
+    fun setOnItemClickListener(onItemClickListener: OnItemClickListener) {
+        mOnItemClickListener = onItemClickListener
+    }
+
+    interface OnItemClickListener {
+        fun onDeleteClick(projectBean: MyProjectBean, position: Int)
+        fun onEditClick(projectBean: MyProjectBean, position: Int)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ProjectHolder(parent.inflate(R.layout.item_project))
 
@@ -102,10 +145,23 @@ class ProjectAdapter : RecyclerView.Adapter<ProjectAdapter.ProjectHolder>() {
         notifyDataSetChanged()
     }
 
+    fun delete(position: Int) {
+        mDataList.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
     inner class ProjectHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         init {
             ScreenUtil.initScale(itemView)
+            itemView.iv_edit.setOnClickListener {
+                val pos = itemView.iv_toggle.tag as Int
+                mOnItemClickListener?.onEditClick(mDataList[pos], pos)
+            }
+            itemView.iv_delete.setOnClickListener {
+                val pos = itemView.iv_toggle.tag as Int
+                mOnItemClickListener?.onDeleteClick(mDataList[pos], pos)
+            }
             itemView.iv_toggle.setOnClickListener {
                 val pos = itemView.iv_toggle.tag as Int
                 var open = false
