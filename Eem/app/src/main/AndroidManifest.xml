@@ -39,7 +39,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <!--android:name=".act.ActSplash"-->
         <activity
-            android:name=".LocTest"
+            android:name=".TestUpload"
             android:screenOrientation="portrait"
             android:theme="@style/ThemeSplash">
             <intent-filter>
@@ -93,6 +93,10 @@
             android:theme="@style/ThemeWhite" />
         <activity
             android:name=".act.ActMsgCenter"
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeWhite" />
+        <activity
+            android:name=".base.ActPhotoGallery"
             android:screenOrientation="portrait"
             android:theme="@style/ThemeWhite" />
 

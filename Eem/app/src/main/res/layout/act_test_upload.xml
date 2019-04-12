@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_test"
+        android:layout_width="600px"
+        android:layout_height="600px"
+        android:scaleType="centerCrop" />
+
+    <Button
+        android:id="@+id/btn_test"
+        android:layout_width="450px"
+        android:layout_height="129px"
+        android:layout_marginTop="90px"
+        android:text="choose image" />
+
+    <Button
+        android:id="@+id/btn_upload"
+        android:layout_width="450px"
+        android:layout_height="129px"
+        android:layout_marginTop="90px"
+        android:text="upload" />
+</LinearLayout>

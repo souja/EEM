@@ -1,7 +1,5 @@
 package org.xutils.http;
 
-import android.text.TextUtils;
-
 import com.souja.lib.utils.MTool;
 
 import org.xutils.common.task.Priority;
@@ -43,7 +41,7 @@ public class RequestParams extends BaseParams {
     private long cacheMaxAge; // 默认缓存存活时间, 单位:毫秒.(如果服务没有返回有效的max-age或Expires)
     private Executor executor; // 自定义线程池
     private Priority priority = Priority.DEFAULT; // 请求优先级
-    private int connectTimeout = 1000 * 30; // 连接超时时间
+    private int connectTimeout = 1000 * 120; // 连接超时时间
     private boolean autoResume = true; // 是否在下载是自动断点续传
     private boolean autoRename = false; // 是否根据头信息自动命名文件
     private int maxRetryCount = 2; // 最大请求错误重试次数
