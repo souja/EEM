@@ -18,6 +18,7 @@ package org.xutils.common.util;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.souja.lib.utils.GsonUtil;
 import com.souja.lib.utils.MTool;
 
 import org.xutils.x;
@@ -65,6 +66,18 @@ public class LogUtil {
         if (!x.isDebug()) return;
         String tag = generateTag();
         int max_str_length = 2001 - tag.length();
+        while (msg.length() > max_str_length) {
+            Log.e(tag, msg.substring(0, max_str_length));
+            msg = msg.substring(max_str_length);
+        }
+        Log.e(tag, "" + msg);
+    }
+
+    public static void e(Object object) {
+        if (!x.isDebug()) return;
+        String tag = generateTag();
+        int max_str_length = 2001 - tag.length();
+        String msg = GsonUtil.objToJsonString(object);
         while (msg.length() > max_str_length) {
             Log.e(tag, msg.substring(0, max_str_length));
             msg = msg.substring(max_str_length);
