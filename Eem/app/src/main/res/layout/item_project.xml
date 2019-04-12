@@ -15,7 +15,6 @@
         <TextView
             android:id="@+id/tv_project_name"
             android:layout_gravity="center_vertical"
-            android:text="倚天屠龙记"
             style="@style/text_45px"
             android:layout_width="0dp"
             android:layout_weight="1"

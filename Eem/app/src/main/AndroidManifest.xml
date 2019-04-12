@@ -37,9 +37,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppBaseTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <!--android:name=".act.ActSplash"-->
         <activity
-            android:name=".LocTest"
+            android:name=".act.ActSplash"
             android:screenOrientation="portrait"
             android:theme="@style/ThemeSplash">
             <intent-filter>
