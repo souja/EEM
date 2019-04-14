@@ -53,6 +53,12 @@ public class MConstants {
         //Rui Url↓
         String GET_MY_PROJECTS = "/Operate/GetMyProject";
         String DELETE_PROJECT = "/Operate/DeleteProject?projectId=";
+        //获取所有省份
+        String GET_PROVINCES = "/ProjectAndDevice/GetProvinces";
+        //根据省份ID获取城市
+        String GET_CITIES_BY_ID = "/ProjectAndDevice/GetTcitys?provinceId=";
+        //根据城市ID获取地区
+        String GET_COUNTIES_BY_ID = "/ProjectAndDevice/GetTcountys?cityId=";
 
     }
 
