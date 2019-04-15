@@ -122,6 +122,9 @@ class ActNewProject : BaseActEd() {
                 }
             }
         }
+        iv_location.setOnClickListener {
+            ActMap.launch(this)
+        }
 
     }
 
