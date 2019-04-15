@@ -93,7 +93,13 @@
         <activity
             android:name=".act.ActMsgCenter"
             android:screenOrientation="portrait"
-            android:theme="@style/ThemeWhite" />
+            android:theme="@style/ThemeWhite"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".act.ActHandleMsg"
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeWhite"
+            android:windowSoftInputMode="adjustPan" />
 
         <!--Rui acts↓-->
         <activity
@@ -107,9 +113,11 @@
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="Vy9GDKe0GWqb0iMM89zjG4Kj7R7PTtvT" >
-        </meta-data>
-        <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote"> </service>
+            android:value="Vy9GDKe0GWqb0iMM89zjG4Kj7R7PTtvT"></meta-data>
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote"></service>
     </application>
 
 </manifest>

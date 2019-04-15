@@ -8,18 +8,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.byt.eem.R;
+import com.byt.eem.act.ActMsgCenter;
 import com.byt.eem.base.BaseHolder;
 import com.byt.eem.base.MBaseLazyFragmentB;
 import com.byt.eem.util.MConstants;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.souja.lib.base.MBaseAdapter;
-import com.souja.lib.inter.CommonItemClickListener;
 import com.souja.lib.inter.IHttpCallBack;
 import com.souja.lib.models.BaseModel;
 import com.souja.lib.models.ODataPage;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import butterknife.BindView;
@@ -46,9 +45,7 @@ public class FragMsg extends MBaseLazyFragmentB {
         mRefreshLayout.setEnableLoadMore(false);
         mRefreshLayout.setOnRefreshListener(refreshLayout -> getMsgList());
         mList = new ArrayList<>();
-        mAdapter = new AdapterMsg(mBaseActivity, mList, position -> {
-
-        });
+        mAdapter = new AdapterMsg(mBaseActivity, mList);
         rvMsgList.setAdapter(mAdapter);
         getMsgList();
     }
@@ -58,6 +55,7 @@ public class FragMsg extends MBaseLazyFragmentB {
 
             @Override
             public void OnSuccess(String msg, ODataPage page, ArrayList<Msg> data) {
+                mRefreshLayout.finishRefresh();
                 mList.clear();
                 if (data.size() > 0) {
                     mList.addAll(data);
@@ -120,8 +118,8 @@ public class FragMsg extends MBaseLazyFragmentB {
     class AdapterMsg extends MBaseAdapter<Msg> {
 
 
-        public AdapterMsg(Context context, List<Msg> list, CommonItemClickListener listener) {
-            super(context, list, listener);
+        public AdapterMsg(Context context, List<Msg> list) {
+            super(context, list, null);
         }
 
         @Override
@@ -138,6 +136,9 @@ public class FragMsg extends MBaseLazyFragmentB {
                     .replace("T", "-")));
             mHolder.tvMsgCount.setText(model.getCounts());
             //todo 返回数据模型中缺少Location ==> 报警地点
+
+            mHolder.itemView.setOnClickListener(view -> GO(ActMsgCenter.class));
+
         }
     }
 

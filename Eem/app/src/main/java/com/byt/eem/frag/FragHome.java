@@ -15,6 +15,7 @@ import com.byt.eem.adapter.AdapterHomeProj;
 import com.byt.eem.base.MBaseFragment;
 import com.byt.eem.model.ODeviceWarn;
 import com.byt.eem.model.OHomeProj;
+import com.byt.eem.model.PageModel;
 import com.byt.eem.util.HttpUtil;
 import com.byt.eem.util.MConstants;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -63,7 +64,7 @@ public class FragHome extends MBaseFragment {
     private AdapterHomeProj mAdapter;
 
 
-    private Param mParam;
+    private PageModel mParam;
     private int pageIndex = 1;
     private List<ODeviceWarn> mListDeviceWarn;
     private int flipperIndex;
@@ -156,7 +157,7 @@ public class FragHome extends MBaseFragment {
 
     //实时告警
     private void getDeviceWarnByRealTime() {
-        if (mParam == null) mParam = new Param(pageIndex);
+        if (mParam == null) mParam = new PageModel(pageIndex);
         Post(MConstants.URL.GET_DEVICE_WARN_BY_REAL_TIME, HttpUtil.formatParams(mParam.toString()),
                 ODeviceWarn.class, new IHttpCallBack<ODeviceWarn>() {
 
@@ -246,14 +247,6 @@ public class FragHome extends MBaseFragment {
         public String Counts;
     }
 
-    class Param extends BaseModel {
-        int pageIndex;
-        int pageSize = 10;
-
-        public Param(int pageIndex) {
-            this.pageIndex = pageIndex;
-        }
-    }
 
     public void pauseFlipper() {
         if (flipper != null && flipper.isFlipping()) {

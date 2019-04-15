@@ -81,6 +81,15 @@ public abstract class ActBase extends AppCompatActivity {
             mDisposable = Flowable.just(obj).subscribe(consumer);
     }
 
+    public boolean containsKey(int actionCode) {
+        return MGlobal.get().containsKey(actionCode);
+    }
+
+    public void addSubscription(int key, Object o) {
+        if (containsKey(key))
+            addSubscription(o, getAction(key));
+    }
+
     protected InputMethodManager inputMethodManager;
     private List<Callback.Cancelable> mCancelables;
     private List<Integer> actions;

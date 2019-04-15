@@ -32,12 +32,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/transparent"
-            android:hint="搜索设备编号或名称"
+            android:hint="搜索设备名称、故障名称或安装地址"
             android:imeOptions="actionDone"
             android:paddingLeft="15px"
             android:paddingRight="45px"
             android:singleLine="true"
-            android:textSize="42px" />
+            android:textSize="36px" />
     </LinearLayout>
 
     <View style="@style/lineDc" />
