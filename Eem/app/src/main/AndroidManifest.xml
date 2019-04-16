@@ -98,6 +98,7 @@
             android:name=".act.ActMsgCenter"
             android:screenOrientation="portrait"
             android:theme="@style/ThemeWhite"
+            android:launchMode="singleInstance"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".act.ActHandleMsg"

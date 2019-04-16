@@ -61,10 +61,14 @@ public class FragMsg extends MBaseLazyFragmentB {
                     mList.addAll(data);
                 }
                 mAdapter.notifyDataSetChanged();
+                if (mList.size() == 0) {
+                    ShowEmptyView();
+                } else HideEmptyView();
             }
 
             @Override
             public void OnFailure(String msg) {
+                mRefreshLayout.finishRefresh();
                 showToast(msg);
             }
         });

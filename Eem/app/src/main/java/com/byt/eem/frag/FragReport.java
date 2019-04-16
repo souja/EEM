@@ -23,7 +23,6 @@ import com.souja.lib.utils.MDateUtils;
 import org.xutils.common.util.LogUtil;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import butterknife.BindView;
@@ -70,15 +69,19 @@ public class FragReport extends MBaseLazyFragmentB {
 
                     @Override
                     public void OnSuccess(String msg, ODataPage page, ArrayList<Report> data) {
+                        smartRefresh.finishRefresh();
                         mList.clear();
                         if (data.size() > 0) {
                             mList.addAll(data);
                         }
                         mAdapter.notifyDataSetChanged();
+                        if (mList.size() == 0) ShowEmptyView();
+                        else HideEmptyView();
                     }
 
                     @Override
                     public void OnFailure(String msg) {
+                        smartRefresh.finishRefresh();
                         showToast(msg);
                     }
                 });
@@ -106,7 +109,7 @@ public class FragReport extends MBaseLazyFragmentB {
             if (isLastItem(position)) {
                 mHolder.vBot.setVisibility(View.GONE);
                 mHolder.vTemp.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 mHolder.vBot.setVisibility(View.VISIBLE);
                 mHolder.vTemp.setVisibility(View.GONE);
             }
