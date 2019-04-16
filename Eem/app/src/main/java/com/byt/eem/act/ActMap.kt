@@ -4,44 +4,82 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Point
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.widget.FrameLayout
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.view.View
+import android.view.ViewGroup
 import com.baidu.mapapi.map.*
 import com.baidu.mapapi.model.LatLngBounds
+import com.baidu.mapapi.search.core.PoiInfo
 import com.baidu.mapapi.search.core.SearchResult
 import com.baidu.mapapi.search.district.DistrictSearch
 import com.baidu.mapapi.search.district.DistrictSearchOption
 import com.baidu.mapapi.search.district.OnGetDistricSearchResultListener
+import com.baidu.mapapi.search.geocode.*
 import com.byt.eem.R
+import com.byt.eem.base.BaseAct
+import com.byt.eem.inflate
+import com.byt.eem.setVisibility
+import com.souja.lib.utils.ScreenUtil
+import com.souja.lib.widget.TitleBar
+import kotlinx.android.synthetic.main.activity_act_map.*
+import kotlinx.android.synthetic.main.item_poi.view.*
 
 
-class ActMap : AppCompatActivity() {
+class ActMap : BaseAct() {
 
-    companion object {
-        fun launch(context: Context) {
-            context.startActivity(Intent(context, ActMap::class.java))
+    override fun setupViewRes() = R.layout.activity_act_map
+
+    override fun initMain() {
+        findViewById<TitleBar>(R.id.m_title)?.setRightClick {
+            //保存位置信息
         }
+        initView()
+        initListeners()
     }
 
-    private var mLayout: FrameLayout? = null
-    private lateinit var mMapView: MapView
-    private var mMarkerF: Marker? = null
+    /**
+     * 初始化地图监听
+     */
+    private fun initListeners() {
+        mBaiduMap!!.setOnMapStatusChangeListener(object : BaiduMap.OnMapStatusChangeListener {
 
-    private var mDistrictSearch: DistrictSearch? = null
+            override fun onMapStatusChangeStart(p0: MapStatus?) {
+            }
 
-    private var mBaiduMap: BaiduMap? = null
+            override fun onMapStatusChangeStart(p0: MapStatus?, p1: Int) {
+            }
 
-    private var bdF = BitmapDescriptorFactory
-            .fromResource(R.drawable.ic_location_marker)
+            override fun onMapStatusChange(p0: MapStatus?) {
+            }
 
-    private var mScreenCenterPoint: Point? = null
+            override fun onMapStatusChangeFinish(status: MapStatus?) {
+                //改变结束之后，获取地图可视范围的中心点坐标
+                val latLng = status!!.target
+                val op = ReverseGeoCodeOption()
+                op.location(latLng)
+                mGeoCodec!!.reverseGeoCode(op)
+            }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_act_map)
-        initView()
-        setContentView(mLayout)
+        })
+
+        // 初始化搜索模块，注册事件监听
+        mGeoCodec = GeoCoder.newInstance()
+        mGeoCodec!!.setOnGetGeoCodeResultListener(object : OnGetGeoCoderResultListener {
+
+            override fun onGetGeoCodeResult(p0: GeoCodeResult?) {
+
+            }
+
+            override fun onGetReverseGeoCodeResult(result: ReverseGeoCodeResult?) {
+                //获取点击的坐标地址
+                result?.poiList.let {
+                    rv_address.adapter = PoiAdapter(it!!)
+                }
+            }
+
+        })
+
         mDistrictSearch = DistrictSearch.newInstance()
         val listener = OnGetDistricSearchResultListener { districtResult ->
             if (null != districtResult && districtResult.error === SearchResult.ERRORNO.NO_ERROR) {
@@ -52,7 +90,7 @@ class ActMap : AppCompatActivity() {
                 if (polyLines != null) {
 
                     val builder = LatLngBounds.Builder()
-                    for (polyline in polyLines!!) {
+                    for (polyline in polyLines) {
                         val ooPolyline11 = PolylineOptions().width(10)
                                 .points(polyline).dottedLine(true).color(Color.BLUE)
                         mBaiduMap!!.addOverlay(ooPolyline11)
@@ -65,7 +103,13 @@ class ActMap : AppCompatActivity() {
                     }
                     mBaiduMap!!.setMapStatus(MapStatusUpdateFactory
                             .newLatLngBounds(builder.build()))
+                    mBaiduMap!!.setMapStatus(MapStatusUpdateFactory
+                            .newMapStatus(MapStatus.Builder().zoom(mBaiduMap!!.maxZoomLevel - 2).build()))
                     addMarker()
+                    val latLng = mMarkerF!!.position
+                    val op = ReverseGeoCodeOption()
+                    op.location(latLng)
+                    mGeoCodec!!.reverseGeoCode(op)
 
                 }
             }
@@ -75,8 +119,27 @@ class ActMap : AppCompatActivity() {
         mDistrictSearch!!.searchDistrict(DistrictSearchOption()
                 .cityName("成都市"))
 
-
     }
+
+    companion object {
+        fun launch(context: Context) {
+            context.startActivity(Intent(context, ActMap::class.java))
+        }
+    }
+
+    private lateinit var mMapView: MapView
+    private var mMarkerF: Marker? = null
+
+    private var mDistrictSearch: DistrictSearch? = null
+
+    private var mBaiduMap: BaiduMap? = null
+
+    private var mGeoCodec: GeoCoder? = null // 搜索模块，也可去掉地图模块独立使用
+
+    private var bdF = BitmapDescriptorFactory
+            .fromResource(R.drawable.ic_location_marker)
+
+    private var mScreenCenterPoint: Point? = null
 
     /**
      * 添加位置锚点
@@ -97,8 +160,8 @@ class ActMap : AppCompatActivity() {
     private fun initView() {
         mMapView = MapView(this, BaiduMapOptions())
         mBaiduMap = mMapView.map
-        mLayout = FrameLayout(this)
-        mLayout!!.addView(mMapView)
+        fl_map.addView(mMapView)
+        rv_address.layoutManager = LinearLayoutManager(this)
     }
 
     override fun onPause() {
@@ -116,7 +179,65 @@ class ActMap : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         // activity 销毁时同时销毁地图控件
+        mGeoCodec?.destroy()
         mMapView.onDestroy()
+    }
+
+    inner class PoiAdapter(private val mPoiList: List<PoiInfo>) : RecyclerView.Adapter<PoiAdapter.PoiHolder>() {
+
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = PoiHolder(parent.inflate(R.layout.item_poi))
+
+        override fun getItemCount() = mPoiList.size
+
+        private var mPreCheckedPosition = 0
+
+        private var mCurrentCheckedPosition = 0
+
+        override fun onBindViewHolder(holder: PoiHolder, position: Int) {
+            holder.bindData(mPoiList[position], position)
+        }
+
+        override fun onBindViewHolder(holder: PoiHolder, position: Int, payloads: MutableList<Any>) {
+            if (payloads.isEmpty()) {
+                super.onBindViewHolder(holder, position, payloads)
+            } else {
+                //局部刷新
+                val visibility = payloads[0] as Boolean
+                if (visibility)
+                    mPreCheckedPosition = mCurrentCheckedPosition
+                holder.itemView.iv_checked.setVisibility(visibility)
+            }
+        }
+
+        inner class PoiHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+            init {
+                ScreenUtil.initScale(itemView)
+                itemView.setOnClickListener { _ ->
+                    mPoiInfo?.let {
+                        mBaiduMap!!.setMapStatus(MapStatusUpdateFactory
+                                .newLatLng(it.location))
+                        val position = itemView.tag as Int
+                        mCurrentCheckedPosition = position
+                        notifyItemChanged(mPreCheckedPosition, false)
+                        notifyItemChanged(position, true)
+                    }
+                }
+            }
+
+            private var mPoiInfo: PoiInfo? = null
+
+            fun bindData(poi: PoiInfo, position: Int) {
+                mPoiInfo = poi
+                itemView.tag = position
+                itemView.tv_name.text = poi.name
+                itemView.tv_address.text = poi.address
+                itemView.iv_checked.setVisibility(position == mCurrentCheckedPosition)
+            }
+
+        }
+
     }
 
 }
