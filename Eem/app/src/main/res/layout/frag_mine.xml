@@ -48,9 +48,11 @@
 
     <View
         style="@style/lineDc"
+        android:visibility="gone"
         android:layout_marginTop="36px" />
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/addDevice"
         android:layout_width="match_parent"
         android:layout_height="144px"

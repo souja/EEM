@@ -27,7 +27,6 @@ public class ActScanQRCode extends BaseAct
     private static final int MY_PERMISSION_REQUEST_CAMERA = 0;
 
     private ViewGroup mainLayout;
-    TitleBar mTitleBar;
     private QRCodeReaderView qrCodeReaderView;
 
     @Override
@@ -38,8 +37,6 @@ public class ActScanQRCode extends BaseAct
     @Override
     protected void initMain() {
         mainLayout = findViewById(R.id.main_layout);
-        mTitleBar = findViewById(R.id.m_title);
-        mTitleBar.setRightClick(view -> GO(ActScanQRCode.class));
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                 == PackageManager.PERMISSION_GRANTED) {
             initQRCodeReaderView();
@@ -52,6 +49,9 @@ public class ActScanQRCode extends BaseAct
         View decoderView = getLayoutInflater().inflate(R.layout.content_decoder, null);
         ScreenUtil.initScale(decoderView);
         mainLayout.addView(decoderView);
+
+        TitleBar titleBar = mainLayout.findViewById(R.id.m_title);
+        titleBar.setRightClick(view -> GO(ActScanQRCode.class));
 
         qrCodeReaderView = decoderView.findViewById(R.id.qrDecoderView);
         CheckBox mFlashlightCheckBox = decoderView.findViewById(R.id.flashlight_checkbox);

@@ -1,10 +1,14 @@
 package com.byt.eem.act;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,7 +22,12 @@ import com.byt.eem.util.MConstants;
 import com.souja.lib.inter.IHttpCallBack;
 import com.souja.lib.models.BaseModel;
 import com.souja.lib.models.ODataPage;
+import com.souja.lib.utils.DialogFactory;
+import com.souja.lib.utils.MDateUtils;
 import com.souja.lib.utils.MTool;
+import com.souja.lib.widget.LoadingDialog;
+
+import org.xutils.common.util.LogUtil;
 
 import java.util.ArrayList;
 
@@ -42,6 +51,8 @@ public class ActDeviceInfoHistory extends BaseAct {
     TextView tvDate2;
     @BindView(R.id.ll_chooseDate2)
     LinearLayout llChooseDate2;
+    @BindView(R.id.btn_confirm)
+    View btnConfirm;
 
     private int deviceId;
     private static final String[] menus = new String[]{"列表", "漏电流", "电流", "电压", "温度"};
@@ -50,6 +61,11 @@ public class ActDeviceInfoHistory extends BaseAct {
             fragChart2,//电流
             fragChart3,//电压
             fragChart4;//温度
+
+    private String beginDateTime, endDateTime;
+    private String dateStr1, timeStr1,//起始日期，时间
+            dateStr2, timeStr2;//截至日期，时间
+    private final String tag1 = "起始日期：", tag2 = "截至日期：";
 
     @Override
     protected int setupViewRes() {
@@ -63,9 +79,21 @@ public class ActDeviceInfoHistory extends BaseAct {
         ibBack.setOnClickListener(view -> finish());
         fragText = new FragHistoryDataText();
         fragChart1 = new FragHistoryDataChart();
+        Bundle bd1 = new Bundle();
+        bd1.putInt("type",1);
+        fragChart1.setArguments(bd1);
         fragChart2 = new FragHistoryDataChart();
+        Bundle bd2 = new Bundle();
+        bd2.putInt("type",2);
+        fragChart2.setArguments(bd2);
         fragChart3 = new FragHistoryDataChart();
+        Bundle bd3 = new Bundle();
+        bd3.putInt("type",3);
+        fragChart3.setArguments(bd3);
         fragChart4 = new FragHistoryDataChart();
+        Bundle bd4 = new Bundle();
+        bd4.putInt("type",4);
+        fragChart4.setArguments(bd4);
         MTool.reflex(tbMenu, 0, 69);
         vpData.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
@@ -97,12 +125,85 @@ public class ActDeviceInfoHistory extends BaseAct {
         });
         vpData.setOffscreenPageLimit(menus.length - 1);
         tbMenu.setupWithViewPager(vpData);
-//        getHistory();
+        //默认查找昨天~今天的数据
+        beginDateTime = MDateUtils.getStringDate(-1);//昨天
+        endDateTime = MDateUtils.getStringDate(0);//今天
+        LogUtil.e(beginDateTime + "   " + endDateTime);
+        tvDate1.setText(String.valueOf(tag1 + beginDateTime));
+        tvDate2.setText(String.valueOf(tag2 + endDateTime));
+        //选择起始时间
+        TimePickerDialog dialogTime1 = new TimePickerDialog(_this, (view, hourOfDay, minute) -> {
+            timeStr1 = getTimeStr(hourOfDay, minute);
+            setupTime(tvDate1, timeStr1);
+        }, 0, 0, true);
+        DatePickerDialog dialogDate1 = DialogFactory.getDatePickerDialog(_this, (view, year, monthOfYear, dayOfMonth) -> {
+            dateStr1 = getDateStr(year, monthOfYear, dayOfMonth);
+            setupDate(tvDate1, tag1, dateStr1);
+            dialogTime1.show();
+        });
+        llChooseDate1.setOnClickListener(v -> dialogDate1.show());
+        //选择截至时间
+        TimePickerDialog dialogTime2 = new TimePickerDialog(_this, (view, hourOfDay, minute) -> {
+            timeStr2 = getTimeStr(hourOfDay, minute);
+            setupTime(tvDate2, timeStr2);
+        }, 0, 0, true);
+        DatePickerDialog dialogDate2 = DialogFactory.getDatePickerDialog(_this, (view, year, monthOfYear, dayOfMonth) -> {
+            dateStr2 = getDateStr(year, monthOfYear, dayOfMonth);
+            setupDate(tvDate2, tag2, dateStr2);
+            dialogTime2.show();
+        });
+        llChooseDate2.setOnClickListener(v -> dialogDate2.show());
+        //确定日期选择，获取数据
+        btnConfirm.setOnClickListener(v -> {
+            beginDateTime = dateStr1 + " " + timeStr1;
+            endDateTime = dateStr2 + " " + timeStr2;
+            LogUtil.e(beginDateTime + "   " + endDateTime);
+            long start = MDateUtils.stringToDateLong(beginDateTime);
+            long end = MDateUtils.stringToDateLong(endDateTime);
+            if (MDateUtils.calcDate(start, end) > 7) {
+                showToast("数据周期不能超过7天");
+                return;
+            }
+            getHistory();
+        });
+        getHistory();
+    }
+
+    private String getTimeStr(int hourOfDay, int minute) {
+        String hour = hourOfDay < 10 ? "0" + hourOfDay : "" + hourOfDay;
+        String min = minute < 10 ? "0" + minute : "" + minute;
+        return hour + ":" + min;
+    }
+
+    private String getDateStr(int year, int monthOfYear, int dayOfMonth) {
+        String month, day;
+        monthOfYear++;
+        month = monthOfYear < 10 ? "0" + monthOfYear : "" + monthOfYear;
+        day = dayOfMonth < 10 ? "0" + dayOfMonth : "" + dayOfMonth;
+        return year + "-" + month + "-" + day;
+    }
+
+    private void setupDate(TextView tvDate, String tag, String newDate) {
+        String oriText = tvDate.getText().toString();
+        LogUtil.e("ori text:" + oriText + ",newDate:" + newDate);
+        String ss = oriText.substring(oriText.indexOf(tag) + tag.length(), oriText.indexOf(" "));
+        LogUtil.e("date ss:" + ss);
+        oriText = oriText.replace(ss, newDate);
+        tvDate.setText(oriText);
+        LogUtil.e(oriText);
+    }
+
+    private void setupTime(TextView tvDate, String newTime) {
+        String oriText = tvDate.getText().toString();
+        String ss = oriText.substring(oriText.indexOf(" ") + 1);
+        oriText = oriText.replace(ss, newTime);
+        tvDate.setText(oriText);
+        LogUtil.e(oriText);
     }
 
     private void getHistory() {
-        Post(MConstants.URL.GET_DEVICES_HISTORY_STATE,
-                HttpUtil.formatParams(new Param(deviceId, "2019-01-01 11:01", "2019-01-02 11:01").toString()),
+        Post(new LoadingDialog(_this), MConstants.URL.GET_DEVICES_HISTORY_STATE,
+                HttpUtil.formatParams(new Param(deviceId, beginDateTime, endDateTime).toString()),
                 History.class, new IHttpCallBack<History>() {
 
                     @Override

@@ -40,7 +40,7 @@
             <ImageView
                 android:layout_width="21px"
                 android:layout_height="24px"
-                android:layout_marginLeft="75px"
+                android:layout_marginLeft="30px"
                 android:background="@drawable/ic_calendar" />
 
             <TextView
@@ -62,6 +62,7 @@
             <ImageView
                 android:layout_width="21px"
                 android:layout_height="24px"
+                android:layout_marginLeft="30px"
                 android:background="@drawable/ic_calendar" />
 
             <TextView

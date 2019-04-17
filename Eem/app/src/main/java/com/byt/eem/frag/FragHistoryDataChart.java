@@ -12,15 +12,31 @@ public class FragHistoryDataChart extends MBaseLazyFragmentBHor {
 
     Unbinder unbinder;
 
+    private int pageType;
 
     @Override
     public void onFirstUserVisible() {
-        _contentView = LayoutInflater.from(mBaseActivity).inflate(R.layout.frag_his_data_chart, null, false);
+        pageType = getArguments().getInt("type");
+        int layoutRes;
+        switch (pageType) {
+            case 1:
+                layoutRes = R.layout.frag_his_data_chart1;
+                break;
+            case 2:
+                layoutRes = R.layout.frag_his_data_chart2;
+                break;
+            case 3:
+                layoutRes = R.layout.frag_his_data_chart3;
+                break;
+            default:
+                layoutRes = R.layout.frag_his_data_chart4;
+        }
+        _contentView = LayoutInflater.from(mBaseActivity).inflate(layoutRes, null, false);
         setContentView(_contentView);
         unbinder = ButterKnife.bind(this, _contentView);
 
-    }
 
+    }
 
 
     @Override

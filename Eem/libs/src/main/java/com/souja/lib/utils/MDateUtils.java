@@ -9,8 +9,6 @@ import java.util.GregorianCalendar;
 public class MDateUtils {
 
 
-
-
     /**
      * 获取当前日期：yyyy-MM-dd HH:mm
      *
@@ -21,7 +19,7 @@ public class MDateUtils {
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(date);
         if (offset != 0) {
-            calendar.add(calendar.DATE, offset);// 正数往后推,负数往前移动
+            calendar.add(Calendar.DATE, offset);// 正数往后推,负数往前移动
             date = calendar.getTime(); // 日期偏移后的结果
         }
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -30,6 +28,26 @@ public class MDateUtils {
     }
 
 
+    public static long stringToDateLong(String dateStr) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date date = null;
+        try {
+            date = sdf.parse(dateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date != null ? date.getTime() : 0;
+    }
+
+
+    /**
+     * 计算两个时间戳相差的天数
+     */
+    public static int calcDate(long stamp1, long stamp2) {
+        long t1 = ((stamp1 / 1000) + 28800) / 86400;
+        long t2 = ((stamp2 / 1000) + 28800) / 86400;
+        return (int) Math.abs(t1 - t2);
+    }
 
 
     /**
@@ -86,18 +104,6 @@ public class MDateUtils {
         }
         return date;
     }
-
-    public static long stringToDateLong(String dateStr) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM");
-        Date date = null;
-        try {
-            date = sdf.parse(dateStr);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return date != null ? date.getTime() : 0;
-    }
-
 
     /**
      * yyyy-MM-dd HH:mm:ss
