@@ -8,26 +8,26 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="129px"
+        android:layout_height="120px"
         android:paddingLeft="42px"
         android:paddingRight="42px">
 
         <TextView
             android:id="@+id/tv_statusName"
-            style="@style/text_45px"
+            style="@style/text_42px"
             android:layout_centerVertical="true"
             tools:text="漏电流" />
 
         <TextView
             android:id="@+id/tv_statusValue"
-            style="@style/text_45px"
+            style="@style/text_42px"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             tools:text="100mA" />
 
         <TextView
             android:id="@+id/tv_statusDesc"
-            style="@style/text_45px"
+            style="@style/text_42px"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             tools:text="正常" />

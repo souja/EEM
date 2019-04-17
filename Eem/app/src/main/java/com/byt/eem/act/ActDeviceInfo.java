@@ -40,6 +40,8 @@ public class ActDeviceInfo extends BaseAct {
     RecyclerView rvStatus;
     @BindView(R.id.smartRefresh)
     SmartRefreshLayout mRefreshLayout;
+    @BindView(R.id.m_title)
+    TitleBar mTitleBar;
 
     private int deviceId;
     private DeviceInfo mDeviceInfo;
@@ -54,7 +56,8 @@ public class ActDeviceInfo extends BaseAct {
     protected void initMain() {
         ButterKnife.bind(this);
         deviceId = getIntent().getIntExtra("id", 0);
-        ((TitleBar) findViewById(R.id.m_title)).setRightClick(view ->
+        mTitleBar.setTitle(getIntent().getStringExtra("name"));
+        mTitleBar.setRightClick(view ->
                 NEXT(new Intent(_this, ActDeviceInfoHistory.class)
                         .putExtra("id", deviceId)));
         mAdapterStatus = new AdapterStatus(_this, new ArrayList<>());
