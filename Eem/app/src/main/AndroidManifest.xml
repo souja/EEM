@@ -3,9 +3,9 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="com.byt.eem">
 
-    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/>
     <!-- 获取CUID，用于鉴权，请求签名等 -->
-    <uses-permission android:name="com.android.launcher.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="com.android.launcher.permission.WRITE_SETTINGS"/>
     <!-- 这个权限用于进行网络定位 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <!-- 这个权限用于访问GPS定位 -->
@@ -96,19 +96,19 @@
             android:theme="@style/ThemeWhite"/>
         <activity
             android:name=".act.ActMsgCenter"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:theme="@style/ThemeWhite"
-            android:launchMode="singleInstance"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".base.ActPhotoGallery"
             android:screenOrientation="portrait"
-            android:theme="@style/ThemeWhite" />
+            android:theme="@style/ThemeWhite"/>
         <activity
             android:name=".act.ActHandleMsg"
             android:screenOrientation="portrait"
             android:theme="@style/ThemeWhite"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"/>
 
         <!-- Rui acts↓ -->
         <activity
@@ -131,9 +131,15 @@
             android:process=":remote">
         </service>
 
-        <activity android:name=".act.ActMap"
-                  android:screenOrientation="portrait"
-                  android:theme="@style/ThemeWhite">
+        <activity
+            android:name=".act.ActMap"
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeWhite">
+        </activity>
+        <activity
+            android:name=".act.ActQueryMapAddress"
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeWhite">
         </activity>
     </application>
 

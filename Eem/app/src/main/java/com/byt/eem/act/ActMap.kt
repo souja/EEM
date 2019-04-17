@@ -31,9 +31,6 @@ class ActMap : BaseAct() {
     override fun setupViewRes() = R.layout.activity_act_map
 
     override fun initMain() {
-        findViewById<TitleBar>(R.id.m_title)?.setRightClick {
-            //保存位置信息
-        }
         initView()
         initListeners()
     }
@@ -42,6 +39,12 @@ class ActMap : BaseAct() {
      * 初始化地图监听
      */
     private fun initListeners() {
+        findViewById<TitleBar>(R.id.m_title)?.setRightClick {
+            //保存位置信息
+        }
+        findViewById<TitleBar>(R.id.m_title)?.setSndMenuClick {
+            ActQueryMapAddress.launch(this)
+        }
         mBaiduMap!!.setOnMapStatusChangeListener(object : BaiduMap.OnMapStatusChangeListener {
 
             override fun onMapStatusChangeStart(p0: MapStatus?) {
