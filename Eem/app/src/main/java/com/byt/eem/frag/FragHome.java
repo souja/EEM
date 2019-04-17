@@ -1,8 +1,6 @@
 package com.byt.eem.frag;
 
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.animation.Animation;
@@ -10,11 +8,13 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.byt.eem.R;
+import com.byt.eem.act.ActMsgCenter;
 import com.byt.eem.act.ActProvinceProjects;
 import com.byt.eem.adapter.AdapterHomeProj;
 import com.byt.eem.base.MBaseFragment;
 import com.byt.eem.model.ODeviceWarn;
 import com.byt.eem.model.OHomeProj;
+import com.byt.eem.model.PageModel;
 import com.byt.eem.util.HttpUtil;
 import com.byt.eem.util.MConstants;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -23,7 +23,6 @@ import com.souja.lib.models.BaseModel;
 import com.souja.lib.models.ODataPage;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import butterknife.BindView;
@@ -63,7 +62,7 @@ public class FragHome extends MBaseFragment {
     private AdapterHomeProj mAdapter;
 
 
-    private Param mParam;
+    private PageModel mParam;
     private int pageIndex = 1;
     private List<ODeviceWarn> mListDeviceWarn;
     private int flipperIndex;
@@ -85,24 +84,12 @@ public class FragHome extends MBaseFragment {
         });
         rvProjects.setAdapter(mAdapter);
         mRefreshLayout.setEnableLoadMore(false);
-        mRefreshLayout.setOnRefreshListener(refreshLayout -> getData());
+        mRefreshLayout.setOnRefreshListener(refreshLayout -> getDeviceStateCount());
         flipper.getInAnimation().setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
                 flipperIndex++;
                 initDeviceWarnParam();
-//                如果没加判断，则任一通知的动画都会被监听
-
-//                View currentView = flipper.getCurrentView();
-//                final TextView textView = currentView.findViewById(R.id.tv_notice);
-//                flipper.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-//                        intent.putExtra("message", textView.getText());
-//                        startActivity(intent);
-//                    }
-//                });
             }
 
             @Override
@@ -115,10 +102,6 @@ public class FragHome extends MBaseFragment {
 
             }
         });
-        getData();
-    }
-
-    private void getData() {
         getDeviceStateCount();
     }
 
@@ -129,12 +112,12 @@ public class FragHome extends MBaseFragment {
 
             @Override
             public void OnSuccess(String msg, ODataPage page, ArrayList<HomeData> data) {
-            if (data.size() > 0) {
-                for (HomeData homeData : data) {
-                    setupWarningParams(homeData);
+                if (data.size() > 0) {
+                    for (HomeData homeData : data) {
+                        setupWarningParams(homeData);
+                    }
+                    getDeviceWarnByRealTime();
                 }
-                getDeviceWarnByRealTime();
-            }
             }
 
             @Override
@@ -156,7 +139,7 @@ public class FragHome extends MBaseFragment {
 
     //实时告警
     private void getDeviceWarnByRealTime() {
-        if (mParam == null) mParam = new Param(pageIndex);
+        if (mParam == null) mParam = new PageModel(pageIndex);
         Post(MConstants.URL.GET_DEVICE_WARN_BY_REAL_TIME, HttpUtil.formatParams(mParam.toString()),
                 ODeviceWarn.class, new IHttpCallBack<ODeviceWarn>() {
 
@@ -185,9 +168,14 @@ public class FragHome extends MBaseFragment {
             tvEmpty.setVisibility(View.VISIBLE);
         } else {
             initDeviceWarnParam();
-
             tvEmpty.setVisibility(View.GONE);
             if (!flipper.isFlipping()) flipper.startFlipping();
+            flipper.setOnClickListener(view -> {
+                pauseFlipper();
+                GO(ActMsgCenter.class);
+            });
+//            _rootView.findViewById(R.id.layout2).setOnClickListener(view -> GO(ActMsgCenter.class));
+
         }
     }
 
@@ -246,14 +234,6 @@ public class FragHome extends MBaseFragment {
         public String Counts;
     }
 
-    class Param extends BaseModel {
-        int pageIndex;
-        int pageSize = 10;
-
-        public Param(int pageIndex) {
-            this.pageIndex = pageIndex;
-        }
-    }
 
     public void pauseFlipper() {
         if (flipper != null && flipper.isFlipping()) {

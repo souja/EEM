@@ -195,6 +195,16 @@ public abstract class BaseFragment extends Fragment {
         mDisposable = Flowable.just(obj).subscribe(consumer);
     }
 
+    public boolean containsKey(int actionCode) {
+        return MGlobal.get().containsKey(actionCode);
+    }
+
+
+    public void addSubscription(int key, Object o) {
+        if (containsKey(key))
+            addSubscription(o, getAction(key));
+    }
+
     @Override
     public void onDestroy() {
         if (mDisposable != null) {

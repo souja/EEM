@@ -35,10 +35,10 @@ public class MDateUtils {
     /**
      * 当前日期
      *
-     * @return yyyy-MM-dd
+     * @return yyyy-MM-dd HH:mm
      */
-    public static String getCurrentDate() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    public static String getCurrentDateTime() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         return formatter.format(new Date());
     }
 

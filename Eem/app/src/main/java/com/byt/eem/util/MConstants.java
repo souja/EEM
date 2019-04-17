@@ -15,6 +15,7 @@ public class MConstants {
     public static String VERSION = "";//接口版本,v1,v2...
 
     public static final int RX_SCAN_QR_CODE = 100;//扫描二维码
+    public static final int RX_PROCESS_ALARM_MSG = 101;//处理告警消息
 
     //Rui Constants↓
 
@@ -46,13 +47,23 @@ public class MConstants {
         String GET_ALL_DEVICE_TYPE = "/Operate/GetAllDeviceType";
         //保存设备信息
         String GET_SAVE_DEVICE_INFO = "/ProjectAndDevice/SaveDeviceInfo";
-        //保存设备信息
-//        String GET_ALARM_STATISTICS = "/Message/GetAlarmStatistics";
+        //获取告警消息列表
+        String GET_ALARM_MSG_LIST = "/Message/GetAlarmDetails";
+        //获取告警消息列表分页信息
+        String GET_ALARM_MSG_LIST_PAGEINFO = "/Message/GetAlarmDetailsPageInfo";
+        //处理消息
+        String PROCESS_ALARM_MSG = "/Message/ProcessAlarm";
 
 
         //Rui Url↓
         String GET_MY_PROJECTS = "/Operate/GetMyProject";
         String DELETE_PROJECT = "/Operate/DeleteProject?projectId=";
+        //获取所有省份
+        String GET_PROVINCES = "/ProjectAndDevice/GetProvinces";
+        //根据省份ID获取城市
+        String GET_CITIES_BY_ID = "/ProjectAndDevice/GetTcitys?provinceId=";
+        //根据城市ID获取地区
+        String GET_COUNTIES_BY_ID = "/ProjectAndDevice/GetTcountys?cityId=";
 
     }
 

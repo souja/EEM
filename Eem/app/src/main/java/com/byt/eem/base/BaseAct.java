@@ -28,6 +28,10 @@ public abstract class BaseAct extends ActBase {
         addRequest(HttpUtil.Post(dialog, url, params, Object.class, callBack));
     }
 
+    public void Post(String url, RequestParams params, IHttpCallBack callBack) {
+        Post(null, url, params, Object.class, callBack);
+    }
+
     public <T> void Post(String url, final Class<T> dataClass, IHttpCallBack<T> callBack) {
         Post(null, url, new RequestParams(), dataClass, callBack);
     }

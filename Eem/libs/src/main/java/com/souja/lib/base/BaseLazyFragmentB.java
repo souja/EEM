@@ -114,6 +114,10 @@ public abstract class BaseLazyFragmentB extends BaseFragment implements IBaseLaz
         emptyView.setVisibility(View.VISIBLE);
     }
 
+    public void HideEmptyView() {
+        emptyView.setVisibility(View.GONE);
+    }
+
     protected boolean isProgressing() {
         return progressView.getVisibility() == View.VISIBLE;
     }

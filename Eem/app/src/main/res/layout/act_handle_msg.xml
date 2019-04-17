@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/page_bg"
+    android:orientation="vertical">
+
+    <com.souja.lib.widget.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:mTitle="处理告警" />
+
+    <TextView
+        style="@style/text_45px"
+        android:layout_width="match_parent"
+        android:layout_marginTop="30px"
+        android:background="@color/white"
+        android:padding="36px"
+        android:text="告警状态"
+        android:textColor="@color/black_38" />
+
+    <View style="@style/lineDc" />
+
+    <RadioGroup
+        android:id="@+id/rg_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/rb_right"
+            android:layout_width="match_parent"
+            android:layout_height="135px"
+            android:layout_marginLeft="36px"
+            android:text="属实"
+            android:textColor="@color/black"
+            android:textSize="45px" />
+
+        <RadioButton
+            android:id="@+id/rb_wrong"
+            android:layout_width="match_parent"
+            android:layout_height="135px"
+            android:layout_marginLeft="36px"
+            android:text="误报"
+            android:textColor="@color/black"
+            android:textSize="45px" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:id="@+id/ll_chooseDateTime"
+        android:layout_width="match_parent"
+        android:layout_height="135px"
+        android:layout_marginTop="30px"
+        android:background="@color/white"
+        android:gravity="center_vertical">
+
+        <TextView
+            style="@style/text_45px"
+            android:layout_marginLeft="36px"
+            android:text="处理时间"
+            android:textColor="@color/black_38" />
+
+        <TextView
+            android:id="@+id/tv_datetime"
+            style="@style/text_45px"
+            android:layout_marginLeft="36px"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="请选择日期时间"
+            android:textColor="@color/black_38" />
+
+        <ImageView
+            android:layout_width="21px"
+            android:layout_height="42px"
+            android:layout_marginLeft="24px"
+            android:layout_marginRight="36px"
+            android:background="@drawable/ic_arrow_51" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30px"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:minHeight="135px">
+
+        <TextView
+            style="@style/text_45px"
+            android:layout_marginLeft="36px"
+            android:text="原因分析"
+            android:textColor="@color/black_38" />
+
+        <EditText
+            android:id="@+id/ed_cause"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24px"
+            android:background="@color/transparent"
+            android:hint="请输入原因分析..."
+            android:paddingTop="15px"
+            android:paddingBottom="15px"
+            android:textSize="45px"
+            tools:text="因为所以因为所以因为所以因为所以因为所以因为所以因为所以因为所以" />
+    </LinearLayout>
+
+    <View style="@style/lineDc" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:minHeight="135px">
+
+        <TextView
+            style="@style/text_45px"
+            android:layout_marginLeft="36px"
+            android:text="处理过程"
+            android:textColor="@color/black_38" />
+
+        <EditText
+            android:id="@+id/ed_exeProcess"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24px"
+            android:background="@color/transparent"
+            android:hint="请输入处理过程..."
+            android:paddingTop="15px"
+            android:paddingBottom="15px"
+            android:textSize="45px"
+            tools:text="过程过程过程过程过程过程过程过程过程过程过程过程" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="129px"
+        android:layout_marginTop="45px">
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_save"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="45px"
+            android:layout_marginRight="45px"
+            android:layout_weight="1"
+            android:background="@drawable/main_grey_radius_btn_bg_selector"
+            android:text="提交"
+            android:textColor="@color/white"
+            android:textSize="45px" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_cancel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="45px"
+            android:layout_marginRight="45px"
+            android:layout_weight="1"
+            android:background="@drawable/main_grey_radius_btn_bg_selector"
+            android:text="取消"
+            android:textColor="@color/white"
+            android:textSize="45px" />
+    </LinearLayout>
+</LinearLayout>
