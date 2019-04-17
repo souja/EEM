@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/page_bg"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:ignore="UnknownId">
 
     <com.souja.lib.widget.TitleBar
         android:layout_width="match_parent"
@@ -16,8 +17,10 @@
         tools:mTitle="123" />
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/smartRefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/m_title">
 
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -40,13 +43,13 @@
                         style="@style/text_42px"
                         android:layout_marginLeft="42px"
                         android:layout_weight="1"
-                        android:text="状态：" />
+                        tools:text="状态：在线" />
 
                     <TextView
                         android:id="@+id/tv_date"
                         style="@style/text_42px"
                         android:layout_marginRight="42px"
-                        android:text="时间：" />
+                        tools:text="时间：2019-12-11" />
 
                 </LinearLayout>
 
@@ -60,4 +63,14 @@
         </android.support.v4.widget.NestedScrollView>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/tv_empty"
+        style="@style/matchParent"
+        android:layout_below="@id/m_title"
+        android:background="@color/page_bg"
+        android:gravity="center"
+        android:text="暂无设备相关数据"
+        android:textColor="@color/grey_80"
+        android:textSize="45px"
+        android:visibility="gone" />
+</RelativeLayout>

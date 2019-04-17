@@ -119,7 +119,13 @@ public class HttpUtil {
                 return;
             }
             String formatDataStr = dataString.replace("\\\"", "'");
-            callBack.OnSuccess(msg, pageObj, GsonUtil.getArr(formatDataStr, dataClass));
+            if (params.getUri().contains(MConstants.URL.GET_DEVICES_STATE_BY_DEVICEID)) {
+                ArrayList<T> list = new ArrayList<>();
+                T r = (T) GsonUtil.getObj(formatDataStr, dataClass);
+                list.add(r);
+                callBack.OnSuccess(msg, pageObj, list);
+            } else
+                callBack.OnSuccess(msg, pageObj, GsonUtil.getArr(formatDataStr, dataClass));
 
            /* if (isNull(resultObj.data) || ((JsonArray) resultObj.data).size() == 0) {
                 callBack.OnSuccess(msg, pageObj, new ArrayList<>());

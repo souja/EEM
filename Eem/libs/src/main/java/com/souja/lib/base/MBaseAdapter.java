@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import com.souja.lib.inter.CommonItemClickListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -55,6 +56,12 @@ public abstract class MBaseAdapter<T> extends RecyclerView.Adapter<RecyclerView.
 
     public T getItem(int position) {
         return mList.get(position);
+    }
+
+
+    public void setDataList(ArrayList<T> list) {
+        mList = list;
+        notifyDataSetChanged();
     }
 }
 

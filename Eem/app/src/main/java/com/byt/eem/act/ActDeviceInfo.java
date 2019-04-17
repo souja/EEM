@@ -1,34 +1,49 @@
 package com.byt.eem.act;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.byt.eem.R;
 import com.byt.eem.base.BaseAct;
+import com.byt.eem.base.BaseHolder;
 import com.byt.eem.util.HttpUtil;
 import com.byt.eem.util.MConstants;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.souja.lib.base.MBaseAdapter;
 import com.souja.lib.inter.IHttpCallBack;
 import com.souja.lib.models.BaseModel;
 import com.souja.lib.models.ODataPage;
+import com.souja.lib.widget.LoadingDialog;
 import com.souja.lib.widget.TitleBar;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+//设备参数信息
 public class ActDeviceInfo extends BaseAct {
 
     @BindView(R.id.tv_status)
     TextView tvStatus;
     @BindView(R.id.tv_date)
     TextView tvDate;
+    @BindView(R.id.tv_empty)
+    TextView tvEmpty;
     @BindView(R.id.rv_status)
     RecyclerView rvStatus;
+    @BindView(R.id.smartRefresh)
+    SmartRefreshLayout mRefreshLayout;
 
     private int deviceId;
     private DeviceInfo mDeviceInfo;
+    private AdapterStatus mAdapterStatus;
 
     @Override
     protected int setupViewRes() {
@@ -42,15 +57,21 @@ public class ActDeviceInfo extends BaseAct {
         ((TitleBar) findViewById(R.id.m_title)).setRightClick(view ->
                 NEXT(new Intent(_this, ActDeviceInfoHistory.class)
                         .putExtra("id", deviceId)));
-        getDeviceInfo();
+        mAdapterStatus = new AdapterStatus(_this, new ArrayList<>());
+        rvStatus.setAdapter(mAdapterStatus);
+        rvStatus.setNestedScrollingEnabled(false);
+        mRefreshLayout.setEnableLoadMore(false);
+        mRefreshLayout.setOnRefreshListener(s -> getDeviceInfo(true));
+        getDeviceInfo(false);
     }
 
-    private void getDeviceInfo() {
-        Post(MConstants.URL.GET_DEVICES_STATE_BY_DEVICEID + deviceId, HttpUtil.defaultParam(),
-                DeviceInfo.class, new IHttpCallBack<DeviceInfo>() {
+    private void getDeviceInfo(boolean refresh) {
+        Post(refresh ? null : new LoadingDialog(_this), MConstants.URL.GET_DEVICES_STATE_BY_DEVICEID + deviceId,
+                HttpUtil.defaultParam(), DeviceInfo.class, new IHttpCallBack<DeviceInfo>() {
 
                     @Override
                     public void OnSuccess(String msg, ODataPage page, ArrayList<DeviceInfo> data) {
+                        mRefreshLayout.finishRefresh();
                         if (data.size() > 0) {
                             mDeviceInfo = data.get(0);
                         }
@@ -59,72 +80,83 @@ public class ActDeviceInfo extends BaseAct {
 
                     @Override
                     public void OnFailure(String msg) {
+                        mRefreshLayout.finishRefresh();
                         showToast(msg);
                     }
                 });
     }
 
     private void initPage() {
-        if (mDeviceInfo == null) return;
-
+        if (mDeviceInfo == null || mDeviceInfo.getItems() == null || mDeviceInfo.getItems().size() == 0) {
+            tvEmpty.setVisibility(View.VISIBLE);
+        } else {
+            tvEmpty.setVisibility(View.GONE);
+            tvStatus.setText(String.valueOf("状态：" + mDeviceInfo.getState()));
+            tvDate.setText(String.valueOf("时间：" + mDeviceInfo.getOperateTime()));
+            mAdapterStatus.setDataList((ArrayList<ItemsBean>) mDeviceInfo.getItems());
+        }
     }
 
+    class AdapterStatus extends MBaseAdapter<ItemsBean> {
 
-    class DeviceInfo extends BaseModel {
+        private int colorProper, colorWarn;
+
+
+        public AdapterStatus(Context context, List<ItemsBean> list) {
+            super(context, list);
+            Resources res = mContext.getResources();
+            colorProper = res.getColor(android.R.color.holo_green_dark);
+            colorWarn = res.getColor(android.R.color.holo_red_dark);
+        }
+
+        @Override
+        public RecyclerView.ViewHolder onCreateView(ViewGroup parent, int viewType) {
+            return new HolderStatus(mInflater.inflate(R.layout.item_device_status, parent, false));
+        }
+
+        @Override
+        public void onBindView(RecyclerView.ViewHolder holder, int position) {
+            HolderStatus mHolder = (HolderStatus) holder;
+            ItemsBean model = getItem(position);
+            mHolder.tvStatusName.setText(model.getParamName());
+            mHolder.tvStatusValue.setText(model.getParamValue());
+            String desc = model.getParamState();
+            mHolder.tvStatusDesc.setText(desc);
+            if (desc.contains("正常")) {
+                mHolder.tvStatusDesc.setTextColor(colorProper);
+            } else {
+                mHolder.tvStatusDesc.setTextColor(colorWarn);
+            }
+        }
+    }
+
+    static class HolderStatus extends BaseHolder {
+
+        @BindView(R.id.tv_statusName)
+        TextView tvStatusName;
+        @BindView(R.id.tv_statusValue)
+        TextView tvStatusValue;
+        @BindView(R.id.tv_statusDesc)
+        TextView tvStatusDesc;
+
+        public HolderStatus(View itemView) {
+            super(itemView);
+        }
+    }
+
+    public class DeviceInfo extends BaseModel {
 
         /**
+         * Items : [{"ParamName":"漏电流","ParamValue":"34.8","ParamState":"正常"},{"ParamName":"A相电流","ParamValue":"15","ParamState":"告警"},{"ParamName":"B相电流","ParamValue":"16","ParamState":"告警"},{"ParamName":"C相电流","ParamValue":"0","ParamState":"正常"},{"ParamName":"A相电压","ParamValue":"230.8","ParamState":"正常"},{"ParamName":"B相电压","ParamValue":"230.9","ParamState":"正常"},{"ParamName":"C相电压","ParamValue":"230.9","ParamState":"正常"},{"ParamName":"1路温度","ParamValue":"14.6","ParamState":"告警"},{"ParamName":"2路温度","ParamValue":"15","ParamState":"正常"},{"ParamName":"3路温度","ParamValue":"14.4","ParamState":"正常"},{"ParamName":"4路温度","ParamValue":"15","ParamState":"正常"}]
          * DeviceName : 1楼总配电箱
          * State : 在线
-         * OperateTime : 2019-03-07T15:14:15
-         * FirstLeakage : 34.8
-         * FirstLeakageState : 正常
-         * Axelectricity : 15
-         * AxelectricityState : 告警
-         * Bxelectricity : 16
-         * BxelectricityState : 告警
-         * Cxelectricity : 0
-         * CxelectricityState : 正常
-         * CommonAxVoltage : 230.8
-         * CommonAxVoltageState : 正常
-         * CommonBxVoltage : 230.9
-         * CommonBxVoltageState : 正常
-         * CommonCxVoltage : 230.9
-         * CommonCxVoltageState : 正常
-         * FirstChannelTemperature : 14.6
-         * FirstChannelTemperatureState : 告警
-         * SecondChannelTemperature : 15
-         * SecondChannelTemperatureState : 正常
-         * ThirdChannelTemperature : 14.4
-         * ThirdChannelTemperatureState : 正常
-         * FourthChannelTemperature : 15
-         * FourthChannelTemperatureState : 正常
+         * OperateTime : 03/07/2019 15:14:15
          */
 
         private String DeviceName;
         private String State;
         private String OperateTime;
-        private String FirstLeakage;
-        private String FirstLeakageState;
-        private String Axelectricity;
-        private String AxelectricityState;
-        private String Bxelectricity;
-        private String BxelectricityState;
-        private String Cxelectricity;
-        private String CxelectricityState;
-        private String CommonAxVoltage;
-        private String CommonAxVoltageState;
-        private String CommonBxVoltage;
-        private String CommonBxVoltageState;
-        private String CommonCxVoltage;
-        private String CommonCxVoltageState;
-        private String FirstChannelTemperature;
-        private String FirstChannelTemperatureState;
-        private String SecondChannelTemperature;
-        private String SecondChannelTemperatureState;
-        private String ThirdChannelTemperature;
-        private String ThirdChannelTemperatureState;
-        private String FourthChannelTemperature;
-        private String FourthChannelTemperatureState;
+        private List<ItemsBean> Items;
 
         public String getDeviceName() {
             return DeviceName;
@@ -150,180 +182,50 @@ public class ActDeviceInfo extends BaseAct {
             this.OperateTime = OperateTime;
         }
 
-        public String getFirstLeakage() {
-            return FirstLeakage;
+        public List<ItemsBean> getItems() {
+            return Items;
         }
 
-        public void setFirstLeakage(String FirstLeakage) {
-            this.FirstLeakage = FirstLeakage;
+        public void setItems(List<ItemsBean> Items) {
+            this.Items = Items;
         }
 
-        public String getFirstLeakageState() {
-            return FirstLeakageState;
+    }
+
+    public class ItemsBean extends BaseModel {
+        /**
+         * ParamName : 漏电流
+         * ParamValue : 34.8
+         * ParamState : 正常
+         */
+
+        private String ParamName;
+        private String ParamValue;
+        private String ParamState;
+
+        public String getParamName() {
+            return ParamName;
         }
 
-        public void setFirstLeakageState(String FirstLeakageState) {
-            this.FirstLeakageState = FirstLeakageState;
+        public void setParamName(String ParamName) {
+            this.ParamName = ParamName;
         }
 
-        public String getAxelectricity() {
-            return Axelectricity;
+        public String getParamValue() {
+            return ParamValue;
         }
 
-        public void setAxelectricity(String Axelectricity) {
-            this.Axelectricity = Axelectricity;
+        public void setParamValue(String ParamValue) {
+            this.ParamValue = ParamValue;
         }
 
-        public String getAxelectricityState() {
-            return AxelectricityState;
+        public String getParamState() {
+            return ParamState;
         }
 
-        public void setAxelectricityState(String AxelectricityState) {
-            this.AxelectricityState = AxelectricityState;
-        }
-
-        public String getBxelectricity() {
-            return Bxelectricity;
-        }
-
-        public void setBxelectricity(String Bxelectricity) {
-            this.Bxelectricity = Bxelectricity;
-        }
-
-        public String getBxelectricityState() {
-            return BxelectricityState;
-        }
-
-        public void setBxelectricityState(String BxelectricityState) {
-            this.BxelectricityState = BxelectricityState;
-        }
-
-        public String getCxelectricity() {
-            return Cxelectricity;
-        }
-
-        public void setCxelectricity(String Cxelectricity) {
-            this.Cxelectricity = Cxelectricity;
-        }
-
-        public String getCxelectricityState() {
-            return CxelectricityState;
-        }
-
-        public void setCxelectricityState(String CxelectricityState) {
-            this.CxelectricityState = CxelectricityState;
-        }
-
-        public String getCommonAxVoltage() {
-            return CommonAxVoltage;
-        }
-
-        public void setCommonAxVoltage(String CommonAxVoltage) {
-            this.CommonAxVoltage = CommonAxVoltage;
-        }
-
-        public String getCommonAxVoltageState() {
-            return CommonAxVoltageState;
-        }
-
-        public void setCommonAxVoltageState(String CommonAxVoltageState) {
-            this.CommonAxVoltageState = CommonAxVoltageState;
-        }
-
-        public String getCommonBxVoltage() {
-            return CommonBxVoltage;
-        }
-
-        public void setCommonBxVoltage(String CommonBxVoltage) {
-            this.CommonBxVoltage = CommonBxVoltage;
-        }
-
-        public String getCommonBxVoltageState() {
-            return CommonBxVoltageState;
-        }
-
-        public void setCommonBxVoltageState(String CommonBxVoltageState) {
-            this.CommonBxVoltageState = CommonBxVoltageState;
-        }
-
-        public String getCommonCxVoltage() {
-            return CommonCxVoltage;
-        }
-
-        public void setCommonCxVoltage(String CommonCxVoltage) {
-            this.CommonCxVoltage = CommonCxVoltage;
-        }
-
-        public String getCommonCxVoltageState() {
-            return CommonCxVoltageState;
-        }
-
-        public void setCommonCxVoltageState(String CommonCxVoltageState) {
-            this.CommonCxVoltageState = CommonCxVoltageState;
-        }
-
-        public String getFirstChannelTemperature() {
-            return FirstChannelTemperature;
-        }
-
-        public void setFirstChannelTemperature(String FirstChannelTemperature) {
-            this.FirstChannelTemperature = FirstChannelTemperature;
-        }
-
-        public String getFirstChannelTemperatureState() {
-            return FirstChannelTemperatureState;
-        }
-
-        public void setFirstChannelTemperatureState(String FirstChannelTemperatureState) {
-            this.FirstChannelTemperatureState = FirstChannelTemperatureState;
-        }
-
-        public String getSecondChannelTemperature() {
-            return SecondChannelTemperature;
-        }
-
-        public void setSecondChannelTemperature(String SecondChannelTemperature) {
-            this.SecondChannelTemperature = SecondChannelTemperature;
-        }
-
-        public String getSecondChannelTemperatureState() {
-            return SecondChannelTemperatureState;
-        }
-
-        public void setSecondChannelTemperatureState(String SecondChannelTemperatureState) {
-            this.SecondChannelTemperatureState = SecondChannelTemperatureState;
-        }
-
-        public String getThirdChannelTemperature() {
-            return ThirdChannelTemperature;
-        }
-
-        public void setThirdChannelTemperature(String ThirdChannelTemperature) {
-            this.ThirdChannelTemperature = ThirdChannelTemperature;
-        }
-
-        public String getThirdChannelTemperatureState() {
-            return ThirdChannelTemperatureState;
-        }
-
-        public void setThirdChannelTemperatureState(String ThirdChannelTemperatureState) {
-            this.ThirdChannelTemperatureState = ThirdChannelTemperatureState;
-        }
-
-        public String getFourthChannelTemperature() {
-            return FourthChannelTemperature;
-        }
-
-        public void setFourthChannelTemperature(String FourthChannelTemperature) {
-            this.FourthChannelTemperature = FourthChannelTemperature;
-        }
-
-        public String getFourthChannelTemperatureState() {
-            return FourthChannelTemperatureState;
-        }
-
-        public void setFourthChannelTemperatureState(String FourthChannelTemperatureState) {
-            this.FourthChannelTemperatureState = FourthChannelTemperatureState;
+        public void setParamState(String ParamState) {
+            this.ParamState = ParamState;
         }
     }
+
 }

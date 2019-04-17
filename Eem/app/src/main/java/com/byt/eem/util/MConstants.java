@@ -38,7 +38,7 @@ public class MConstants {
         //根据项目查询设备
         String GET_DEVICES_BY_PROJECT = "/Home/GetDevicesByProject?projectId=";
         //获取设备当前状态
-        String GET_DEVICES_STATE_BY_DEVICEID = "/Home/GetDeviceStateByDeviceId?deviceId=";
+        String GET_DEVICES_STATE_BY_DEVICEID = "/Home/GetDeviceStateByDeviceIdEx?deviceId=";
         //获取当前设备的历史记录 Id beginTime endTime
         String GET_DEVICES_HISTORY_STATE = "/Home/GetDeviceHisState";
         //获取当前用户的所有项目包含其子用户的项目，用于设备新增的时候的项目选择
