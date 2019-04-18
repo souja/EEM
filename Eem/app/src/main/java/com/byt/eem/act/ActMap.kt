@@ -1,6 +1,6 @@
 package com.byt.eem.act
 
-import android.content.Context
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Point
@@ -20,6 +20,7 @@ import com.byt.eem.R
 import com.byt.eem.base.BaseAct
 import com.byt.eem.inflate
 import com.byt.eem.setVisibility
+import com.souja.lib.base.ActBase
 import com.souja.lib.utils.ScreenUtil
 import com.souja.lib.widget.TitleBar
 import kotlinx.android.synthetic.main.activity_act_map.*
@@ -28,6 +29,14 @@ import kotlinx.android.synthetic.main.item_poi.view.*
 
 class ActMap : BaseAct() {
 
+    companion object {
+        fun launch(context: ActBase, cityName: String, reqCode: Int) {
+            context.startActivityForResult(Intent(context, ActMap::class.java).apply {
+                putExtra("city", cityName)
+            }, reqCode)
+        }
+    }
+
     override fun setupViewRes() = R.layout.activity_act_map
 
     override fun initMain() {
@@ -35,15 +44,20 @@ class ActMap : BaseAct() {
         initListeners()
     }
 
+    private var mPoiInfo: PoiInfo? = null
+
     /**
      * 初始化地图监听
      */
     private fun initListeners() {
         findViewById<TitleBar>(R.id.m_title)?.setRightClick {
-            //保存位置信息
+            setResult(Activity.RESULT_OK, Intent().apply {
+                putExtra("poi", mPoiInfo)
+            })
+            finish()
         }
         findViewById<TitleBar>(R.id.m_title)?.setSndMenuClick {
-            ActQueryMapAddress.launch(this)
+            ActQueryMapAddress.launch(this, intent.getStringExtra("city"), 1)
         }
         mBaiduMap!!.setOnMapStatusChangeListener(object : BaiduMap.OnMapStatusChangeListener {
 
@@ -76,8 +90,9 @@ class ActMap : BaseAct() {
 
             override fun onGetReverseGeoCodeResult(result: ReverseGeoCodeResult?) {
                 //获取点击的坐标地址
-                result?.poiList.let {
-                    rv_address.adapter = PoiAdapter(it!!)
+                result?.poiList?.let {
+                    mPoiInfo = it[0]
+                    rv_address.adapter = PoiAdapter(it)
                 }
             }
 
@@ -120,14 +135,8 @@ class ActMap : BaseAct() {
         }
         mDistrictSearch!!.setOnDistrictSearchListener(listener)
         mDistrictSearch!!.searchDistrict(DistrictSearchOption()
-                .cityName("成都市"))
+                .cityName(intent.getStringExtra("city")))
 
-    }
-
-    companion object {
-        fun launch(context: Context) {
-            context.startActivity(Intent(context, ActMap::class.java))
-        }
     }
 
     private lateinit var mMapView: MapView
@@ -219,6 +228,7 @@ class ActMap : BaseAct() {
                 ScreenUtil.initScale(itemView)
                 itemView.setOnClickListener { _ ->
                     mPoiInfo?.let {
+                        this@ActMap.mPoiInfo = mPoiInfo
                         mBaiduMap!!.setMapStatus(MapStatusUpdateFactory
                                 .newLatLng(it.location))
                         val position = itemView.tag as Int
@@ -241,6 +251,19 @@ class ActMap : BaseAct() {
 
         }
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+            data?.getParcelableExtra<PoiInfo>("poi")?.let {
+                mBaiduMap!!.setMapStatus(MapStatusUpdateFactory
+                        .newLatLng(it.location))
+                val op = ReverseGeoCodeOption()
+                op.location(it.location)
+                mGeoCodec!!.reverseGeoCode(op)
+            }
+        }
     }
 
 }

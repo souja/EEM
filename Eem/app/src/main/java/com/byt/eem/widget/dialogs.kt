@@ -20,6 +20,7 @@ import com.byt.eem.inflate
 import com.byt.eem.model.CityBean
 import com.byt.eem.model.CountyBean
 import com.byt.eem.model.ProvinceBean
+import com.byt.eem.model.UserControllerBean
 import com.souja.lib.utils.ScreenUtil
 import kotlinx.android.synthetic.main.item_district.view.*
 
@@ -81,7 +82,7 @@ open class BaseFullBottomSheetFragment : BottomSheetDialogFragment() {
  * Time : 2019/4/13 2:01 PM
  * Description :
  */
-open class ProvinceCityCountyPickerDialog<T> : DialogFragment() {
+open class CommonSelectDialog<T> : DialogFragment() {
 
     private var mDatas: ArrayList<T>? = null
 
@@ -183,6 +184,24 @@ open class ProvinceCityCountyPickerDialog<T> : DialogFragment() {
 
     }
 
+    inner class UserAdapter(datas: ArrayList<UserControllerBean>) : BaseAdapter<UserControllerBean>(datas) {
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserHolder =
+                UserHolder(parent.inflate(R.layout.item_district), mOnItemClickListener)
+
+    }
+
+    inner class UserHolder(itemView: View?, private var mOnItemClickListener: OnItemClickListener?) : BaseHolder<UserControllerBean>(itemView) {
+        override fun onItemClick(data: UserControllerBean) {
+            this.mOnItemClickListener?.onItemClick(data.id, data.id.toString(), data.userName)
+        }
+
+        override fun setContent() {
+            itemView.tv_content.text = mData!!.userName
+        }
+
+    }
+
     abstract inner class BaseHolder<T>(itemView: View?) : RecyclerView.ViewHolder(itemView) {
 
         abstract fun onItemClick(data: T)
@@ -212,7 +231,7 @@ open class ProvinceCityCountyPickerDialog<T> : DialogFragment() {
 
 }
 
-class ProvinceDialog : ProvinceCityCountyPickerDialog<ProvinceBean>() {
+class ProvinceDialog : CommonSelectDialog<ProvinceBean>() {
 
     companion object {
         fun newInstance(datas: ArrayList<ProvinceBean>) = ProvinceDialog().apply {
@@ -230,7 +249,7 @@ class ProvinceDialog : ProvinceCityCountyPickerDialog<ProvinceBean>() {
 
 }
 
-class CityDialog : ProvinceCityCountyPickerDialog<CityBean>() {
+class CityDialog : CommonSelectDialog<CityBean>() {
 
     companion object {
         fun newInstance(datas: ArrayList<CityBean>) = CityDialog().apply {
@@ -248,7 +267,7 @@ class CityDialog : ProvinceCityCountyPickerDialog<CityBean>() {
 
 }
 
-class CountyDialog : ProvinceCityCountyPickerDialog<CountyBean>() {
+class CountyDialog : CommonSelectDialog<CountyBean>() {
 
     companion object {
         fun newInstance(datas: ArrayList<CountyBean>) = CountyDialog().apply {
@@ -262,6 +281,23 @@ class CountyDialog : ProvinceCityCountyPickerDialog<CountyBean>() {
         return CountyAdapter(datas).apply {
             this.mOnItemClickListener = mOnItemClickListener
         }
+    }
+
+}
+
+class UserDialog: CommonSelectDialog<UserControllerBean>() {
+
+    companion object {
+        fun newInstance(datas: ArrayList<UserControllerBean>) = UserDialog().apply {
+            arguments = Bundle().apply {
+                putSerializable("data", datas)
+            }
+        }
+    }
+
+    override fun createAdapter(datas: ArrayList<UserControllerBean>,
+                               mOnItemClickListener: OnItemClickListener?) = UserAdapter(datas).apply {
+        this.mOnItemClickListener = mOnItemClickListener
     }
 
 }

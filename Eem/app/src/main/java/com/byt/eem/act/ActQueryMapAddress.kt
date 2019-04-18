@@ -1,6 +1,6 @@
 package com.byt.eem.act
 
-import android.content.Context
+import android.app.Activity
 import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -22,8 +22,10 @@ import kotlinx.android.synthetic.main.item_poi.view.*
 class ActQueryMapAddress : BaseActEd() {
 
     companion object {
-        fun launch(context: Context) {
-            context.startActivity(Intent(context, ActQueryMapAddress::class.java))
+        fun launch(context: BaseAct, cityName: String, reqCode: Int) {
+            context.startActivityForResult(Intent(context, ActQueryMapAddress::class.java).apply {
+                putExtra("city", cityName)
+            }, reqCode)
         }
     }
 
@@ -32,12 +34,14 @@ class ActQueryMapAddress : BaseActEd() {
     private var mPoiSearch = PoiSearch.newInstance()
 
     override fun initMain() {
-        iv_back.setOnClickListener { onBackPressed() }
+        iv_back.setOnClickListener {
+            onBackPressed()
+        }
         mPoiSearch.setOnGetPoiSearchResultListener(listener)
-        et_input.addTextChangedListener(object :TextWatcher{
+        et_input.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 mPoiSearch.searchInCity(PoiCitySearchOption()
-                        .city("成都") //必填
+                        .city(intent.getStringExtra("city")) //必填
                         .keyword(s.toString()) //必填
                         .pageNum(0)
                         .pageCapacity(20))
@@ -96,7 +100,10 @@ class ActQueryMapAddress : BaseActEd() {
                 ScreenUtil.initScale(itemView)
                 itemView.setOnClickListener { _ ->
                     mPoiInfo?.let {
-
+                        setResult(Activity.RESULT_OK, Intent().apply {
+                            putExtra("poi", mPoiInfo)
+                        })
+                        finish()
                     }
                 }
             }

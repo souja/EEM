@@ -64,6 +64,8 @@ public class MConstants {
         String GET_CITIES_BY_ID = "/ProjectAndDevice/GetTcitys?provinceId=";
         //根据城市ID获取地区
         String GET_COUNTIES_BY_ID = "/ProjectAndDevice/GetTcountys?cityId=";
+        //获取所有业主
+        String GET_ALL_USER = "/ProjectAndDevice/GetAllUser";
 
     }
 

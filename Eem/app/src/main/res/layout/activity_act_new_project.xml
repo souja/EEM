@@ -40,8 +40,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:src="@drawable/ic_arrow_51"/>
 
                 <EditText
@@ -52,7 +52,8 @@
                     android:layout_marginRight="32px"
                     android:layout_toLeftOf="@id/tmp_iv_name"
                     android:background="@null"
-                    android:hint="请输入项目名称"/>
+                    android:hint="请输入项目名称"
+                    android:textColor="#0e0e0e"/>
 
             </RelativeLayout>
 
@@ -62,8 +63,10 @@
                 android:background="@color/color_list_divider"/>
 
             <RelativeLayout
+                android:id="@+id/rl_user"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
                 android:padding="32px">
 
                 <TextView
@@ -77,15 +80,16 @@
                     android:textColor="#0f0f0f"/>
 
                 <ImageView
-                    android:layout_centerVertical="true"
                     android:id="@+id/tmp_iv_host"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:src="@drawable/ic_arrow_51"/>
 
-                <EditText
+                <TextView
+                    android:id="@+id/tv_user"
                     style="@style/text_42px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -93,7 +97,8 @@
                     android:layout_marginRight="32px"
                     android:layout_toLeftOf="@id/tmp_iv_host"
                     android:background="@null"
-                    android:hint="请选择业主"/>
+                    android:hint="请选择业主"
+                    android:textColor="#80f0f0f0"/>
 
             </RelativeLayout>
 
@@ -118,12 +123,12 @@
                     android:textColor="#0f0f0f"/>
 
                 <ImageView
-                    android:layout_centerVertical="true"
                     android:id="@+id/tmp_iv_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:src="@drawable/ic_arrow_51"/>
 
                 <EditText
@@ -134,7 +139,9 @@
                     android:layout_marginRight="32px"
                     android:layout_toLeftOf="@id/tmp_iv_number"
                     android:background="@null"
-                    android:hint="请填写联系电话"/>
+                    android:hint="请填写联系电话"
+                    android:textColor="#80f0f0f0"
+                    android:textColorHint="#80f0f0f0"/>
 
             </RelativeLayout>
 
@@ -159,12 +166,12 @@
                     android:textColor="#0f0f0f"/>
 
                 <ImageView
-                    android:layout_centerVertical="true"
                     android:id="@+id/tmp_iv_contact"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:src="@drawable/ic_arrow_51"/>
 
                 <EditText
@@ -175,7 +182,9 @@
                     android:layout_marginRight="32px"
                     android:layout_toLeftOf="@id/tmp_iv_contact"
                     android:background="@null"
-                    android:hint="请输入联系人"/>
+                    android:hint="请输入联系人"
+                    android:textColor="#80f0f0f0"
+                    android:textColorHint="#80f0f0f0"/>
 
             </RelativeLayout>
 
@@ -211,18 +220,18 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="137px"
-                android:gravity="center_vertical"
                 android:layout_marginLeft="32px"
                 android:layout_marginRight="32px"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_province"
                     style="@style/text_45px"
-                    android:background="?attr/selectableItemBackground"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="?attr/selectableItemBackground"
                     android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
                     android:gravity="center"
                     android:text="省"/>
@@ -256,9 +265,9 @@
                 android:background="@color/color_list_divider"/>
 
             <RelativeLayout
-                android:layout_marginLeft="32px"
                 android:layout_width="match_parent"
-                android:layout_height="137px">
+                android:layout_height="137px"
+                android:layout_marginLeft="32px">
 
                 <TextView
                     style="@style/text_45px"
@@ -269,16 +278,16 @@
                     android:textColor="#0f0f0f"/>
 
                 <ImageView
-                    style="?attr/actionButtonStyle"
-                    android:layout_centerVertical="true"
                     android:id="@+id/iv_location"
+                    style="?attr/actionButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:src="@drawable/ic_location"/>
 
-                <EditText
+                <TextView
                     android:id="@+id/tv_address"
                     style="@style/text_42px"
                     android:layout_width="wrap_content"
@@ -286,8 +295,8 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="32px"
                     android:layout_toLeftOf="@id/iv_location"
-                    android:background="@null"
-                    android:hint=""/>
+                    android:text="项目地址"
+                    android:textColor="#80f0f0f0"/>
 
             </RelativeLayout>
 
@@ -309,9 +318,9 @@
                     android:layout_width="0dp"
                     android:layout_height="110px"
                     android:layout_weight="1"
-                    android:text="返回"
-                    android:gravity="center"
                     android:background="@drawable/cancel_shape_bg"
+                    android:gravity="center"
+                    android:text="返回"
                     android:textColor="@color/black"
                     android:textSize="42px"/>
 
@@ -321,10 +330,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="32px"
                     android:layout_weight="1"
-                    android:text="保存"
+                    android:background="@drawable/login_btn_bg_selector"
                     android:gravity="center_horizontal"
                     android:paddingTop="36px"
-                    android:background="@drawable/login_btn_bg_selector"
+                    android:text="保存"
                     android:textColor="#fff"
                     android:textSize="42px"/>
 
