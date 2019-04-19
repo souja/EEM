@@ -15,7 +15,7 @@ import com.byt.eem.base.BaseAct
 import com.byt.eem.base.BaseActEd
 import com.byt.eem.inflate
 import com.souja.lib.utils.ScreenUtil
-import kotlinx.android.synthetic.main.activity_act_query_map_address.*
+import kotlinx.android.synthetic.main.activity_query_map_address.*
 import kotlinx.android.synthetic.main.item_poi.view.*
 
 
@@ -29,7 +29,7 @@ class ActQueryMapAddress : BaseActEd() {
         }
     }
 
-    override fun setupViewRes() = R.layout.activity_act_query_map_address
+    override fun setupViewRes() = R.layout.activity_query_map_address
 
     private var mPoiSearch = PoiSearch.newInstance()
 

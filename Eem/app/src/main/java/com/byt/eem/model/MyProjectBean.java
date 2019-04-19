@@ -194,27 +194,4 @@ public class MyProjectBean extends BaseModel {
         this.Counts = Counts;
     }
 
-    @Override
-    public String toString() {
-        return "MyProjectBean{" +
-                "Address='" + Address + '\'' +
-                ", PTime='" + PTime + '\'' +
-                ", TCityId=" + TCityId +
-                ", TCountyId=" + TCountyId +
-                ", TProvinceId=" + TProvinceId +
-                ", CityName='" + CityName + '\'' +
-                ", CountyName='" + CountyName + '\'' +
-                ", ProvinceName='" + ProvinceName + '\'' +
-                ", TUserId=" + TUserId +
-                ", TProjectName='" + TProjectName + '\'' +
-                ", Id=" + Id +
-                ", Longitude='" + Longitude + '\'' +
-                ", Latitude='" + Latitude + '\'' +
-                ", TContactId='" + TContactId + '\'' +
-                ", ContactName='" + ContactName + '\'' +
-                ", Phone='" + Phone + '\'' +
-                ", UserName='" + UserName + '\'' +
-                ", Counts=" + Counts +
-                '}';
-    }
 }

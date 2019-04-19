@@ -45,6 +45,7 @@
                     android:src="@drawable/ic_arrow_51"/>
 
                 <EditText
+                    android:id="@+id/et_project_name"
                     style="@style/text_42px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -98,7 +99,7 @@
                     android:layout_toLeftOf="@id/tmp_iv_host"
                     android:background="@null"
                     android:hint="请选择业主"
-                    android:textColor="#80f0f0f0"/>
+                    android:textColor="#0f0f0f"/>
 
             </RelativeLayout>
 
@@ -132,6 +133,7 @@
                     android:src="@drawable/ic_arrow_51"/>
 
                 <EditText
+                    android:id="@+id/et_phone"
                     style="@style/text_42px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -139,9 +141,8 @@
                     android:layout_marginRight="32px"
                     android:layout_toLeftOf="@id/tmp_iv_number"
                     android:background="@null"
-                    android:hint="请填写联系电话"
-                    android:textColor="#80f0f0f0"
-                    android:textColorHint="#80f0f0f0"/>
+                    android:inputType="phone"
+                    android:hint="请填写联系电话"/>
 
             </RelativeLayout>
 
@@ -175,6 +176,7 @@
                     android:src="@drawable/ic_arrow_51"/>
 
                 <EditText
+                    android:id="@+id/et_contact"
                     style="@style/text_42px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -183,8 +185,7 @@
                     android:layout_toLeftOf="@id/tmp_iv_contact"
                     android:background="@null"
                     android:hint="请输入联系人"
-                    android:textColor="#80f0f0f0"
-                    android:textColorHint="#80f0f0f0"/>
+                    android:textColor="#0f0f0f"/>
 
             </RelativeLayout>
 
@@ -295,8 +296,8 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="32px"
                     android:layout_toLeftOf="@id/iv_location"
-                    android:text="项目地址"
-                    android:textColor="#80f0f0f0"/>
+                    android:hint="项目地址"
+                    android:textColor="#0e0e0e"/>
 
             </RelativeLayout>
 

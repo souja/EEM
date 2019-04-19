@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.baidu.mapapi.map.*
+import com.baidu.mapapi.model.LatLng
 import com.baidu.mapapi.model.LatLngBounds
 import com.baidu.mapapi.search.core.PoiInfo
 import com.baidu.mapapi.search.core.SearchResult
@@ -23,21 +24,23 @@ import com.byt.eem.setVisibility
 import com.souja.lib.base.ActBase
 import com.souja.lib.utils.ScreenUtil
 import com.souja.lib.widget.TitleBar
-import kotlinx.android.synthetic.main.activity_act_map.*
+import kotlinx.android.synthetic.main.activity_map.*
 import kotlinx.android.synthetic.main.item_poi.view.*
 
 
 class ActMap : BaseAct() {
 
     companion object {
-        fun launch(context: ActBase, cityName: String, reqCode: Int) {
+        fun launch(context: ActBase, cityName: String, reqCode: Int, lat: Double = 0.0, long: Double = 0.0) {
             context.startActivityForResult(Intent(context, ActMap::class.java).apply {
                 putExtra("city", cityName)
+                putExtra("lat", lat)
+                putExtra("long", long)
             }, reqCode)
         }
     }
 
-    override fun setupViewRes() = R.layout.activity_act_map
+    override fun setupViewRes() = R.layout.activity_map
 
     override fun initMain() {
         initView()
@@ -59,6 +62,8 @@ class ActMap : BaseAct() {
         findViewById<TitleBar>(R.id.m_title)?.setSndMenuClick {
             ActQueryMapAddress.launch(this, intent.getStringExtra("city"), 1)
         }
+        val lat = intent.getDoubleExtra("lat", 0.0)
+        val long = intent.getDoubleExtra("long", 0.0)
         mBaiduMap!!.setOnMapStatusChangeListener(object : BaiduMap.OnMapStatusChangeListener {
 
             override fun onMapStatusChangeStart(p0: MapStatus?) {
@@ -122,9 +127,13 @@ class ActMap : BaseAct() {
                     mBaiduMap!!.setMapStatus(MapStatusUpdateFactory
                             .newLatLngBounds(builder.build()))
                     mBaiduMap!!.setMapStatus(MapStatusUpdateFactory
-                            .newMapStatus(MapStatus.Builder().zoom(mBaiduMap!!.maxZoomLevel - 2).build()))
+                            .newMapStatus(MapStatus.Builder().zoom(mBaiduMap!!.maxZoomLevel - 3).build()))
                     addMarker()
-                    val latLng = mMarkerF!!.position
+                    val latLng = if (lat > 0 && long > 0) {
+                        LatLng(lat, long)
+                    } else {
+                        mMarkerF!!.position
+                    }
                     val op = ReverseGeoCodeOption()
                     op.location(latLng)
                     mGeoCodec!!.reverseGeoCode(op)

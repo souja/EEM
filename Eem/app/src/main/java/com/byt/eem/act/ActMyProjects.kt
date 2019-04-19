@@ -1,6 +1,7 @@
 package com.byt.eem.act
 
 import android.animation.ObjectAnimator
+import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -18,7 +19,7 @@ import com.souja.lib.models.ODataPage
 import com.souja.lib.utils.ScreenUtil
 import com.souja.lib.widget.LoadingDialog
 import com.souja.lib.widget.TitleBar
-import kotlinx.android.synthetic.main.activity_act_my_projects.*
+import kotlinx.android.synthetic.main.activity_my_projects.*
 import kotlinx.android.synthetic.main.item_project.view.*
 
 
@@ -53,7 +54,7 @@ class ActMyProjects : BaseAct(), ProjectAdapter.OnItemClickListener {
     }
 
     override fun onEditClick(projectBean: MyProjectBean, position: Int) {
-        ActNewProject.launch(this)
+        ActNewProject.launch(this, 1, projectBean)
     }
 
     companion object {
@@ -64,7 +65,7 @@ class ActMyProjects : BaseAct(), ProjectAdapter.OnItemClickListener {
 
     private var mAdapter: ProjectAdapter? = null
 
-    override fun setupViewRes() = R.layout.activity_act_my_projects
+    override fun setupViewRes() = R.layout.activity_my_projects
 
     override fun initMain() {
         recycler_project.layoutManager = LinearLayoutManager(_this)
@@ -73,7 +74,7 @@ class ActMyProjects : BaseAct(), ProjectAdapter.OnItemClickListener {
         mAdapter!!.setOnItemClickListener(this)
         recycler_project.adapter = mAdapter
         findViewById<TitleBar>(R.id.m_title)?.setRightClick {
-            ActNewProject.launch(_this)
+            ActNewProject.launch(_this, 1)
         }
         Post(LoadingDialog(_this, "正在加载..."), MConstants.URL.GET_MY_PROJECTS, MyProjectBean::class.java, object : IHttpCallBack<MyProjectBean> {
             override fun OnSuccess(msg: String?, page: ODataPage?, data: ArrayList<MyProjectBean>?) {
@@ -84,6 +85,21 @@ class ActMyProjects : BaseAct(), ProjectAdapter.OnItemClickListener {
             }
 
         })
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+            Post(LoadingDialog(_this, "正在加载..."), MConstants.URL.GET_MY_PROJECTS, MyProjectBean::class.java, object : IHttpCallBack<MyProjectBean> {
+                override fun OnSuccess(msg: String?, page: ODataPage?, data: ArrayList<MyProjectBean>?) {
+                    mAdapter?.setData(data!!)
+                }
+
+                override fun OnFailure(msg: String?) {
+                }
+
+            })
+        }
     }
 
 }

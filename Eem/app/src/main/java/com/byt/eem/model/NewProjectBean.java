@@ -4,10 +4,10 @@ import com.souja.lib.models.BaseModel;
 
 /**
  * Author : hikobe8@github.com
- * Time : 2019/4/14 12:46 PM
+ * Time : 2019/4/20 12:35 AM
  * Description :
  */
-public class ProjectInfoBean extends BaseModel {
+public class NewProjectBean extends BaseModel {
 
     /**
      * Address : 广安神仙树1号
