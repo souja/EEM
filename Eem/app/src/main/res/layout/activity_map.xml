@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:mRightText="确定"
-        app:mRightSrcB="@drawable/ic_location"
+        app:mRightSrcB="@drawable/ic_search"
         app:mTitle="位置"/>
 
     <FrameLayout

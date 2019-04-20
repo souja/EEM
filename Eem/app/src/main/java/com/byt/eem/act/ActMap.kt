@@ -166,7 +166,7 @@ class ActMap : BaseAct() {
      * 添加位置锚点
      */
     private fun addMarker() {
-        if (null != mBaiduMap!!.mapStatus) {
+        if (null != mBaiduMap!!.mapStatus && null != mBaiduMap!!.projection) {
             val llF = mBaiduMap!!.mapStatus.target
             mScreenCenterPoint = mBaiduMap!!.projection.toScreenLocation(llF)
             val ooF = MarkerOptions().position(llF).icon(bdF).perspective(true)
