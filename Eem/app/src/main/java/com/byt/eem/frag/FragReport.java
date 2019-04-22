@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.byt.eem.R;
@@ -19,10 +21,16 @@ import com.souja.lib.inter.IHttpCallBack;
 import com.souja.lib.models.BaseModel;
 import com.souja.lib.models.ODataPage;
 import com.souja.lib.utils.MDateUtils;
+import com.souja.lib.widget.LoadingDialog;
+import com.weigan.loopview.LoopView;
 
 import org.xutils.common.util.LogUtil;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import butterknife.BindView;
@@ -35,12 +43,35 @@ public class FragReport extends MBaseLazyFragmentB {
     RecyclerView rvMsgList;
     @BindView(R.id.smartRefresh)
     SmartRefreshLayout smartRefresh;
+    @BindView(R.id.tv_year)
+    TextView tvYear;
+    @BindView(R.id.tv_week)
+    TextView tvWeek;
+    @BindView(R.id.tv_start)
+    TextView tvStart;
+    @BindView(R.id.tv_end)
+    TextView tvEnd;
+    @BindView(R.id.yearWheel)
+    LoopView yearWheel;
+    @BindView(R.id.weekWheel)
+    LoopView weekWheel;
+    @BindView(R.id.ll_wheels)
+    View wheels;
+    @BindView(R.id.tv_empty)
+    View emptyView;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
 
     Unbinder unbinder;
 
     private String startTime, endTime;
     private List<Report> mList;
     private AdapterReport mAdapter;
+    List<String> years = new ArrayList<>();
+    List<String> weeks = new ArrayList<>();
+
+    private int reqYear, reqWeek;
+    private boolean bChooseYear;
 
     @Override
     public void onFirstUserVisible() {
@@ -48,22 +79,106 @@ public class FragReport extends MBaseLazyFragmentB {
         setContentView(_contentView);
         unbinder = ButterKnife.bind(this, _contentView);
         smartRefresh.setEnableLoadMore(false);
-        smartRefresh.setOnRefreshListener(refreshLayout -> getReports());
+        smartRefresh.setOnRefreshListener(refreshLayout -> getReports(true));
         mList = new ArrayList<>();
         mAdapter = new AdapterReport(mBaseActivity, mList, position -> {
 
         });
         rvMsgList.setAdapter(mAdapter);
-        startTime = MDateUtils.getStringDate(-7);
-        endTime = MDateUtils.getStringDate(0);
+
+        Animation fadeIn = AnimationUtils.loadAnimation(mBaseActivity, R.anim.fade_in);
+        Animation fadeOut = AnimationUtils.loadAnimation(mBaseActivity, R.anim.fade_out);
+
+
+        _contentView.findViewById(R.id.ll_chooseYear).setOnClickListener(view -> {
+            tvTitle.setText("选择年份");
+            bChooseYear = true;
+            weekWheel.setVisibility(View.GONE);
+            yearWheel.setVisibility(View.VISIBLE);
+            wheels.setVisibility(View.VISIBLE);
+            wheels.startAnimation(fadeIn);
+        });
+
+        _contentView.findViewById(R.id.ll_chooseWeek).setOnClickListener(view -> {
+            tvTitle.setText("选择周次");
+            bChooseYear = false;
+            yearWheel.setVisibility(View.GONE);
+            weekWheel.setVisibility(View.VISIBLE);
+            wheels.setVisibility(View.VISIBLE);
+            wheels.startAnimation(fadeIn);
+        });
+
+        wheels.setOnClickListener(view -> wheels.startAnimation(fadeOut));
+        _contentView.findViewById(R.id.tv_cancel).setOnClickListener(view -> wheels.startAnimation(fadeOut));
+        _contentView.findViewById(R.id.tv_confirm).setOnClickListener(view -> {
+            if (bChooseYear) {
+                tvYear.setText(years.get(yearWheel.getSelectedItem()));
+            } else {
+                tvWeek.setText(weeks.get(weekWheel.getSelectedItem()));
+            }
+            wheels.startAnimation(fadeOut);
+        });
+
+        fadeOut.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                wheels.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        reqYear = Integer.parseInt(MDateUtils.getCurrentYear());//年
+
+        for (int i = reqYear; i >= (reqYear - 10); i--) {
+            years.add(String.valueOf(i));
+            LogUtil.e(i);
+        }
+        yearWheel.setItems(years);
+
+        int totalWeeks = MDateUtils.getMaxWeekNumOfYear(reqYear);
+        for (int i = totalWeeks; i >= 1; i--) {
+            weeks.add(String.valueOf(i));
+            LogUtil.e(i);
+        }
+        weekWheel.setItems(weeks);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date today = new Date();
+        Calendar c = new GregorianCalendar();
+        c.setTime(today);
+
+        startTime = sdf.format(MDateUtils.getFirstDayOfWeek(today));
+        endTime = sdf.format(MDateUtils.getLastDayOfWeek(today));
         LogUtil.e("Init StartTime:" + startTime + ",EndTime:" + endTime);
-        startTime = "2018-01-03 11:01";
-        endTime = "2019-01-03 11:01";
-        getReports();
+        tvStart.setText(startTime + "~");
+        tvEnd.setText(endTime);
+        reqWeek = MDateUtils.getWeekOfYear(today);//当前周次
+        tvWeek.setText(String.valueOf(reqWeek));//周次
+
+        _contentView.findViewById(R.id.btn_confirm).setOnClickListener(view -> {
+            reqYear = Integer.parseInt(tvYear.getText().toString());
+            reqWeek = Integer.parseInt(tvWeek.getText().toString());
+            startTime = sdf.format(MDateUtils.getFirstDayOfWeek(reqYear, reqWeek));
+            endTime = sdf.format(MDateUtils.getLastDayOfWeek(reqYear, reqWeek));
+            getReports(false);
+        });
+
+
+        getReports(false);
     }
 
-    private void getReports() {
-        Post(MConstants.URL.GET_PROJECT_STATISTICS,
+    private void getReports(boolean refresh) {
+        LogUtil.e("获取" + reqYear + "年第" + reqWeek + "周数据");
+        Post(refresh ? null : new LoadingDialog(mBaseActivity), MConstants.URL.GET_PROJECT_STATISTICS,
                 HttpUtil.formatParams(new Param(startTime, endTime).toString()),
                 Report.class, new IHttpCallBack<Report>() {
 
@@ -75,8 +190,8 @@ public class FragReport extends MBaseLazyFragmentB {
                             mList.addAll(data);
                         }
                         mAdapter.notifyDataSetChanged();
-                        if (mList.size() == 0) ShowEmptyView();
-                        else HideEmptyView();
+                        if (mList.size() == 0) emptyView.setVisibility(View.VISIBLE);
+                        else emptyView.setVisibility(View.GONE);
                     }
 
                     @Override
