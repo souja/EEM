@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+//test(user 1)
 public class ActLogin extends BaseActEd {
     @BindView(R.id.ed_account)
     AppCompatEditText edAccount;

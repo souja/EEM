@@ -35,7 +35,6 @@
         android:hint="请输入登录账号"
         android:imeOptions="actionNext"
         android:singleLine="true"
-        android:text="user"
         android:textSize="45px" />
 
     <RelativeLayout
@@ -55,7 +54,6 @@
             android:layout_marginTop="90px"
             android:hint="请输入密码"
             android:imeOptions="actionGo"
-            android:text="1"
             android:inputType="textPassword"
             android:singleLine="true"
             android:textSize="45px" />

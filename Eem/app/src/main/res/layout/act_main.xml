@@ -18,8 +18,8 @@
         <com.souja.lib.widget.MCheckBox
             style="@style/cbNavi"
             app:mDrawable="@drawable/navi_a_selector"
-            app:mDrawableHeight="65px"
-            app:mDrawableWidth="69px"
+            app:mDrawableHeight="60px"
+            app:mDrawableWidth="60px"
             app:mSelfControl="true"
             app:mText="首页"
             app:mTxtColor="@color/grey_c4"
