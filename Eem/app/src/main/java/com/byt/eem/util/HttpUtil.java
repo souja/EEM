@@ -3,6 +3,7 @@ package com.byt.eem.util;
 import android.app.ProgressDialog;
 import android.text.TextUtils;
 
+import com.byt.eem.EApp;
 import com.souja.lib.enums.EnumExceptions;
 import com.souja.lib.inter.IHttpCallBack;
 import com.souja.lib.models.BaseModel;
@@ -25,36 +26,19 @@ import java.util.ArrayList;
 
 public class HttpUtil {
 
-    private static final int M_HTTP_SUCCESS = 1;//接口成功
-    private static final int M_MULT_LOGIN = 9;//其它设备登录
-
-    private static String tempVer;
+//    private static final int M_HTTP_SUCCESS = 1;//接口成功
+//    private static final int M_MULT_LOGIN = 9;//其它设备登录
 
     public static String formatUrl(String url) {
         if (url.contains("http:") || url.contains("https:")) return url;
-        //不需要增加版本控制的接口
-        if (url.contains("/account/") || url.contains("/banner/") || url.contains("/version/")
-                || url.contains("module/") || url.contains("/image/") || url.contains("/home/")) {
-//            LogUtil.e("no format:" + url);
-            url = MConstants.HTTP + url;
-        } else {
-//            LogUtil.e("formatted url:" + url);
-            if (MConstants.VERSION == null || MConstants.VERSION.isEmpty()) {
-                if (tempVer == null) tempVer = SPHelper.getString("apiVer");
-                url = MConstants.HTTP + tempVer + url;
-            } else
-                url = MConstants.HTTP + MConstants.VERSION + url;
-        }
-        return url;
+        return MConstants.HTTP + url;
     }
 
     private static void addIdentify(RequestParams params) {
-        /*if (EApp.getUserInfo() != null) {
-            String token = EApp.getUserInfo().getAccessToken();
+        if (EApp.getUserInfo() != null) {
             int id = EApp.getUserInfo().getId();
-            params.setHeader("userHospitalId", id + "");
-            LogUtil.e("token:" + token + " ==&&== id:" + id);
-        }*/
+            params.setHeader("id", id + "");
+        }
         params.setHeader("Auth", "HfHm7jBjmlDCrUm7xJFr8GDOWHCGE6ykOWzbEvrRgFvvEU1ziWHZ1hvJ2A9pTJbK");
     }
 

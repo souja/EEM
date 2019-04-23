@@ -139,10 +139,7 @@ public class FragMsg extends MBaseLazyFragmentB {
             mHolder.tvMsgTime.setText(String.valueOf("报警时间：" + model.getAlarmTime()
                     .replace("T", "-")));
             mHolder.tvMsgCount.setText(model.getCounts());
-            //todo 返回数据模型中缺少Location ==> 报警地点
-
             mHolder.itemView.setOnClickListener(view -> GO(ActMsgCenter.class));
-
         }
     }
 

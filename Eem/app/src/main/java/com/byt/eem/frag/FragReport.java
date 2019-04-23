@@ -233,7 +233,6 @@ public class FragReport extends MBaseLazyFragmentB {
             Report model = getItem(position);
             mHolder.tvName.setText(model.getProjectName());
             mHolder.tvCount.setText(String.valueOf("报警次数：" + model.getCounts() + "次"));
-            //todo 缺少"项目编号"
             if (isLastItem(position)) {
                 mHolder.vBot.setVisibility(View.GONE);
                 mHolder.vTemp.setVisibility(View.VISIBLE);

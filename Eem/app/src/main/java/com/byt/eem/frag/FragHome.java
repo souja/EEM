@@ -208,7 +208,6 @@ public class FragHome extends MBaseFragment {
                     mList.addAll(data);
                 }
                 mAdapter.notifyDataSetChanged();
-                //todo 只有省名、总设备数，缺少各省下面的各状态设备数
                 //?参数是否需要再传入一个省相关的字段，只靠state如何区分各省
                 //1:根据状态获取设备信息 参数:string state（正常/告警/离线）;接口地址: http://localhost:56721/api/Home/GetDevicesByState
                 mRefreshLayout.finishRefresh();

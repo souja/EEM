@@ -7,7 +7,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="234px"
+        android:layout_height="174px"
         android:paddingLeft="45px"
         android:paddingTop="36px"
         android:paddingRight="36px">
@@ -26,6 +26,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/tv_number"
             style="@style/text_36px"
             android:layout_below="@id/tv_name"

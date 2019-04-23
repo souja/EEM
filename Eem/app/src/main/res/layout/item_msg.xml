@@ -11,7 +11,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="240px"
+        android:layout_height="180px"
         android:background="@color/white"
         android:paddingLeft="36px"
         android:paddingTop="36px"
@@ -41,6 +41,7 @@
 
         <ImageView
             android:layout_width="30px"
+            android:visibility="gone"
             android:layout_height="39px"
             android:layout_below="@id/tv_msgTime"
             android:layout_toRightOf="@id/iv_temp"
@@ -48,6 +49,7 @@
 
         <TextView
             style="@style/text_36px"
+            android:visibility="gone"
             android:layout_below="@id/tv_msgTime"
             android:layout_marginLeft="45px"
             android:layout_toRightOf="@id/iv_temp"

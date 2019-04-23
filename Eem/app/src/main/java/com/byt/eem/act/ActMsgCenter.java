@@ -158,8 +158,8 @@ public class ActMsgCenter extends BaseActEd {
         private String AlarmName;
         private String HappenTime;
         private String IsProcessed;
-        private String contactPhone = "18628084571";
-        private String deviceName = "测试设备名称";
+        private String contactPhone;
+        private String deviceName;
 
         public String getDeviceName() {
             return deviceName;
@@ -257,7 +257,9 @@ public class ActMsgCenter extends BaseActEd {
             //发生时间
             mHolder.tvOccurTime.setText(model.getHappenTime().replace("T", "/"));
             //设备名称
-            mHolder.tvDeviceType.setText(model.getDeviceName() + position);//TODO 缺少设备名称
+            mHolder.tvDeviceType.setText(model.getDeviceName());//TODO 缺少设备名称
+            //设备编码
+            mHolder.tvDeviceCode.setText(model.getDeviceCode());
             //联系电话
             mHolder.tvContactPhone.setText(model.getContactPhone());
             //点击item提示是否拨打电话
@@ -285,6 +287,8 @@ public class ActMsgCenter extends BaseActEd {
 
         @BindView(R.id.tv_deviceType)
         TextView tvDeviceType;
+        @BindView(R.id.tv_deviceCode)
+        TextView tvDeviceCode;
         @BindView(R.id.tv_errName)
         TextView tvErrName;
         @BindView(R.id.tv_occurTime)

@@ -5,15 +5,11 @@ package com.byt.eem.util;
  */
 
 public class MConstants {
-//    public static String HTTP = "https://testpay.chftne.cn/api";//test
-    public static String HTTP = "https://wx.zzese.cn/api";//pro
+    public static String HTTP = "https://testpay.chftne.cn/api";//test
+//    public static String HTTP = "https://wx.zzese.cn/api";//pro
 
     //用户信息缓存KEY
     public static final String USERINFO_KEY = "eemUserInfo";
-    //应用下载KEY
-    public static final String DOWNLOAD_KEY = "eem-new";
-
-    public static String VERSION = "";//接口版本,v1,v2...
 
     public static final int RX_SCAN_QR_CODE = 100;//扫描二维码
     public static final int RX_PROCESS_ALARM_MSG = 101;//处理告警消息
