@@ -51,7 +51,7 @@ public class ActScanQRCode extends BaseAct
         mainLayout.addView(decoderView);
 
         TitleBar titleBar = mainLayout.findViewById(R.id.m_title);
-        titleBar.setRightClick(view -> GO(ActScanQRCode.class));
+        titleBar.setRightClick(view -> GO(ActCreateDevice.class));
 
         qrCodeReaderView = decoderView.findViewById(R.id.qrDecoderView);
         CheckBox mFlashlightCheckBox = decoderView.findViewById(R.id.flashlight_checkbox);
