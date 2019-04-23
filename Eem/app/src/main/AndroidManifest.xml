@@ -140,6 +140,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/ThemeWhite">
         </activity>
+
+
+        <!--适配全面屏-->
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.1" />
+
     </application>
 
 </manifest>
