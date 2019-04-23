@@ -62,7 +62,7 @@
             android:layout_width="72px"
             android:layout_height="72px"
             android:layout_marginLeft="42px"
-            android:background="@mipmap/ic_launcher_round" />
+            android:background="@mipmap/ic_launcher" />
 
         <TextView
             style="@style/text_48px"

@@ -259,7 +259,7 @@ public class ActMsgCenter extends BaseActEd {
             //设备名称
             mHolder.tvDeviceType.setText(model.getDeviceName() + position);//TODO 缺少设备名称
             //联系电话
-            mHolder.tvContactPhone.setText(model.getContactPhone());//todo 缺少联系电话
+            mHolder.tvContactPhone.setText(model.getContactPhone());
             //点击item提示是否拨打电话
             mHolder.tvContactPhone.setOnClickListener(view ->
                     DialogFactory.NewDialog(mContext, null, "是否拨打电话：" + model.getContactPhone(),

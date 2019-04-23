@@ -19,8 +19,9 @@
 
     <TextView
         style="@style/text_45px"
+        android:layout_gravity="center"
         android:layout_marginLeft="48px"
-        android:layout_marginTop="120px"
+        android:layout_marginTop="300px"
         android:layout_marginRight="48px"
         android:lineSpacingExtra="4dp"
         android:text="@string/aboutSys"

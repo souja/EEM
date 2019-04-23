@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Eem</string>
+    <string name="app_name">智慧用电云平台</string>
     <string name="accountDigits">0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM~!@#$%-=.+_</string>
     <string name="deviceCodeDigits">0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM</string>
-    <string name="aboutSys">关于系统关于系统关于系统关于系统关于系统关于系统关于系统关于系统关于系统关于系统关于系统关于系统关于系统关于系统关于系统关于系统关于系统关于系统关于系统关于系统关于系统关于系统关于系统关于系统关于系统关于系统关于系统关于系统关于系统关于系统关于系统关于系统关于系统关于系统关于系统关于系统</string>
+    <string name="aboutSys">智慧用电云平台</string>
 </resources>

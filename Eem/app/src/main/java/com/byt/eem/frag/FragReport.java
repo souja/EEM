@@ -89,7 +89,6 @@ public class FragReport extends MBaseLazyFragmentB {
         Animation fadeIn = AnimationUtils.loadAnimation(mBaseActivity, R.anim.fade_in);
         Animation fadeOut = AnimationUtils.loadAnimation(mBaseActivity, R.anim.fade_out);
 
-
         _contentView.findViewById(R.id.ll_chooseYear).setOnClickListener(view -> {
             tvTitle.setText("选择年份");
             bChooseYear = true;
@@ -112,9 +111,16 @@ public class FragReport extends MBaseLazyFragmentB {
         _contentView.findViewById(R.id.tv_cancel).setOnClickListener(view -> wheels.startAnimation(fadeOut));
         _contentView.findViewById(R.id.tv_confirm).setOnClickListener(view -> {
             if (bChooseYear) {
-                tvYear.setText(years.get(yearWheel.getSelectedItem()));
+                String year = years.get(yearWheel.getSelectedItem());
+                tvYear.setText(year);
+                initWeeks(Integer.parseInt(year));
+                int week = Integer.parseInt(tvWeek.getText().toString());
+                initStartEnd(Integer.parseInt(year), week);
             } else {
-                tvWeek.setText(weeks.get(weekWheel.getSelectedItem()));
+                String week = weeks.get(weekWheel.getSelectedItem());
+                tvWeek.setText(week);
+                int year = Integer.parseInt(tvYear.getText().toString());
+                initStartEnd(year, Integer.parseInt(week));
             }
             wheels.startAnimation(fadeOut);
         });
@@ -137,43 +143,50 @@ public class FragReport extends MBaseLazyFragmentB {
         });
 
         reqYear = Integer.parseInt(MDateUtils.getCurrentYear());//年
-
         for (int i = reqYear; i >= (reqYear - 10); i--) {
             years.add(String.valueOf(i));
-            LogUtil.e(i);
         }
         yearWheel.setItems(years);
 
-        int totalWeeks = MDateUtils.getMaxWeekNumOfYear(reqYear);
-        for (int i = totalWeeks; i >= 1; i--) {
-            weeks.add(String.valueOf(i));
-            LogUtil.e(i);
-        }
-        weekWheel.setItems(weeks);
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date today = new Date();
-        Calendar c = new GregorianCalendar();
-        c.setTime(today);
-
-        startTime = sdf.format(MDateUtils.getFirstDayOfWeek(today));
-        endTime = sdf.format(MDateUtils.getLastDayOfWeek(today));
-        LogUtil.e("Init StartTime:" + startTime + ",EndTime:" + endTime);
-        tvStart.setText(startTime + "~");
-        tvEnd.setText(endTime);
-        reqWeek = MDateUtils.getWeekOfYear(today);//当前周次
+        initWeeks(reqYear);
+        reqWeek = MDateUtils.getWeekOfYear(new Date());//当前周次
         tvWeek.setText(String.valueOf(reqWeek));//周次
+
+        initStartEnd(reqYear, reqWeek);
 
         _contentView.findViewById(R.id.btn_confirm).setOnClickListener(view -> {
             reqYear = Integer.parseInt(tvYear.getText().toString());
             reqWeek = Integer.parseInt(tvWeek.getText().toString());
-            startTime = sdf.format(MDateUtils.getFirstDayOfWeek(reqYear, reqWeek));
-            endTime = sdf.format(MDateUtils.getLastDayOfWeek(reqYear, reqWeek));
+            initStartEnd(reqYear, reqWeek);
             getReports(false);
         });
 
-
         getReports(false);
+    }
+
+    private void initWeeks(int year) {
+        int totalWeeks = MDateUtils.getMaxWeekNumOfYear(year);
+        LogUtil.e(year + "年共" + totalWeeks + "周");
+        weeks.clear();
+        for (int i = totalWeeks; i >= 1; i--) {
+            weeks.add(String.valueOf(i));
+//            LogUtil.e(i);
+        }
+        weekWheel.setItems(weeks);
+    }
+
+    private void initStartEnd(int year, int week) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        Date today = new Date();
+//        Calendar c = new GregorianCalendar();
+//        c.setTime(today);
+        startTime = sdf.format(MDateUtils.getFirstDayOfWeek(year, week));
+        endTime = sdf.format(MDateUtils.getLastDayOfWeek(year, week));
+//        startTime = sdf.format(MDateUtils.getFirstDayOfWeek(today));
+//        endTime = sdf.format(MDateUtils.getLastDayOfWeek(today));
+        LogUtil.e("Init StartTime:" + startTime + ",EndTime:" + endTime);
+        tvStart.setText(String.valueOf(startTime + "~"));
+        tvEnd.setText(endTime);
     }
 
     private void getReports(boolean refresh) {
