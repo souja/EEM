@@ -16,6 +16,10 @@ import com.souja.lib.utils.SPHelper;
 import org.xutils.common.util.LogUtil;
 import org.xutils.x;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
 public class EApp extends MultiDexApplication {
 
     static {
@@ -40,6 +44,7 @@ public class EApp extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        closeAndroidPDialog();
         mContext = this;
         // 在使用 SDK 各组间之前初始化 context 信息，传入 ApplicationContext
         SDKInitializer.initialize(this);
@@ -54,6 +59,26 @@ public class EApp extends MultiDexApplication {
         SPHelper.init(mContext, getPackageName());
     }
 
+    private void closeAndroidPDialog() {
+        try {
+            Class aClass = Class.forName("android.content.pm.PackageParser$Package");
+            Constructor declaredConstructor = aClass.getDeclaredConstructor(String.class);
+            declaredConstructor.setAccessible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            Class cls = Class.forName("android.app.ActivityThread");
+            Method declaredMethod = cls.getDeclaredMethod("currentActivityThread");
+            declaredMethod.setAccessible(true);
+            Object activityThread = declaredMethod.invoke(null);
+            Field mHiddenApiWarningShown = cls.getDeclaredField("mHiddenApiWarningShown");
+            mHiddenApiWarningShown.setAccessible(true);
+            mHiddenApiWarningShown.setBoolean(activityThread, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public static int getStatusBarHeight(Context context) {
         int statusBarHeight = 0;
