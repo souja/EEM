@@ -84,6 +84,72 @@
         android:layout_marginBottom="210px"
         android:background="@drawable/trans_round_bg"
         android:scaleType="center"
-        android:src="@drawable/menu_selector"
-        app:mCheck="true" />
+        android:src="@drawable/menu_selector" />
+
+
+    <LinearLayout
+        android:id="@+id/ll_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="60px"
+        android:layout_marginBottom="390px"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <ImageButton
+            android:id="@+id/ib_state"
+            android:layout_width="150px"
+            android:layout_height="150px"
+            android:background="@drawable/ic_state" />
+
+        <ImageButton
+            android:id="@+id/ib_out"
+            android:layout_width="150px"
+            android:layout_height="150px"
+            android:layout_marginLeft="30px"
+            android:background="@drawable/ic_out" />
+
+        <ImageButton
+            android:id="@+id/ib_silence"
+            android:layout_width="150px"
+            android:layout_height="150px"
+            android:layout_marginLeft="30px"
+            android:background="@drawable/ic_silence" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_bot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="60px"
+        android:layout_marginBottom="30px"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <ImageButton
+            android:id="@+id/ib_set"
+            android:layout_width="150px"
+            android:layout_height="150px"
+            android:background="@drawable/ic_setting" />
+
+        <ImageButton
+            android:id="@+id/ib_revert"
+            android:layout_width="150px"
+            android:layout_height="150px"
+            android:layout_marginLeft="30px"
+            android:background="@drawable/ic_revert" />
+
+        <ImageButton
+            android:id="@+id/ib_selfCheck"
+            android:layout_width="150px"
+            android:layout_height="150px"
+            android:layout_marginLeft="30px"
+            android:background="@drawable/ic_self_check" />
+
+    </LinearLayout>
+
 </RelativeLayout>

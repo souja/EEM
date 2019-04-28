@@ -4,14 +4,17 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.net.Uri;
+import android.os.Build;
 import android.support.design.widget.TabLayout;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -21,6 +24,7 @@ import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -423,5 +427,44 @@ public class MTool {
     }
 
 
+
+    /**
+     * 全透状态栏
+     */
+    public static void setStatusBarFullTransparent(Window window) {
+        if (Build.VERSION.SDK_INT >= 21) {//21表示5.0
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);
+        } else if (Build.VERSION.SDK_INT >= 19) {//19表示4.4
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //虚拟键盘也透明
+            //getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        }
+    }
+
+    /**
+     * 设置StatusBar字体颜色
+     * <p>
+     * 参数true表示StatusBar风格为Light，字体颜色为黑色
+     * 参数false表示StatusBar风格不是Light，字体颜色为白色
+     * <p>
+     * <item name="android:windowLightStatusBar">true</item>
+     * 在theme或style中使用这个属性改变StatusBar的字体颜色，这种形式相对不灵活
+     */
+    @TargetApi(Build.VERSION_CODES.M)
+    public static void setStatusBarTextColor(Window window, boolean lightStatusBar) {
+        if (window == null) return;
+        View decor = window.getDecorView();
+        int ui = decor.getSystemUiVisibility();
+        if (lightStatusBar) {
+            ui |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+        } else {
+            ui &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+        }
+        decor.setSystemUiVisibility(ui);
+    }
 }
 

@@ -59,6 +59,7 @@ public class ActDeviceList extends BaseActEd {
         mAdapter = new AdapterDevice(_this, new ArrayList<>(), position ->
                 NEXT(new Intent(_this, ActDeviceInfo.class)
                         .putExtra("name", mList.get(position).getDeviceName())
+                        .putExtra("code", mList.get(position).getDeviceCode())
                         .putExtra("id", mList.get(position).getDeviceId())));
         rvDevices.setAdapter(mAdapter);
         smartRefresh.setEnableLoadMore(false);

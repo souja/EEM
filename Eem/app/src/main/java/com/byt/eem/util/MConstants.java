@@ -50,6 +50,8 @@ public class MConstants {
         String GET_ALARM_MSG_LIST_PAGEINFO = "/Message/GetAlarmDetailsPageInfo";
         //处理消息
         String PROCESS_ALARM_MSG = "/Message/ProcessAlarm";
+        //消息处理参数获取
+        String GET_HANDLE_PARAM = "/DeviceCtrl/GetParamFromDb?deviceCode=";
 
 
         //Rui Url↓

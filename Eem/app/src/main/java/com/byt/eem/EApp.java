@@ -53,7 +53,7 @@ public class EApp extends MultiDexApplication {
         SDKInitializer.setCoordType(CoordType.GCJ02);
 
         x.Ext.init(this);
-        x.Ext.setDebug(true);
+        x.Ext.setDebug(false);
         LogUtil.customTagPrefix = "【EEM_APP】";
 
         SPHelper.init(mContext, getPackageName());

@@ -3,9 +3,13 @@ package com.byt.eem.act;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.byt.eem.R;
@@ -13,12 +17,12 @@ import com.byt.eem.base.BaseAct;
 import com.byt.eem.base.BaseHolder;
 import com.byt.eem.util.HttpUtil;
 import com.byt.eem.util.MConstants;
+import com.byt.eem.widget.MCheckableImgView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.souja.lib.base.MBaseAdapter;
 import com.souja.lib.inter.IHttpCallBack;
 import com.souja.lib.models.BaseModel;
 import com.souja.lib.models.ODataPage;
-import com.souja.lib.widget.LoadingDialog;
 import com.souja.lib.widget.TitleBar;
 
 import java.util.ArrayList;
@@ -42,10 +46,31 @@ public class ActDeviceInfo extends BaseAct {
     SmartRefreshLayout mRefreshLayout;
     @BindView(R.id.m_title)
     TitleBar mTitleBar;
+    @BindView(R.id.ib_menu)
+    MCheckableImgView ibMenu;
+    @BindView(R.id.ib_set)
+    ImageButton ibSet;
+    @BindView(R.id.ib_revert)
+    ImageButton ibRevert;
+    @BindView(R.id.ib_selfCheck)
+    ImageButton ibSelfCheck;
+    @BindView(R.id.ib_state)
+    ImageButton ibState;
+    @BindView(R.id.ib_out)
+    ImageButton ibOut;
+    @BindView(R.id.ib_silence)
+    ImageButton ibSilence;
+    @BindView(R.id.ll_top)
+    View top;
+    @BindView(R.id.ll_bot)
+    View bot;
 
     private int deviceId;
+    private String devicCode;
     private DeviceInfo mDeviceInfo;
     private AdapterStatus mAdapterStatus;
+    private boolean bExpand;
+    private Animation fadeIn, fadeOut;
 
     @Override
     protected int setupViewRes() {
@@ -56,6 +81,7 @@ public class ActDeviceInfo extends BaseAct {
     protected void initMain() {
         ButterKnife.bind(this);
         deviceId = getIntent().getIntExtra("id", 0);
+        devicCode = getIntent().getStringExtra("code");
         mTitleBar.setTitle(getIntent().getStringExtra("name"));
         mTitleBar.setRightClick(view ->
                 NEXT(new Intent(_this, ActDeviceInfoHistory.class)
@@ -65,15 +91,85 @@ public class ActDeviceInfo extends BaseAct {
         rvStatus.setNestedScrollingEnabled(false);
         mRefreshLayout.setEnableLoadMore(false);
         mRefreshLayout.setOnRefreshListener(s -> getDeviceInfo(true));
+        initAnimation();
+        initBtnListeners();
+        ibMenu.setOnClickListener(view -> {
+            if (!bExpand) {
+                showBtns();
+            } else {
+                hideBtns();
+            }
+        });
+        getDeviceControl();
         getDeviceInfo(false);
     }
 
+    private void initAnimation() {
+        fadeIn = AnimationUtils.loadAnimation(_this, R.anim.fade_in);
+        fadeOut = AnimationUtils.loadAnimation(_this, R.anim.fade_out);
+        fadeOut.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                top.setVisibility(View.GONE);
+                bot.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+    }
+
+
+    private void showBtns() {
+        bExpand = true;
+        ibMenu.setImageResource(R.drawable.ic_close_menu);
+        top.setVisibility(View.VISIBLE);
+        top.startAnimation(fadeIn);
+        bot.setVisibility(View.VISIBLE);
+        bot.startAnimation(fadeIn);
+    }
+
+    private void hideBtns() {
+        bExpand = false;
+        ibMenu.setImageResource(R.drawable.ic_menu_more);
+        top.startAnimation(fadeOut);
+        bot.startAnimation(fadeOut);
+    }
+
+    private void initBtnListeners() {
+//        ibSet.setOnClickListener(view -> );
+//        ibSilence.setOnClickListener(view -> handleDevice());
+    }
+
+    private void getDeviceControl() {
+        Post(null, MConstants.URL.GET_HANDLE_PARAM + devicCode, HttpUtil.defaultParam(),
+                Object.class, new IHttpCallBack<Object>() {
+                    @Override
+                    public void OnSuccess(String msg, ODataPage page, ArrayList<Object> data) {
+
+                    }
+
+                    @Override
+                    public void OnFailure(String msg) {
+                        showToast(msg);
+                    }
+                });
+    }
+
     private void getDeviceInfo(boolean refresh) {
-        Post(refresh ? null : new LoadingDialog(_this), MConstants.URL.GET_DEVICES_STATE_BY_DEVICEID + deviceId,
+        Post(null, MConstants.URL.GET_DEVICES_STATE_BY_DEVICEID + deviceId,
                 HttpUtil.defaultParam(), DeviceInfo.class, new IHttpCallBack<DeviceInfo>() {
 
                     @Override
                     public void OnSuccess(String msg, ODataPage page, ArrayList<DeviceInfo> data) {
+                        if (refresh) showToast("更新成功");
                         mRefreshLayout.finishRefresh();
                         if (data.size() > 0) {
                             mDeviceInfo = data.get(0);
@@ -98,6 +194,13 @@ public class ActDeviceInfo extends BaseAct {
             tvDate.setText(String.valueOf("时间：" + mDeviceInfo.getOperateTime()));
             mAdapterStatus.setDataList((ArrayList<ItemsBean>) mDeviceInfo.getItems());
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 
     class AdapterStatus extends MBaseAdapter<ItemsBean> {

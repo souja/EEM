@@ -12,9 +12,11 @@ import com.byt.eem.model.UserInfo;
 import com.byt.eem.util.MConstants;
 import com.souja.lib.utils.GsonUtil;
 import com.souja.lib.utils.MGlobal;
+import com.souja.lib.utils.MTool;
 import com.souja.lib.utils.SPHelper;
 
 import org.xutils.common.util.LogUtil;
+import org.xutils.x;
 
 public class ActSplash extends AppCompatActivity {
 
@@ -22,25 +24,25 @@ public class ActSplash extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        MTool.setStatusBarFullTransparent(getWindow());
+        MTool.setStatusBarTextColor(getWindow(), true);
+
         if (!MGlobal.get().isInitializedScreenParams()) {
             DisplayMetrics displayMetrics = new DisplayMetrics();
             getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
             MGlobal.get().initScreenParam(displayMetrics);
-
-//         String model = Build.MODEL;
-//         String carrier = Build.MANUFACTURER;
-//         LogUtil.e("手机型号/厂商：" + model + "," + carrier);
-//         SPHelper.putString("deviceInfo", model + " " + carrier);
         }
 
-//        int statusBarHeight = EApp.getStatusBarHeight(this);
-//        EApp.setStatusBarHeight(statusBarHeight);
 
-        checkUserInfo();
+        if (x.isDebug()) {
+            String userInfoStr = SPHelper.getString(MConstants.USERINFO_KEY);
+            LogUtil.e(userInfoStr);
+            checkUserInfo(userInfoStr);
+        } else
+            goLogin();
     }
 
-    private void checkUserInfo() {
-        String userInfoStr = SPHelper.getString(MConstants.USERINFO_KEY);
+    private void checkUserInfo(String userInfoStr) {
         if (userInfoStr.isEmpty()) {
             LogUtil.e("没有登录过");
             goLogin();
