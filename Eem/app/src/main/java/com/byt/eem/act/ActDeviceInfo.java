@@ -100,7 +100,7 @@ public class ActDeviceInfo extends BaseAct {
                 hideBtns();
             }
         });
-        getDeviceControl();
+//        getDeviceControl();
         getDeviceInfo(false);
     }
 
@@ -144,8 +144,20 @@ public class ActDeviceInfo extends BaseAct {
     }
 
     private void initBtnListeners() {
-//        ibSet.setOnClickListener(view -> );
-//        ibSilence.setOnClickListener(view -> handleDevice());
+        ibSet.setOnClickListener(view -> goSet());
+        ibSilence.setOnClickListener(view -> handleDevice());
+        ibOut.setOnClickListener(view -> handleDevice());
+        ibState.setOnClickListener(view -> handleDevice());
+        ibSelfCheck.setOnClickListener(view -> handleDevice());
+        ibRevert.setOnClickListener(view -> handleDevice());
+    }
+
+    private void goSet() {
+        hideBtns();
+    }
+
+    private void handleDevice() {
+        hideBtns();
     }
 
     private void getDeviceControl() {
