@@ -145,22 +145,27 @@ public class ActDeviceInfo extends BaseAct {
 
     private void initBtnListeners() {
         ibSet.setOnClickListener(view -> goSet());
-        ibSilence.setOnClickListener(view -> handleDevice());
-        ibOut.setOnClickListener(view -> handleDevice());
-        ibState.setOnClickListener(view -> handleDevice());
-        ibSelfCheck.setOnClickListener(view -> handleDevice());
-        ibRevert.setOnClickListener(view -> handleDevice());
+        ibSilence.setOnClickListener(view -> handleDevice(1));
+        ibOut.setOnClickListener(view -> handleDevice(2));
+        ibState.setOnClickListener(view -> handleDevice(3));
+        ibSelfCheck.setOnClickListener(view -> handleDevice(4));
+        ibRevert.setOnClickListener(view -> handleDevice(5));
     }
 
     private void goSet() {
         hideBtns();
     }
 
-    private void handleDevice() {
+    private void handleDevice(int flag) {
         hideBtns();
+        switch (flag){
+
+        }
+
+
     }
 
-    private void getDeviceControl() {
+  /*  private void getDeviceControl() {
         Post(null, MConstants.URL.GET_HANDLE_PARAM + devicCode, HttpUtil.defaultParam(),
                 Object.class, new IHttpCallBack<Object>() {
                     @Override
@@ -173,10 +178,10 @@ public class ActDeviceInfo extends BaseAct {
                         showToast(msg);
                     }
                 });
-    }
+    }*/
 
     private void getDeviceInfo(boolean refresh) {
-        Post(null, MConstants.URL.GET_DEVICES_STATE_BY_DEVICEID + deviceId,
+        Post(getDialog(), MConstants.URL.GET_DEVICES_STATE_BY_DEVICEID + deviceId,
                 HttpUtil.defaultParam(), DeviceInfo.class, new IHttpCallBack<DeviceInfo>() {
 
                     @Override

@@ -79,7 +79,7 @@ public class FragReport extends MBaseLazyFragmentB {
         setContentView(_contentView);
         unbinder = ButterKnife.bind(this, _contentView);
         smartRefresh.setEnableLoadMore(false);
-        smartRefresh.setOnRefreshListener(refreshLayout -> getReports(true));
+        smartRefresh.setOnRefreshListener(refreshLayout -> getReports());
         mList = new ArrayList<>();
         mAdapter = new AdapterReport(mBaseActivity, mList, position -> {
 
@@ -158,10 +158,10 @@ public class FragReport extends MBaseLazyFragmentB {
             reqYear = Integer.parseInt(tvYear.getText().toString());
             reqWeek = Integer.parseInt(tvWeek.getText().toString());
             initStartEnd(reqYear, reqWeek);
-            getReports(false);
+            getReports();
         });
 
-        getReports(false);
+        getReports();
     }
 
     private void initWeeks(int year) {
@@ -189,9 +189,9 @@ public class FragReport extends MBaseLazyFragmentB {
         tvEnd.setText(endTime);
     }
 
-    private void getReports(boolean refresh) {
+    private void getReports() {
         LogUtil.e("获取" + reqYear + "年第" + reqWeek + "周数据");
-        Post(refresh ? null : new LoadingDialog(mBaseActivity), MConstants.URL.GET_PROJECT_STATISTICS,
+        Post(getDialog(), MConstants.URL.GET_PROJECT_STATISTICS,
                 HttpUtil.formatParams(new Param(startTime, endTime).toString()),
                 Report.class, new IHttpCallBack<Report>() {
 

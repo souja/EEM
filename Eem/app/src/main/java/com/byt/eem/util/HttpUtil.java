@@ -1,6 +1,6 @@
 package com.byt.eem.util;
 
-import android.app.ProgressDialog;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 
 import com.byt.eem.EApp;
@@ -10,7 +10,6 @@ import com.souja.lib.models.BaseModel;
 import com.souja.lib.models.ODataPage;
 import com.souja.lib.utils.GsonUtil;
 import com.souja.lib.utils.MTool;
-import com.souja.lib.utils.SPHelper;
 
 import org.xutils.common.Callback;
 import org.xutils.common.util.LogUtil;
@@ -26,8 +25,6 @@ import java.util.ArrayList;
 
 public class HttpUtil {
 
-//    private static final int M_HTTP_SUCCESS = 1;//接口成功
-//    private static final int M_MULT_LOGIN = 9;//其它设备登录
 
     public static String formatUrl(String url) {
         if (url.contains("http:") || url.contains("https:")) return url;
@@ -59,7 +56,6 @@ public class HttpUtil {
 
     public static RequestParams formatParams(String paramJStr) {
         RequestParams paramJson = new RequestParams();
-//        paramJson.setAsJsonContent(true);
         if (!MTool.isEmpty(paramJStr)) {
             String finalStr = "\"" + paramJStr.replace("\"", "\\\"") + "\"";
             LogUtil.e("===Request params===" + paramJStr);
@@ -92,10 +88,6 @@ public class HttpUtil {
         boolean success = resultObj.isSucess;
         String msg = resultObj.msg;
         if (success) {
-//            ODataPage pageObj;//分页
-//            if (isNull(resultObj.pagination)) pageObj = new ODataPage();
-//            else
-//                pageObj = (ODataPage) GsonUtil.getObj(resultObj.pagination.toString(), ODataPage.class);
             ODataPage pageObj = new ODataPage();
             String dataString = resultObj.dataJsonStr;
             if (TextUtils.isEmpty(dataString)) {
@@ -111,75 +103,36 @@ public class HttpUtil {
             } else
                 callBack.OnSuccess(msg, pageObj, GsonUtil.getArr(formatDataStr, dataClass));
 
-           /* if (isNull(resultObj.data) || ((JsonArray) resultObj.data).size() == 0) {
-                callBack.OnSuccess(msg, pageObj, new ArrayList<>());
-            } else if (resultObj.data.isJsonArray()) {
-                String dataArr = resultObj.data.toString();
-                if (dataClass == String.class) {
-                    Gson gson = new Gson();
-                    String[] array = gson.fromJson(dataArr, String[].class);
-                    List<String> parseData = Arrays.asList(array);
-                    ArrayList<String> rtnData = new ArrayList<>();
-                    rtnData.addAll(parseData);
-                    callBack.OnSuccess(msg, pageObj, rtnData);
-                } else if (dataClass == Double.class) {
-                    Gson gson = new Gson();
-                    Double[] array = gson.fromJson(dataArr, Double[].class);
-                    List<Double> parseData = Arrays.asList(array);
-                    ArrayList<Double> rtnData = new ArrayList<>();
-                    rtnData.addAll(parseData);
-                    callBack.OnSuccess(msg, pageObj, rtnData);
-                } else if (dataClass == Integer.class) {
-                    Gson gson = new Gson();
-                    Integer[] array = gson.fromJson(resultObj.data.toString(), Integer[].class);
-                    List<Integer> parseData = Arrays.asList(array);
-                    ArrayList<Integer> rtnData = new ArrayList<>();
-                    rtnData.addAll(parseData);
-                    callBack.OnSuccess(msg, pageObj, rtnData);
-                } else
-                    callBack.OnSuccess(msg, pageObj, GsonUtil.getArr(dataArr, dataClass));
-            } else {
-                String dataStr = resultObj.data.toString();
-                ArrayList<T> dataList = new ArrayList<>();
-                dataList.add(new Gson().fromJson(dataStr, dataClass));
-                callBack.OnSuccess(msg, pageObj, dataList);
-            }*/
         } else {
-//            if (code == M_MULT_LOGIN) loginOutDate();
-//            else callBack.OnFailure(msg == null ? "服务器异常" : msg);
             callBack.OnFailure(msg == null ? "抱歉，服务器开小差了~" : msg);
         }
 
     }
 
-    private static void handleOnRequestErr(ProgressDialog dialog, RequestParams params, Throwable ex, IHttpCallBack callBack) {
+    private static void handleOnRequestErr(AlertDialog dialog, RequestParams params, Throwable ex, IHttpCallBack callBack) {
         if (dialog != null && dialog.isShowing()) dialog.dismiss();
 
         String errStr = ex.toString();
         LogUtil.e("===" + params.getUri() + "===\n===>>>onError:" + errStr);
         callBack.OnFailure(getErrMsgStr(errStr));
-//        if (errStr.contains("404") && ActMain.get() != null) {
-//            loginOutDate();
-//        } else {
-//        }
     }
 
-    public static <T> Callback.Cancelable Post(ProgressDialog dialog, String url, RequestParams mParams,
+    public static <T> Callback.Cancelable Post(AlertDialog dialog, String url, RequestParams mParams,
                                                final Class<T> dataClass, IHttpCallBack<T> callBack) {
         return Request(dialog, url, HttpMethod.POST, mParams, dataClass, callBack);
     }
 
-    public static <T> Callback.Cancelable Get(ProgressDialog dialog, String url, RequestParams mParams,
+    public static <T> Callback.Cancelable Get(AlertDialog dialog, String url, RequestParams mParams,
                                               final Class<T> dataClass, IHttpCallBack<T> callBack) {
         return Request(dialog, url, HttpMethod.GET, mParams, dataClass, callBack);
     }
 
-    public static <T> Callback.Cancelable Delete(ProgressDialog dialog, String url, RequestParams mParams,
+    public static <T> Callback.Cancelable Delete(AlertDialog dialog, String url, RequestParams mParams,
                                                  final Class<T> dataClass, IHttpCallBack<T> callBack) {
         return Request(dialog, url, HttpMethod.DELETE, mParams, dataClass, callBack);
     }
 
-    public static <T> Callback.Cancelable Request(ProgressDialog dialog, String url, HttpMethod method, RequestParams mParams,
+    public static <T> Callback.Cancelable Request(AlertDialog dialog, String url, HttpMethod method, RequestParams mParams,
                                                   final Class<T> dataClass, IHttpCallBack<T> callBack) {
         if (!NetWorkUtils.isNetworkAvailable()) {
             callBack.OnFailure(EnumExceptions.NO_INTERNET.getDesc());
@@ -233,7 +186,7 @@ public class HttpUtil {
     }
 
 /*
-    public static <T> Callback.Cancelable PostMult(ProgressDialog dialog, RequestParams mParams,
+    public static <T> Callback.Cancelable PostMult(AlertDialog dialog, RequestParams mParams,
                                                    final Class<T> dataClass, IHttpCallBack callBack) {
         if (!NetWorkUtils.isNetworkAvailable()) {
             callBack.OnFailure(EnumExceptions.NO_INTERNET.getDesc());
@@ -291,7 +244,7 @@ public class HttpUtil {
 
     }
 /*
-    public static Callback.Cancelable UploadImage(ProgressDialog dialog, RequestParams params, IUploadImageCallBack callBack) {
+    public static Callback.Cancelable UploadImage(AlertDialog dialog, RequestParams params, IUploadImageCallBack callBack) {
         if (!NetWorkUtils.isNetworkAvailable()) {
             callBack.OnFailure(EnumExceptions.NO_INTERNET.getDesc());
             return null;

@@ -115,7 +115,7 @@ public class ActMsgCenter extends BaseActEd {
         if (mPageModel == null) mPageModel = new PageModel(pageIndex);
         else mPageModel.pageIndex = pageIndex;
 
-        Post(MConstants.URL.GET_ALARM_MSG_LIST, HttpUtil.formatParams(mPageModel.toString()),
+        Post(getDialog(),MConstants.URL.GET_ALARM_MSG_LIST, HttpUtil.formatParams(mPageModel.toString()),
                 Alarm.class, new IHttpCallBack<Alarm>() {
 
                     @Override

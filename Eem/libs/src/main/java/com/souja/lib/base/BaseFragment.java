@@ -11,14 +11,19 @@ package com.souja.lib.base;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
 
+import com.souja.lib.R;
 import com.souja.lib.utils.MGlobal;
 import com.souja.lib.utils.MTool;
 import com.souja.lib.utils.ScreenUtil;
@@ -42,6 +47,30 @@ import io.reactivex.functions.Consumer;
  * @since JDK 1.6
  */
 public abstract class BaseFragment extends Fragment {
+
+    protected AlertDialog _mDialog;
+    protected TextView _tvProgressTip;
+
+    public AlertDialog getDialog() {
+        createDialog(null);
+        return _mDialog;
+    }
+
+    public AlertDialog getDialog(String msg) {
+        createDialog(msg);
+        return _mDialog;
+    }
+
+    private void createDialog(@Nullable String msg) {
+        if (_mDialog == null) {
+            _mDialog = new AlertDialog.Builder(mBaseActivity, R.style.CustomProgressDialog).create();
+            View loadView = LayoutInflater.from(mBaseActivity).inflate(R.layout.m_dialog_new, null);
+            _mDialog.setView(loadView, 0, 0, 0, 0);
+            _mDialog.setCanceledOnTouchOutside(false);
+            _tvProgressTip = loadView.findViewById(R.id.tvTip);
+        }
+        _tvProgressTip.setText(TextUtils.isEmpty(msg) ? "加载中..." : msg);
+    }
 
     public abstract int setupLayoutRes();
 

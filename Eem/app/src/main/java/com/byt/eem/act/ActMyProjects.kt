@@ -37,7 +37,7 @@ class ActMyProjects : BaseAct(), ProjectAdapter.OnItemClickListener {
     }
 
     private fun deleteProject(id: Int, position: Int) {
-        Post(LoadingDialog(_this, "删除中..."),
+        Post(getDialog("删除中..."),
                 MConstants.URL.DELETE_PROJECT + id,
                 Any::class.java,
                 object : IHttpCallBack<Any> {
@@ -76,7 +76,7 @@ class ActMyProjects : BaseAct(), ProjectAdapter.OnItemClickListener {
         findViewById<TitleBar>(R.id.m_title)?.setRightClick {
             ActNewProject.launch(_this, 1)
         }
-        Post(LoadingDialog(_this, "正在加载..."), MConstants.URL.GET_MY_PROJECTS, MyProjectBean::class.java, object : IHttpCallBack<MyProjectBean> {
+        Post(getDialog(), MConstants.URL.GET_MY_PROJECTS, MyProjectBean::class.java, object : IHttpCallBack<MyProjectBean> {
             override fun OnSuccess(msg: String?, page: ODataPage?, data: ArrayList<MyProjectBean>?) {
                 mAdapter?.setData(data!!)
             }
@@ -90,7 +90,7 @@ class ActMyProjects : BaseAct(), ProjectAdapter.OnItemClickListener {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-            Post(LoadingDialog(_this, "正在加载..."), MConstants.URL.GET_MY_PROJECTS, MyProjectBean::class.java, object : IHttpCallBack<MyProjectBean> {
+            Post(getDialog(), MConstants.URL.GET_MY_PROJECTS, MyProjectBean::class.java, object : IHttpCallBack<MyProjectBean> {
                 override fun OnSuccess(msg: String?, page: ODataPage?, data: ArrayList<MyProjectBean>?) {
                     mAdapter?.setData(data!!)
                 }

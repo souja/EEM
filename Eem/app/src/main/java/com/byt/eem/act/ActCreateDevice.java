@@ -12,11 +12,11 @@ import com.byt.eem.R;
 import com.byt.eem.base.BaseAct;
 import com.byt.eem.util.HttpUtil;
 import com.byt.eem.util.MConstants;
+import com.souja.lib.base.ActBase;
 import com.souja.lib.inter.IHttpCallBack;
 import com.souja.lib.models.BaseModel;
 import com.souja.lib.models.ODataPage;
 import com.souja.lib.utils.DialogFactory;
-import com.souja.lib.widget.LoadingDialog;
 import com.souja.lib.widget.TitleBar;
 import com.weigan.loopview.LoopView;
 
@@ -24,7 +24,6 @@ import org.xutils.common.util.LogUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 import butterknife.BindView;
@@ -91,6 +90,7 @@ public class ActCreateDevice extends BaseAct {
     private DatePickerDialog startDialog, simStartDialog, endDialog, simEndDialog;
 
     private String deviceCode;
+
 
     @Override
     protected void initMain() {
@@ -226,7 +226,7 @@ public class ActCreateDevice extends BaseAct {
         param.setIotCardValidDays(Integer.parseInt(effPeriod));
         param.setIotCardDisableDate(seTime);
 
-        Post(new LoadingDialog(_this, "数据保存中..."), MConstants.URL.GET_SAVE_DEVICE_INFO,
+        Post(getDialog("数据保存中..."), MConstants.URL.GET_SAVE_DEVICE_INFO,
                 HttpUtil.formatParams(param.toString()), new IHttpCallBack<Object>() {
 
                     @Override
@@ -251,8 +251,7 @@ public class ActCreateDevice extends BaseAct {
     }
 
     private void getUserProjects() {
-        Post(new LoadingDialog(_this, ""),
-                MConstants.URL.GET_MY_AND_MYCHILD_PROJECTS + EApp.getUserInfo().getId(),
+        Post(getDialog(), MConstants.URL.GET_MY_AND_MYCHILD_PROJECTS + EApp.getUserInfo().getId(),
                 HttpUtil.defaultParam(), Project.class, new IHttpCallBack<Project>() {
 
                     @Override
@@ -273,7 +272,7 @@ public class ActCreateDevice extends BaseAct {
     }
 
     private void getDeviceType() {
-        Post(new LoadingDialog(_this, ""), MConstants.URL.GET_ALL_DEVICE_TYPE,
+        Post(getDialog(), MConstants.URL.GET_ALL_DEVICE_TYPE,
                 HttpUtil.defaultParam(), DeviceType.class, new IHttpCallBack<DeviceType>() {
 
                     @Override

@@ -84,7 +84,7 @@ class ActNewProject : BaseActEd() {
         }
         tv_province.setOnClickListener {
             if (mProvinceList.isEmpty()) {
-                Post(LoadingDialog(this, "正在加载..."), MConstants.URL.GET_PROVINCES, ProvinceBean::class.java, object : IHttpCallBack<ProvinceBean> {
+                Post(getDialog(), MConstants.URL.GET_PROVINCES, ProvinceBean::class.java, object : IHttpCallBack<ProvinceBean> {
                     override fun OnSuccess(msg: String?, page: ODataPage?, data: java.util.ArrayList<ProvinceBean>?) {
                         if (data == null || data.isEmpty()) {
                             showToast("暂无数据")
@@ -107,7 +107,7 @@ class ActNewProject : BaseActEd() {
             if (mProvinceId > 0) {
                 val list = mCityMap.get(mProvinceId)
                 if (list == null || list.isEmpty()) {
-                    Post(LoadingDialog(this, "正在加载..."), MConstants.URL.GET_CITIES_BY_ID + mProvinceId, CityBean::class.java, object : IHttpCallBack<CityBean> {
+                    Post(getDialog(), MConstants.URL.GET_CITIES_BY_ID + mProvinceId, CityBean::class.java, object : IHttpCallBack<CityBean> {
                         override fun OnFailure(msg: String?) {
                         }
 
@@ -130,7 +130,7 @@ class ActNewProject : BaseActEd() {
             if (mProvinceId > 0 && mCityId > 0) {
                 val list = mCountyMap["$mProvinceId$mCityId"]
                 if (list == null || list.isEmpty()) {
-                    Post(LoadingDialog(this, "正在加载..."), MConstants.URL.GET_COUNTIES_BY_ID + mCityId, CountyBean::class.java, object : IHttpCallBack<CountyBean> {
+                    Post(getDialog(), MConstants.URL.GET_COUNTIES_BY_ID + mCityId, CountyBean::class.java, object : IHttpCallBack<CountyBean> {
                         override fun OnFailure(msg: String?) {
                         }
 
@@ -157,7 +157,7 @@ class ActNewProject : BaseActEd() {
         }
 
         rl_user.setOnClickListener {
-            Post(LoadingDialog(this, "正在加载..."), MConstants.URL.GET_ALL_USER, UserControllerBean::class.java, object : IHttpCallBack<UserControllerBean> {
+            Post(getDialog(), MConstants.URL.GET_ALL_USER, UserControllerBean::class.java, object : IHttpCallBack<UserControllerBean> {
                 override fun OnFailure(msg: String?) {
                 }
 
@@ -181,7 +181,7 @@ class ActNewProject : BaseActEd() {
 
         btn_save.setOnClickListener { _ ->
             if (checkInput()) {
-                Post(LoadingDialog(_this, "数据保存中..."),
+                Post(getDialog("数据保存中..."),
                         if (mUpdate) MConstants.URL.UPDATE_PROJECT else MConstants.URL.SAVE_PROJECT
                         , getPostParams(), object : IHttpCallBack<Any> {
                     override fun OnSuccess(msg: String?, page: ODataPage?, data: java.util.ArrayList<Any>?) {

@@ -95,7 +95,8 @@ public class ActDeviceList extends BaseActEd {
     }
 
     private void getList() {
-        Post(MConstants.URL.GET_DEVICES_BY_PROJECT + projectId, HttpUtil.defaultParam(),
+        Post(getDialog(),MConstants.URL.GET_DEVICES_BY_PROJECT + projectId,
+                HttpUtil.defaultParam(),
                 Device.class, new IHttpCallBack<Device>() {
 
                     @Override

@@ -24,7 +24,6 @@ import com.souja.lib.models.ODataPage;
 import com.souja.lib.widget.TitleBar;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import butterknife.BindView;
@@ -91,7 +90,7 @@ public class ActProvinceProjects extends BaseActEd {
     }
 
     private void getList() {
-        Post(MConstants.URL.GET_PROJECTS_BY_PROVINCE + provinceId,
+        Post(getDialog(), MConstants.URL.GET_PROJECTS_BY_PROVINCE + provinceId,
                 HttpUtil.defaultParam(), ProvProj.class, new IHttpCallBack<ProvProj>() {
 
                     @Override

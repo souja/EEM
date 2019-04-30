@@ -94,7 +94,7 @@ public class ActLogin extends BaseActEd {
             showToast("请输入密码");
             return;
         }
-        Post(new LoadingDialog(_this), MConstants.URL.LOGIN,
+        Post(getDialog(), MConstants.URL.LOGIN,
                 HttpUtil.formatParams(new LoginParam(phone, pwd).toString()),
                 UserInfo.class, new IHttpCallBack<UserInfo>() {
 

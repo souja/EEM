@@ -2,4 +2,11 @@
 <resources>
     <color name="text_color_project_black">#0f0f0f</color>
     <color name="color_list_divider">#80000000</color>
+
+
+    <color name="colorPrimary">@color/main_color</color>
+    <color name="colorPrimaryDark">@color/main_color</color>
+    <color name="colorAccent">@color/main_color</color>
+
+    <color name="main_color">#ffaa66cc</color>
 </resources>

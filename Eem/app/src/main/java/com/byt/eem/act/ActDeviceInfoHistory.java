@@ -202,7 +202,7 @@ public class ActDeviceInfoHistory extends BaseAct {
     }
 
     private void getHistory() {
-        Post(new LoadingDialog(_this), MConstants.URL.GET_DEVICES_HISTORY_STATE,
+        Post(getDialog(), MConstants.URL.GET_DEVICES_HISTORY_STATE,
                 HttpUtil.formatParams(new Param(deviceId, beginDateTime, endDateTime).toString()),
                 History.class, new IHttpCallBack<History>() {
 
