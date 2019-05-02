@@ -15,13 +15,13 @@ public class ActSet extends BaseAct {
     private String deviceCode;
     @Override
     protected void initMain() {
-""
+
        deviceCode =getIntent().getStringExtra("code");
 
        getDeviceParam();
     }
 
     private void getDeviceParam(){
-        Post(getDialog(),MTool.formatStr(MConstants.URL.HANDLE_DEVICE,"GetParamFromDb"));
+//        Post(getDialog(),MTool.formatStr(MConstants.URL.HANDLE_DEVICE,"GetParamFromDb"));
     }
 }
