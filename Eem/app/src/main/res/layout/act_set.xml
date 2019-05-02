@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/page_bg"
+    android:orientation="vertical">
+
+    <com.souja.lib.widget.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:mTitle="实时数据" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="36px">
+
+        <TextView
+            style="@style/text_45px"
+            android:text="当前设备：" />
+
+        <TextView
+            style="@style/text_45px"
+            android:layout_weight="1"
+            tools:text="asdf1234" />
+        <TextView
+            style="@style/text_45px"
+            android:text="状态：" />
+
+    </LinearLayout>
+</LinearLayout>

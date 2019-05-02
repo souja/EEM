@@ -1,7 +1,7 @@
 package com.byt.eem.base;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 
 import com.byt.eem.util.HttpUtil;
 import com.souja.lib.base.ActBaseHor;
@@ -19,7 +19,7 @@ public abstract class BaseActHor extends ActBaseHor {
         _this = this;
     }
 
-    public <T> void Post(ProgressDialog dialog, String url, RequestParams params,
+    public <T> void Post(AlertDialog dialog, String url, RequestParams params,
                          final Class<T> dataClass, IHttpCallBack callBack) {
         addRequest(HttpUtil.Post(dialog, url, params, dataClass, callBack));
     }
@@ -32,17 +32,17 @@ public abstract class BaseActHor extends ActBaseHor {
         Post(null, url, params, dataClass, callBack);
     }
 
-    public <T> void Post(ProgressDialog dialog, String url,
+    public <T> void Post(AlertDialog dialog, String url,
                          final Class<T> dataClass, IHttpCallBack callBack) {
         Post(dialog, url, new RequestParams(), dataClass, callBack);
     }
 
-    public <T> void Get(ProgressDialog dialog, String url, RequestParams params,
+    public <T> void Get(AlertDialog dialog, String url, RequestParams params,
                         final Class<T> dataClass, IHttpCallBack callBack) {
         addRequest(HttpUtil.Get(dialog, url, params, dataClass, callBack));
     }
 
-    public <T> void Delete(ProgressDialog dialog, String url, RequestParams params,
+    public <T> void Delete(AlertDialog dialog, String url, RequestParams params,
                            final Class<T> dataClass, IHttpCallBack callBack) {
         addRequest(HttpUtil.Delete(dialog, url, params, dataClass, callBack));
     }

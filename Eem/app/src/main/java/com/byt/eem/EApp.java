@@ -1,6 +1,7 @@
 package com.byt.eem;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.multidex.MultiDexApplication;
 
 import com.baidu.mapapi.CoordType;
@@ -53,13 +54,14 @@ public class EApp extends MultiDexApplication {
         SDKInitializer.setCoordType(CoordType.GCJ02);
 
         x.Ext.init(this);
-        x.Ext.setDebug(false);
+        x.Ext.setDebug(true);
         LogUtil.customTagPrefix = "【EEM_APP】";
 
         SPHelper.init(mContext, getPackageName());
     }
 
     private void closeAndroidPDialog() {
+        if (Build.VERSION.SDK_INT < 28) return;
         try {
             Class aClass = Class.forName("android.content.pm.PackageParser$Package");
             Constructor declaredConstructor = aClass.getDeclaredConstructor(String.class);

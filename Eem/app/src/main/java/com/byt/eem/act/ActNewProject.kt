@@ -19,7 +19,6 @@ import com.byt.eem.widget.*
 import com.souja.lib.base.ActBase
 import com.souja.lib.inter.IHttpCallBack
 import com.souja.lib.models.ODataPage
-import com.souja.lib.widget.LoadingDialog
 import com.souja.lib.widget.TitleBar
 import kotlinx.android.synthetic.main.activity_new_project.*
 import org.xutils.http.RequestParams

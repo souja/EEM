@@ -17,7 +17,6 @@ import com.byt.eem.util.MConstants
 import com.souja.lib.inter.IHttpCallBack
 import com.souja.lib.models.ODataPage
 import com.souja.lib.utils.ScreenUtil
-import com.souja.lib.widget.LoadingDialog
 import com.souja.lib.widget.TitleBar
 import kotlinx.android.synthetic.main.activity_my_projects.*
 import kotlinx.android.synthetic.main.item_project.view.*

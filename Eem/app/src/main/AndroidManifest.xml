@@ -108,6 +108,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/ThemeWhite"
             android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".act.ActSet"
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeWhite"
+            android:windowSoftInputMode="adjustPan"/>
 
         <!-- Rui acts↓ -->
         <activity

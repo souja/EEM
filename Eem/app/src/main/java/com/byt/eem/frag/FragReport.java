@@ -21,16 +21,13 @@ import com.souja.lib.inter.IHttpCallBack;
 import com.souja.lib.models.BaseModel;
 import com.souja.lib.models.ODataPage;
 import com.souja.lib.utils.MDateUtils;
-import com.souja.lib.widget.LoadingDialog;
 import com.weigan.loopview.LoopView;
 
 import org.xutils.common.util.LogUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import butterknife.BindView;

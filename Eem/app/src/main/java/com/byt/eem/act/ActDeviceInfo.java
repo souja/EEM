@@ -3,7 +3,6 @@ package com.byt.eem.act;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +22,7 @@ import com.souja.lib.base.MBaseAdapter;
 import com.souja.lib.inter.IHttpCallBack;
 import com.souja.lib.models.BaseModel;
 import com.souja.lib.models.ODataPage;
+import com.souja.lib.utils.MTool;
 import com.souja.lib.widget.TitleBar;
 
 import java.util.ArrayList;
@@ -66,7 +66,7 @@ public class ActDeviceInfo extends BaseAct {
     View bot;
 
     private int deviceId;
-    private String devicCode;
+    private String deviceCode;
     private DeviceInfo mDeviceInfo;
     private AdapterStatus mAdapterStatus;
     private boolean bExpand;
@@ -81,7 +81,7 @@ public class ActDeviceInfo extends BaseAct {
     protected void initMain() {
         ButterKnife.bind(this);
         deviceId = getIntent().getIntExtra("id", 0);
-        devicCode = getIntent().getStringExtra("code");
+        deviceCode = getIntent().getStringExtra("code");
         mTitleBar.setTitle(getIntent().getStringExtra("name"));
         mTitleBar.setRightClick(view ->
                 NEXT(new Intent(_this, ActDeviceInfoHistory.class)
@@ -100,7 +100,6 @@ public class ActDeviceInfo extends BaseAct {
                 hideBtns();
             }
         });
-//        getDeviceControl();
         getDeviceInfo(false);
     }
 
@@ -144,25 +143,30 @@ public class ActDeviceInfo extends BaseAct {
     }
 
     private void initBtnListeners() {
-        ibSet.setOnClickListener(view -> goSet());
-        ibSilence.setOnClickListener(view -> handleDevice(1));
-        ibOut.setOnClickListener(view -> handleDevice(2));
-        ibState.setOnClickListener(view -> handleDevice(3));
-        ibSelfCheck.setOnClickListener(view -> handleDevice(4));
-        ibRevert.setOnClickListener(view -> handleDevice(5));
+        ibSet.setOnClickListener(view -> NEXT(new Intent(_this, ActSet.class)
+                .putExtra("code", deviceCode)));
+        ibState.setOnClickListener(view -> getDeviceInfo(true));
+        ibRevert.setOnClickListener(view -> handleDevice("Reset"));//复位
+        ibOut.setOnClickListener(view -> handleDevice("TurnOff"));//脱扣
+        ibSilence.setOnClickListener(view -> handleDevice("Silence"));//消音
+        ibSelfCheck.setOnClickListener(view -> handleDevice("Check"));//自检
     }
 
-    private void goSet() {
+    private void handleDevice(String flag) {
         hideBtns();
-    }
+        String url = MTool.formatStr(MConstants.URL.HANDLE_DEVICE, flag);
+        Post(getDialog(), url, new IHttpCallBack() {
 
-    private void handleDevice(int flag) {
-        hideBtns();
-        switch (flag){
+            @Override
+            public void OnSuccess(String msg, ODataPage page, ArrayList data) {
+                showToast("操作成功");
+            }
 
-        }
-
-
+            @Override
+            public void OnFailure(String msg) {
+                showToast(msg);
+            }
+        });
     }
 
   /*  private void getDeviceControl() {
@@ -186,7 +190,7 @@ public class ActDeviceInfo extends BaseAct {
 
                     @Override
                     public void OnSuccess(String msg, ODataPage page, ArrayList<DeviceInfo> data) {
-                        if (refresh) showToast("更新成功");
+                        if (refresh) showToast("数据更新成功");
                         mRefreshLayout.finishRefresh();
                         if (data.size() > 0) {
                             mDeviceInfo = data.get(0);
@@ -211,13 +215,6 @@ public class ActDeviceInfo extends BaseAct {
             tvDate.setText(String.valueOf("时间：" + mDeviceInfo.getOperateTime()));
             mAdapterStatus.setDataList((ArrayList<ItemsBean>) mDeviceInfo.getItems());
         }
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 
     class AdapterStatus extends MBaseAdapter<ItemsBean> {

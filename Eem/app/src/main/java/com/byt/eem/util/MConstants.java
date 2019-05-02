@@ -5,8 +5,8 @@ package com.byt.eem.util;
  */
 
 public class MConstants {
-    public static String HTTP = "https://testpay.chftne.cn/api";//test
-//    public static String HTTP = "https://wx.zzese.cn/api";//pro
+//    public static String HTTP = "https://testpay.chftne.cn/api";//test
+    public static String HTTP = "https://wx.zzese.cn/api";//pro
 
     //用户信息缓存KEY
     public static final String USERINFO_KEY = "eemUserInfo";
@@ -50,8 +50,8 @@ public class MConstants {
         String GET_ALARM_MSG_LIST_PAGEINFO = "/Message/GetAlarmDetailsPageInfo";
         //处理消息
         String PROCESS_ALARM_MSG = "/Message/ProcessAlarm";
-        //消息处理参数获取
-        String GET_HANDLE_PARAM = "/DeviceCtrl/GetParamFromDb?deviceCode=";
+        //设备操作
+        String HANDLE_DEVICE = "/DeviceCtrlControl/%s";
 
 
         //Rui Url↓
