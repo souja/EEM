@@ -41,6 +41,7 @@ dependencies {
     api 'top.zibin:Luban:1.1.8'
     api 'com.just.agentweb:agentweb:4.0.2'
     api 'com.google.zxing:core:3.2.1'
+    api project(':MPChartLib')
 }
 
 tasks.withType(JavaCompile) {

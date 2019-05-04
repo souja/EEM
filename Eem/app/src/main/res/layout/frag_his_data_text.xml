@@ -1,6 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:gravity="center"
+            android:paddingTop="16px"
+            android:paddingBottom="16px"
+            android:paddingLeft="6px"
+            android:paddingRight="6px"
+            android:id="@+id/tv_time"
+            android:textColor="#000"
+            android:text="时间"
+            style="@style/text_24px"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:gravity="center"
+            android:paddingTop="16px"
+            android:paddingBottom="16px"
+            android:paddingLeft="6px"
+            android:paddingRight="6px"
+            android:id="@+id/tv_av"
+            android:textColor="#000"
+            android:text="A相电压"
+            style="@style/text_24px"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:gravity="center"
+            android:paddingTop="16px"
+            android:paddingBottom="16px"
+            android:paddingLeft="6px"
+            android:paddingRight="6px"
+            android:id="@+id/tv_bv"
+            android:textColor="#000"
+            android:text="B相电压"
+            style="@style/text_24px"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:gravity="center"
+            android:paddingTop="16px"
+            android:paddingBottom="16px"
+            android:paddingLeft="6px"
+            android:paddingRight="6px"
+            android:id="@+id/tv_cv"
+            android:textColor="#000"
+            android:text="C相电压"
+            style="@style/text_24px"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:gravity="center"
+            android:paddingTop="16px"
+            android:paddingBottom="16px"
+            android:paddingLeft="6px"
+            android:paddingRight="6px"
+            android:id="@+id/tv_ae"
+            android:textColor="#000"
+            android:text="A相电流"
+            style="@style/text_24px"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:gravity="center"
+            android:paddingTop="16px"
+            android:paddingBottom="16px"
+            android:paddingLeft="6px"
+            android:paddingRight="6px"
+            android:id="@+id/tv_be"
+            android:textColor="#000"
+            android:text="B相电流"
+            style="@style/text_24px"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:gravity="center"
+            android:paddingTop="16px"
+            android:paddingBottom="16px"
+            android:paddingLeft="6px"
+            android:paddingRight="6px"
+            android:id="@+id/tv_ce"
+            android:textColor="#000"
+            android:text="C相电流"
+            style="@style/text_24px"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:gravity="center"
+            android:paddingTop="16px"
+            android:paddingBottom="16px"
+            android:paddingLeft="6px"
+            android:paddingRight="6px"
+            android:id="@+id/tv_lou"
+            android:textColor="#000"
+            android:text="漏电流"
+            style="@style/text_24px"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:gravity="center"
+            android:paddingTop="16px"
+            android:paddingBottom="16px"
+            android:paddingLeft="6px"
+            android:paddingRight="6px"
+            android:id="@+id/tv_tmp2"
+            android:textColor="#000"
+            android:text="2路温度"
+            style="@style/text_24px"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:gravity="center"
+            android:paddingTop="16px"
+            android:paddingBottom="16px"
+            android:paddingLeft="6px"
+            android:paddingRight="6px"
+            android:id="@+id/tv_tmp3"
+            android:textColor="#000"
+            android:text="3路温度"
+            style="@style/text_24px"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:gravity="center"
+            android:paddingTop="16px"
+            android:paddingBottom="16px"
+            android:paddingLeft="6px"
+            android:paddingRight="6px"
+            android:id="@+id/tv_tmp4"
+            android:textColor="#000"
+            android:text="4路温度"
+            style="@style/text_24px"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_history"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
 
 </LinearLayout>

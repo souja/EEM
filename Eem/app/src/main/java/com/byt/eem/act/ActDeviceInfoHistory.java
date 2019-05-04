@@ -25,7 +25,6 @@ import com.souja.lib.models.ODataPage;
 import com.souja.lib.utils.DialogFactory;
 import com.souja.lib.utils.MDateUtils;
 import com.souja.lib.utils.MTool;
-import com.souja.lib.widget.LoadingDialog;
 
 import org.xutils.common.util.LogUtil;
 
@@ -53,6 +52,8 @@ public class ActDeviceInfoHistory extends BaseAct {
     LinearLayout llChooseDate2;
     @BindView(R.id.btn_confirm)
     View btnConfirm;
+    @BindView(R.id.layout_empty)
+    LinearLayout mPlaceHolder;
 
     private int deviceId;
     private static final String[] menus = new String[]{"列表", "漏电流", "电流", "电压", "温度"};
@@ -208,17 +209,33 @@ public class ActDeviceInfoHistory extends BaseAct {
 
                     @Override
                     public void OnSuccess(String msg, ODataPage page, ArrayList<History> data) {
-
+                        if (data == null || data.size() < 1) {
+                            mPlaceHolder.setVisibility(View.VISIBLE);
+                            vpData.setVisibility(View.INVISIBLE);
+                            vpData.setEnabled(false);
+                        } else  {
+                            vpData.setVisibility(View.VISIBLE);
+                            mPlaceHolder.setVisibility(View.INVISIBLE);
+                            vpData.setEnabled(true);
+                            fragText.setData(data);
+                            fragChart1.setData(data);
+                            fragChart2.setData(data);
+                            fragChart3.setData(data);
+                            fragChart4.setData(data);
+                        }
                     }
 
                     @Override
                     public void OnFailure(String msg) {
+                        mPlaceHolder.setVisibility(View.VISIBLE);
+                        vpData.setVisibility(View.INVISIBLE);
+                        vpData.setEnabled(false);
                         showToast(msg);
                     }
                 });
     }
 
-    class History extends BaseModel {
+    public class History extends BaseModel {
 
         /**
          * DeviceName : 1楼总配电箱

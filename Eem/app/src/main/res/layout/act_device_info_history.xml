@@ -85,8 +85,36 @@
             android:textSize="24px" />
     </LinearLayout>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/vp_data"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_data"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:id="@+id/layout_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="242px"
+                android:layout_height="198px"
+                android:background="@drawable/ic_nodata" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="暂无数据"
+                android:layout_marginRight="15px"
+                android:layout_marginTop="15px"
+                android:textColor="@color/grey_80"
+                android:textSize="36px" />
+        </LinearLayout>
+
+    </FrameLayout>
 </LinearLayout>

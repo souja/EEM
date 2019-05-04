@@ -21,6 +21,7 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.souja.lib.utils.MGlobal;
 import com.souja.lib.utils.MTool;
+import com.souja.lib.utils.ScreenUtil;
 import com.souja.lib.utils.ScreenUtilHor;
 
 import org.xutils.common.Callback;
@@ -102,7 +103,7 @@ public abstract class BaseFragmentHor extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         _rootView = inflater.inflate(setupLayoutRes(), null, false);
-        ScreenUtilHor.initScale(_rootView);
+        ScreenUtil.initScale(_rootView);
         initMain();
         return _rootView;
     }
