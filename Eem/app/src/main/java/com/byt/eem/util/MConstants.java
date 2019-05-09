@@ -5,8 +5,8 @@ package com.byt.eem.util;
  */
 
 public class MConstants {
-//    public static String HTTP = "https://testpay.chftne.cn/api";//test
-    public static String HTTP = "https://wx.zzese.cn/api";//pro
+    public static String HTTP = "https://wxzz.chftne.cn/api";//test
+//    public static String HTTP = "https://wx.zzese.cn/api";//pro
 
     //用户信息缓存KEY
     public static final String USERINFO_KEY = "eemUserInfo";
@@ -18,6 +18,8 @@ public class MConstants {
 
 
     public interface URL {
+        //检查更新
+        String CHECK_UPDATE = "/Operate/CheckUpdate";
         //登录
         String LOGIN = "/SUser/Login";
         //获取设备状态汇总信息(如故障75台,离线50台,正常309台,其他50台)
