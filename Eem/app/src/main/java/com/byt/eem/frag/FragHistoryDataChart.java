@@ -15,6 +15,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+
 public class FragHistoryDataChart extends MBaseLazyFragmentBHor {
 
     Unbinder unbinder;

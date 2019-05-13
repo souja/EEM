@@ -13,7 +13,15 @@ import com.byt.eem.frag.FragHome;
 import com.byt.eem.frag.FragMine;
 import com.byt.eem.frag.FragMsg;
 import com.byt.eem.frag.FragReport;
+import com.byt.eem.util.MConstants;
+import com.souja.lib.inter.IHttpCallBack;
+import com.souja.lib.models.BaseModel;
+import com.souja.lib.models.ODataPage;
 import com.souja.lib.widget.MCheckBox;
+
+import org.xutils.common.util.LogUtil;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -94,7 +102,26 @@ public class ActMain extends BaseAct {
             }
         }
 
+        new Thread(()-> checkUpdate()).start();
 
+    }
+
+    class VersionInfo extends BaseModel{
+
+    }
+
+    private void checkUpdate(){
+        Post(null, MConstants.URL.CHECK_UPDATE, VersionInfo.class, new IHttpCallBack<VersionInfo>() {
+            @Override
+            public void OnSuccess(String msg, ODataPage page, ArrayList<VersionInfo> data) {
+
+            }
+
+            @Override
+            public void OnFailure(String msg) {
+                LogUtil.e("检查更新失败:"+msg);
+            }
+        });
     }
 
     private void hanldeOnNaviClick(int naviIndex) {

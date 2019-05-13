@@ -5,6 +5,10 @@ import com.souja.lib.models.BaseModel;
 public class UserInfo extends BaseModel {
 
     /**
+     * {"IsSucess":true,"Msg":null,"DataJsonStr":"[{\"Id\":12,\"ParentId\":0,\"PassWord\":\"1\",
+     * \"UserId\":\"user\",\"UserName\":\"体验用户\",\"TRoleId\":1,\"Phone\":null,\"PlatFormName\":
+     * \"智慧消防平台\",\"CompanyLogo\":\"/UpLoad/峰泰logo1副本.jpg\",\"CompanyName\":\"成都峰泰电气有限公司\",
+     * \"RoleName\":\"超级管理员\"}]","OutId":0}
      * Id : 12
      * ParentId : 0
      * ParentTUserId : null

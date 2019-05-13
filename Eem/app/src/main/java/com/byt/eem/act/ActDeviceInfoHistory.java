@@ -34,6 +34,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 //设备状态历史记录
+//测试数据获取：2019-1-1 19:50 2019-1-1 19:52
 public class ActDeviceInfoHistory extends BaseAct {
 
     @BindView(R.id.ib_back)
