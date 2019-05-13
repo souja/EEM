@@ -11,6 +11,8 @@ public class MConstants {
     //用户信息缓存KEY
     public static final String USERINFO_KEY = "eemUserInfo";
 
+    public static final String DOWNLOAD_KEY = "eemNewVersion";
+
     public static final int RX_SCAN_QR_CODE = 100;//扫描二维码
     public static final int RX_PROCESS_ALARM_MSG = 101;//处理告警消息
 

@@ -1,27 +1,61 @@
 package com.byt.eem;
 
+import android.app.DownloadManager;
 import android.content.Context;
+import android.content.IntentFilter;
+import android.net.Uri;
 import android.os.Build;
 import android.support.multidex.MultiDexApplication;
 
+import com.android.tony.defenselib.DefenseCrash;
+import com.android.tony.defenselib.handler.IExceptionHandler;
 import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
 import com.byt.eem.model.UserInfo;
+import com.byt.eem.receiver.DownLoadApkBroadCast;
 import com.byt.eem.util.MConstants;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.souja.lib.inter.DownloadTask;
 import com.souja.lib.utils.GsonUtil;
 import com.souja.lib.utils.SPHelper;
 
 import org.xutils.common.util.LogUtil;
 import org.xutils.x;
 
+import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-public class EApp extends MultiDexApplication {
+public class EApp extends MultiDexApplication implements IExceptionHandler {
+
+
+    @Override
+    public void onCaughtException(Thread thread, Throwable throwable, boolean b) {
+        throwable.printStackTrace();
+    }
+
+    @Override
+    public void onEnterSafeMode() {
+
+    }
+
+    @Override
+    public void onMayBeBlackScreen(Throwable throwable) {
+
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        // step1: Initialize the lib.
+        DefenseCrash.initialize();
+        // setp2: Install the fire wall defense.
+        DefenseCrash.install(this);
+    }
+
 
     static {
         //设置全局的Header构建器
@@ -42,6 +76,10 @@ public class EApp extends MultiDexApplication {
         return mContext;
     }
 
+    private DownLoadApkBroadCast mDownLoadApkBroadCast;
+
+    private static DownloadTask mDownloadTask;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -58,6 +96,10 @@ public class EApp extends MultiDexApplication {
         LogUtil.customTagPrefix = "【EEM_APP】";
 
         SPHelper.init(mContext, getPackageName());
+
+
+        mDownLoadApkBroadCast = new DownLoadApkBroadCast();
+        registerReceiver(mDownLoadApkBroadCast, new IntentFilter("android.intent.action.DOWNLOAD_COMPLETE"));
     }
 
     private void closeAndroidPDialog() {
@@ -139,6 +181,26 @@ public class EApp extends MultiDexApplication {
     //更新登录用户信息缓存
     public static void updateUserInfoCache() {
         SPHelper.putString(MConstants.USERINFO_KEY, GsonUtil.objToJsonString(mUserInfo));
+    }
+
+
+    public static void setTask(DownloadTask task) {
+        mDownloadTask = task;
+    }
+
+    public static void downloadLatestVersionInBackground(String downloadUrl, File newApkInstaller) {
+        DownloadManager dManager = (DownloadManager) mContext.getSystemService(Context.DOWNLOAD_SERVICE);
+        Uri uri = Uri.parse(downloadUrl);
+        DownloadManager.Request request = new DownloadManager.Request(uri);
+
+        request.setDestinationUri(Uri.fromFile(newApkInstaller)); //自定义下载目录
+        request.setDescription("正在为您下载最新版本的医美宝...");
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setMimeType("application/vnd.android.package-archive");
+        request.allowScanningByMediaScanner();// 设置为可被媒体扫描器找到
+        request.setVisibleInDownloadsUi(true);// 设置为可见和可管理
+        long reference = dManager.enqueue(request);
+        SPHelper.putLong(MConstants.DOWNLOAD_KEY, reference); // 保存当前下载的ID
     }
 
 }

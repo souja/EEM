@@ -95,7 +95,8 @@ public class HttpUtil {
                 return;
             }
             String formatDataStr = dataString.replace("\\\"", "'");
-            if (params.getUri().contains(MConstants.URL.GET_DEVICES_STATE_BY_DEVICEID)) {
+            if (params.getUri().contains(MConstants.URL.GET_DEVICES_STATE_BY_DEVICEID)
+                    || params.getUri().contains(MConstants.URL.CHECK_UPDATE)) {
                 ArrayList<T> list = new ArrayList<>();
                 T r = (T) GsonUtil.getObj(formatDataStr, dataClass);
                 list.add(r);

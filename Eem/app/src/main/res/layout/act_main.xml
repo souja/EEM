@@ -73,4 +73,104 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/divider" />
+
+    <LinearLayout
+        android:id="@+id/ll_update"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_50per"
+        android:clickable="true"
+        android:gravity="center"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="72px"
+            android:layout_marginRight="72px"
+            android:background="@color/white"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="108px"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="60px"
+                    android:layout_height="60px"
+                    android:background="@drawable/ic_update" />
+
+                <TextView
+                    style="@style/text_51px"
+                    android:text="发现新版本" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="150px"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_desc"
+                    style="@style/text_45px"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="36px"
+                    android:layout_marginRight="36px"
+                    android:lineSpacingExtra="3dp"
+                    tools:text="1.优化用户体验\n2.修复bug\n3.增加XX功能" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="126px"
+                    android:layout_margin="36px"
+                    android:gravity="center_vertical">
+
+                    <Button
+                        android:id="@+id/btn_skip"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/main_grey_radius_btn_bg_selector"
+                        android:text="我知道了"
+                        android:textColor="@color/white"
+                        android:textSize="45px"
+                        tools:visibility="gone" />
+
+                    <Button
+                        android:id="@+id/btn_update"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="36px"
+                        android:layout_weight="1"
+                        android:background="@drawable/main_grey_radius_btn_bg_selector"
+                        android:text="立即升级"
+                        android:textColor="@color/white"
+                        android:textSize="45px"
+                        tools:visibility="gone" />
+
+                    <ProgressBar
+                        android:id="@+id/sk_progress"
+                        style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:max="100"
+                        android:progressDrawable="@drawable/layer_text_progress"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
 </RelativeLayout>
