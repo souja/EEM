@@ -5,7 +5,7 @@ package com.byt.eem.util;
  */
 
 public class MConstants {
-    public static String HTTP = "https://wxzz.chftne.cn/api";//test
+        public static String HTTP = "https://wxzz.chftne.cn/api";//test
 //    public static String HTTP = "https://wx.zzese.cn/api";//pro
 
     //用户信息缓存KEY
@@ -15,6 +15,7 @@ public class MConstants {
 
     public static final int RX_SCAN_QR_CODE = 100;//扫描二维码
     public static final int RX_PROCESS_ALARM_MSG = 101;//处理告警消息
+    public static final int RX_UPDATE_DEVICE_INFO = 102;//修改"设置"里面的参数后，更新数据
 
     //Rui Constants↓
 
@@ -56,6 +57,10 @@ public class MConstants {
         String PROCESS_ALARM_MSG = "/Message/ProcessAlarm";
         //设备操作
         String HANDLE_DEVICE = "/DeviceCtrlControl/%s";
+        //获取设备参数
+        String GET_DEVICE_PARAM = "/DeviceCtrlControl/GetParamFromDb?deviceCode=%s";
+        //设置设备参数
+        String SET_DEVICE_PARAM = "/DeviceCtrlControl/SetParamToDb";
 
 
         //Rui Url↓

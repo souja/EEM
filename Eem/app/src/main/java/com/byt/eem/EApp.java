@@ -20,6 +20,7 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.souja.lib.inter.DownloadTask;
 import com.souja.lib.utils.GsonUtil;
 import com.souja.lib.utils.SPHelper;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import org.xutils.common.util.LogUtil;
 import org.xutils.x;
@@ -86,17 +87,19 @@ public class EApp extends MultiDexApplication implements IExceptionHandler {
         closeAndroidPDialog();
         mContext = this;
         // 在使用 SDK 各组间之前初始化 context 信息，传入 ApplicationContext
-        SDKInitializer.initialize(this);
+        SDKInitializer.initialize(mContext);
         //自4.3.0起，百度地图SDK所有接口均支持百度坐标和国测局坐标，用此方法设置您使用的坐标类型.
         //包括BD09LL和GCJ02两种坐标，默认是BD09LL坐标。
         SDKInitializer.setCoordType(CoordType.GCJ02);
 
-        x.Ext.init(this);
-        x.Ext.setDebug(true);
+        x.Ext.init(mContext);
+        x.Ext.setDebug(false);
         LogUtil.customTagPrefix = "【EEM_APP】";
 
-        SPHelper.init(mContext, getPackageName());
+        CrashReport.initCrashReport(mContext, "cf64f14ee4", x.isDebug());
 
+
+        SPHelper.init(mContext, getPackageName());
 
         mDownLoadApkBroadCast = new DownLoadApkBroadCast();
         registerReceiver(mDownLoadApkBroadCast, new IntentFilter("android.intent.action.DOWNLOAD_COMPLETE"));

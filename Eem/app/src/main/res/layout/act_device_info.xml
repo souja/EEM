@@ -16,52 +16,37 @@
         app:mTitleColor="@color/grey_66"
         tools:mTitle="123" />
 
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/smartRefresh"
+    <LinearLayout
+        android:id="@+id/ll_statusTop"
+        android:layout_width="match_parent"
+        android:layout_height="129px"
+        android:layout_below="@id/m_title"
+        android:layout_marginTop="24px"
+        android:background="@color/white"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tv_status"
+            style="@style/text_42px"
+            android:layout_marginLeft="42px"
+            android:layout_weight="1"
+            tools:text="状态：在线" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            style="@style/text_42px"
+            android:layout_marginRight="42px"
+            tools:text="时间：2019-12-11" />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_status"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/m_title">
-
-        <android.support.v4.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="129px"
-                    android:layout_marginTop="24px"
-                    android:background="@color/white"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:id="@+id/tv_status"
-                        style="@style/text_42px"
-                        android:layout_marginLeft="42px"
-                        android:layout_weight="1"
-                        tools:text="状态：在线" />
-
-                    <TextView
-                        android:id="@+id/tv_date"
-                        style="@style/text_42px"
-                        android:layout_marginRight="42px"
-                        tools:text="时间：2019-12-11" />
-
-                </LinearLayout>
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_status"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24px"
-                    app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
-            </LinearLayout>
-        </android.support.v4.widget.NestedScrollView>
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+        android:layout_below="@id/ll_statusTop"
+        android:layout_marginTop="24px"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
 
     <TextView
         android:id="@+id/tv_empty"
@@ -116,7 +101,8 @@
             android:layout_width="150px"
             android:layout_height="150px"
             android:layout_marginLeft="30px"
-            android:background="@drawable/ic_silence" />
+            android:background="@drawable/ic_silence"
+            android:visibility="gone" />
     </LinearLayout>
 
     <LinearLayout
@@ -131,10 +117,11 @@
         tools:visibility="visible">
 
         <ImageButton
-            android:id="@+id/ib_set"
+            android:id="@+id/ib_selfCheck"
             android:layout_width="150px"
             android:layout_height="150px"
-            android:background="@drawable/ic_setting" />
+            android:background="@drawable/ic_setting"
+            android:visibility="gone" />
 
         <ImageButton
             android:id="@+id/ib_revert"
@@ -144,11 +131,11 @@
             android:background="@drawable/ic_revert" />
 
         <ImageButton
-            android:id="@+id/ib_selfCheck"
+            android:id="@+id/ib_set"
             android:layout_width="150px"
             android:layout_height="150px"
             android:layout_marginLeft="30px"
-            android:background="@drawable/ic_self_check" />
+            android:background="@drawable/ic_set" />
 
     </LinearLayout>
 

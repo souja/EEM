@@ -158,23 +158,23 @@ public class ActMsgCenter extends BaseActEd {
         private String AlarmName;
         private String HappenTime;
         private String IsProcessed;
-        private String contactPhone;
-        private String deviceName;
+        private String Phone;
+        private String DeviceName;
 
         public String getDeviceName() {
-            return deviceName;
+            return DeviceName;
         }
 
         public void setDeviceName(String deviceName) {
-            this.deviceName = deviceName;
+            this.DeviceName = deviceName;
         }
 
-        public String getContactPhone() {
-            return contactPhone;
+        public String getPhone() {
+            return Phone;
         }
 
-        public void setContactPhone(String contactPhone) {
-            this.contactPhone = contactPhone;
+        public void setPhone(String phone) {
+            this.Phone = phone;
         }
 
         public int getTAlarmRecordId() {
@@ -261,13 +261,13 @@ public class ActMsgCenter extends BaseActEd {
             //设备编码
             mHolder.tvDeviceCode.setText(model.getDeviceCode());
             //联系电话
-            mHolder.tvContactPhone.setText(model.getContactPhone());
+            mHolder.tvContactPhone.setText(model.getPhone());
             //点击item提示是否拨打电话
             mHolder.tvContactPhone.setOnClickListener(view ->
-                    DialogFactory.NewDialog(mContext, null, "是否拨打电话：" + model.getContactPhone(),
+                    DialogFactory.NewDialog(mContext, null, "是否拨打电话：" + model.getPhone(),
                             "确定", (d, i) -> {
                                 d.dismiss();
-                                MTool.CallPhone(mContext, model.getContactPhone());
+                                MTool.CallPhone(mContext, model.getPhone());
                             }, "取消", (d, i) -> d.dismiss()).show());
             //点击item处理消息
             mHolder.itemView.setOnClickListener(view -> {

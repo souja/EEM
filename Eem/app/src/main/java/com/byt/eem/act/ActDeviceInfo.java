@@ -1,5 +1,6 @@
 package com.byt.eem.act;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -17,11 +18,11 @@ import com.byt.eem.base.BaseHolder;
 import com.byt.eem.util.HttpUtil;
 import com.byt.eem.util.MConstants;
 import com.byt.eem.widget.MCheckableImgView;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.souja.lib.base.MBaseAdapter;
 import com.souja.lib.inter.IHttpCallBack;
 import com.souja.lib.models.BaseModel;
 import com.souja.lib.models.ODataPage;
+import com.souja.lib.utils.DialogFactory;
 import com.souja.lib.utils.MTool;
 import com.souja.lib.widget.TitleBar;
 
@@ -30,6 +31,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.functions.Consumer;
 
 //设备参数信息
 public class ActDeviceInfo extends BaseAct {
@@ -42,8 +44,6 @@ public class ActDeviceInfo extends BaseAct {
     TextView tvEmpty;
     @BindView(R.id.rv_status)
     RecyclerView rvStatus;
-    @BindView(R.id.smartRefresh)
-    SmartRefreshLayout mRefreshLayout;
     @BindView(R.id.m_title)
     TitleBar mTitleBar;
     @BindView(R.id.ib_menu)
@@ -88,9 +88,6 @@ public class ActDeviceInfo extends BaseAct {
                         .putExtra("id", deviceId)));
         mAdapterStatus = new AdapterStatus(_this, new ArrayList<>());
         rvStatus.setAdapter(mAdapterStatus);
-        rvStatus.setNestedScrollingEnabled(false);
-        mRefreshLayout.setEnableLoadMore(false);
-        mRefreshLayout.setOnRefreshListener(s -> getDeviceInfo(true));
         initAnimation();
         initBtnListeners();
         ibMenu.setOnClickListener(view -> {
@@ -100,7 +97,9 @@ public class ActDeviceInfo extends BaseAct {
                 hideBtns();
             }
         });
-        getDeviceInfo(false);
+        Consumer update = s -> getDeviceInfo(false, false);
+        addAction(MConstants.RX_UPDATE_DEVICE_INFO, update);
+        getDeviceInfo(false,true);
     }
 
     private void initAnimation() {
@@ -143,13 +142,32 @@ public class ActDeviceInfo extends BaseAct {
     }
 
     private void initBtnListeners() {
-        ibSet.setOnClickListener(view -> NEXT(new Intent(_this, ActSet.class)
-                .putExtra("code", deviceCode)));
-        ibState.setOnClickListener(view -> getDeviceInfo(true));
-        ibRevert.setOnClickListener(view -> handleDevice("Reset"));//复位
-        ibOut.setOnClickListener(view -> handleDevice("TurnOff"));//脱扣
-        ibSilence.setOnClickListener(view -> handleDevice("Silence"));//消音
-        ibSelfCheck.setOnClickListener(view -> handleDevice("Check"));//自检
+        ibSet.setOnClickListener(view -> {//设置
+            if (mDeviceInfo == null) {
+                DialogFactory.SimpleDialog(_this, null, "获取设备信息失败，请点击\"状态\"更新数据后重试");
+                return;
+            }
+            NEXT(new Intent(_this, ActSet.class)
+                    .putExtra("status", mDeviceInfo.getState())
+                    .putExtra("code", deviceCode));
+        });
+        ibState.setOnClickListener(view -> getDeviceInfo(true,true));//状态->更新数据
+        ibRevert.setOnClickListener(view -> {//复位
+            if (mDeviceInfo == null) {
+                DialogFactory.SimpleDialog(_this, null, "获取设备信息失败，请点击\"状态\"更新数据后重试");
+                return;
+            }
+            handleDevice("Reset");
+        });
+        ibOut.setOnClickListener(view -> {//脱扣
+            if (mDeviceInfo == null) {
+                DialogFactory.SimpleDialog(_this, null, "获取设备信息失败，请点击\"状态\"更新数据后重试");
+                return;
+            }
+            handleDevice("TurnOff");
+        });
+//        ibSilence.setOnClickListener(view -> handleDevice("Silence"));//消音
+//        ibSelfCheck.setOnClickListener(view -> handleDevice("Check"));//自检
     }
 
     private void handleDevice(String flag) {
@@ -169,29 +187,13 @@ public class ActDeviceInfo extends BaseAct {
         });
     }
 
-  /*  private void getDeviceControl() {
-        Post(null, MConstants.URL.GET_HANDLE_PARAM + devicCode, HttpUtil.defaultParam(),
-                Object.class, new IHttpCallBack<Object>() {
-                    @Override
-                    public void OnSuccess(String msg, ODataPage page, ArrayList<Object> data) {
-
-                    }
-
-                    @Override
-                    public void OnFailure(String msg) {
-                        showToast(msg);
-                    }
-                });
-    }*/
-
-    private void getDeviceInfo(boolean refresh) {
-        Post(getDialog(), MConstants.URL.GET_DEVICES_STATE_BY_DEVICEID + deviceId,
+    private void getDeviceInfo(boolean refresh, boolean dialog) {
+        Post(dialog ? getDialog() : null, MConstants.URL.GET_DEVICES_STATE_BY_DEVICEID + deviceId,
                 HttpUtil.defaultParam(), DeviceInfo.class, new IHttpCallBack<DeviceInfo>() {
 
                     @Override
                     public void OnSuccess(String msg, ODataPage page, ArrayList<DeviceInfo> data) {
                         if (refresh) showToast("数据更新成功");
-                        mRefreshLayout.finishRefresh();
                         if (data.size() > 0) {
                             mDeviceInfo = data.get(0);
                         }
@@ -200,7 +202,6 @@ public class ActDeviceInfo extends BaseAct {
 
                     @Override
                     public void OnFailure(String msg) {
-                        mRefreshLayout.finishRefresh();
                         showToast(msg);
                     }
                 });
@@ -250,7 +251,7 @@ public class ActDeviceInfo extends BaseAct {
         }
     }
 
-    static class HolderStatus extends BaseHolder {
+    class HolderStatus extends BaseHolder {
 
         @BindView(R.id.tv_statusName)
         TextView tvStatusName;
