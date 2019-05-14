@@ -12,9 +12,13 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.byt.eem.R;
 import com.byt.eem.base.BaseActEd;
 import com.byt.eem.base.BaseHolder;
+import com.byt.eem.util.GlideUtil;
 import com.byt.eem.util.HttpUtil;
 import com.byt.eem.util.MConstants;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -26,7 +30,6 @@ import com.souja.lib.models.ODataPage;
 import com.souja.lib.widget.CircularImageView;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import butterknife.BindView;
@@ -95,7 +98,7 @@ public class ActDeviceList extends BaseActEd {
     }
 
     private void getList() {
-        Post(getDialog(),MConstants.URL.GET_DEVICES_BY_PROJECT + projectId,
+        Post(getDialog(), MConstants.URL.GET_DEVICES_BY_PROJECT + projectId,
                 HttpUtil.defaultParam(),
                 Device.class, new IHttpCallBack<Device>() {
 
@@ -157,6 +160,9 @@ public class ActDeviceList extends BaseActEd {
             }
             mHolder.tvAddress.setText(String.valueOf("地址  " + model.getDeployAdress()));
             mHolder.itemView.setOnClickListener(view -> mItemClickListener.onClick(position));
+            Glide.with(mContext)
+                    .load(model.getImageUrl())
+                    .into(mHolder.civIcon);
         }
 
         public void setDataList(List<Device> tempList) {
@@ -166,7 +172,7 @@ public class ActDeviceList extends BaseActEd {
         }
     }
 
-    static class HolderDevice extends BaseHolder {
+    class HolderDevice extends BaseHolder {
 
         @BindView(R.id.tv_number)
         TextView tvNumber;
@@ -209,6 +215,15 @@ public class ActDeviceList extends BaseActEd {
         private String State;
         private String OperateTime;
         private String DeployAdress;
+        private String ImageUrl;
+
+        public String getImageUrl() {
+            return ImageUrl;
+        }
+
+        public void setImageUrl(String imageUrl) {
+            ImageUrl = imageUrl;
+        }
 
         public int getProjectId() {
             return ProjectId;

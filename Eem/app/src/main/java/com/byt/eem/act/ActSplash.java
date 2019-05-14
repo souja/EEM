@@ -34,11 +34,11 @@ public class ActSplash extends AppCompatActivity {
         }
 
 
-        if (x.isDebug()) {
-            String userInfoStr = SPHelper.getString(MConstants.USERINFO_KEY);
-            LogUtil.e(userInfoStr);
-            checkUserInfo(userInfoStr);
-        } else
+//        if (x.isDebug()) {
+//            String userInfoStr = SPHelper.getString(MConstants.USERINFO_KEY);
+//            LogUtil.e(userInfoStr);
+//            checkUserInfo(userInfoStr);
+//        } else
             goLogin();
     }
 
