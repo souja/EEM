@@ -68,6 +68,7 @@
             android:hint="请输入"
             android:inputType="number"
             android:maxLength="8"
+            android:singleLine="true"
             android:textColor="@color/black_33"
             android:textSize="45px" />
     </LinearLayout>
@@ -97,6 +98,7 @@
             android:hint="请输入"
             android:inputType="number"
             android:maxLength="8"
+            android:singleLine="true"
             android:textColor="@color/black_33"
             android:textSize="45px" />
     </LinearLayout>
@@ -126,6 +128,7 @@
             android:hint="请输入"
             android:inputType="number"
             android:maxLength="8"
+            android:singleLine="true"
             android:textColor="@color/black_33"
             android:textSize="45px" />
     </LinearLayout>
@@ -155,6 +158,7 @@
             android:hint="请输入"
             android:inputType="number"
             android:maxLength="8"
+            android:singleLine="true"
             android:textColor="@color/black_33"
             android:textSize="45px" />
     </LinearLayout>
@@ -184,6 +188,7 @@
             android:hint="请输入"
             android:inputType="number"
             android:maxLength="8"
+            android:singleLine="true"
             android:textColor="@color/black_33"
             android:textSize="45px" />
     </LinearLayout>

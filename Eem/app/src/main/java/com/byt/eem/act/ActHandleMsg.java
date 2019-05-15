@@ -60,8 +60,12 @@ public class ActHandleMsg extends BaseAct {
         btnCancel.setOnClickListener(view -> finish());
 
         TimePickerDialog dialogTime = new TimePickerDialog(_this, (view, hourOfDay, minute) -> {
-            timeStr = hourOfDay + ":" + minute;
+            String h = hourOfDay < 10 ? "0" + hourOfDay : hourOfDay + "";
+            String m = minute < 10 ? "0" + minute : minute + "";
+
+            timeStr = h + ":" + m;
             LogUtil.e(timeStr);
+            tvDatetime.setText(dateStr + " " + timeStr);
         }, 0, 0, true);
         DatePickerDialog dialogDate = DialogFactory.getDatePickerDialog(_this, (view, year, monthOfYear, dayOfMonth) -> {
             String month, day;
@@ -77,6 +81,7 @@ public class ActHandleMsg extends BaseAct {
                 day = String.valueOf(dayOfMonth);
             }
             dateStr = String.valueOf(year) + "-" + month + "-" + day;
+            tvDatetime.setText(dateStr + " " + timeStr);
             LogUtil.e(dateStr);
             dialogTime.show();
         });
@@ -107,20 +112,21 @@ public class ActHandleMsg extends BaseAct {
         param.OperateTime = MDateUtils.getCurrentDateTime();
         param.ProcessDate = dateStr + " " + timeStr;
 
-        Post(MConstants.URL.PROCESS_ALARM_MSG, HttpUtil.formatParams(param.toString()), new IHttpCallBack() {
+        Post(getDialog(), MConstants.URL.PROCESS_ALARM_MSG, HttpUtil.formatParams(param.toString()),
+                new IHttpCallBack() {
 
-            @Override
-            public void OnSuccess(String msg, ODataPage page, ArrayList data) {
-                showToast("处理成功");
-                addSubscription(MConstants.RX_PROCESS_ALARM_MSG, "");
-                tvDatetime.postDelayed(() -> finish(), 100);
-            }
+                    @Override
+                    public void OnSuccess(String msg, ODataPage page, ArrayList data) {
+                        showToast("处理成功", 2000);
+                        addSubscription(MConstants.RX_PROCESS_ALARM_MSG, "");
+                        tvDatetime.postDelayed(() -> finish(), 100);
+                    }
 
-            @Override
-            public void OnFailure(String msg) {
-                showToast(msg);
-            }
-        });
+                    @Override
+                    public void OnFailure(String msg) {
+                        showToast(TextUtils.isEmpty(msg) ? "处理失败" : msg);
+                    }
+                });
     }
 
 

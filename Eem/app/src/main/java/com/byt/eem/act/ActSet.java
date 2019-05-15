@@ -96,7 +96,7 @@ public class ActSet extends BaseAct {
             return;
         }
 
-        String valStr2 = edValue1.getText().toString().trim();
+        String valStr2 = edValue2.getText().toString().trim();
         if (valStr2.isEmpty()) {
             showToast("请输入\"温度报警值\"");
             return;
@@ -107,7 +107,7 @@ public class ActSet extends BaseAct {
             return;
         }
 
-        String valStr3 = edValue1.getText().toString().trim();
+        String valStr3 = edValue3.getText().toString().trim();
         if (valStr3.isEmpty()) {
             showToast("请输入\"电流报警值\"");
             return;
@@ -119,7 +119,7 @@ public class ActSet extends BaseAct {
         }
 
 
-        String valStr4 = edValue1.getText().toString().trim();
+        String valStr4 = edValue4.getText().toString().trim();
         if (valStr4.isEmpty()) {
             showToast("请输入\"过电压报警值\"");
             return;
@@ -131,7 +131,7 @@ public class ActSet extends BaseAct {
         }
 
 
-        String valStr5 = edValue1.getText().toString().trim();
+        String valStr5 = edValue5.getText().toString().trim();
         if (valStr5.isEmpty()) {
             showToast("请输入\"欠电压报警值\"");
             return;
@@ -144,6 +144,7 @@ public class ActSet extends BaseAct {
 
 
         SetParam param = new SetParam();
+        param.Id = mDeviceParam.getId();
         param.LeakageThreshold = val1;
         param.TemperatureThreshold = val2;
         param.ElectricityThreshold = val3;
@@ -167,6 +168,7 @@ public class ActSet extends BaseAct {
     }
 
     class SetParam extends BaseModel {
+        int Id;//设备id
         int LeakageThreshold;//漏电
         int TemperatureThreshold;//温度
         int ElectricityThreshold;//电流

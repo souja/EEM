@@ -58,7 +58,10 @@ public class ActMsgCenter extends BaseActEd {
     @Override
     protected void initMain() {
         ButterKnife.bind(this);
-        Consumer handleOnProcessMsg = s -> mAdapter.handleItem();
+        Consumer handleOnProcessMsg = s -> {
+            LogUtil.e("update list");
+            mAdapter.handleItem();
+        };
         addAction(MConstants.RX_PROCESS_ALARM_MSG, handleOnProcessMsg);
         smartRefresh.setEnableLoadMore(false);
         smartRefresh.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
