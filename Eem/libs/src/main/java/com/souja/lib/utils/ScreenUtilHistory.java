@@ -8,12 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-//横屏使用
-public class ScreenUtilHor {
+public class ScreenUtilHistory {
 
     // Screen Params
-    public static final int BASE_SCREEN_WIDTH = 1920;
-//    public static final int BASE_SCREEN_HEIGHT = 1334;
+    public static final int BASE_SCREEN_WIDTH = 1080;
+    //    public static final int BASE_SCREEN_HEIGHT = 1334;
     public static float mScale = 1;
 //    public static float mScaleH = 1;
 
@@ -25,11 +24,12 @@ public class ScreenUtilHor {
 //    private static Context mContext;
     public static void setScale(Activity context) {
 //        mContext = context;
-        int height;
+        int width, height;
         DisplayMetrics displayMetrics = new DisplayMetrics();
         context.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        width = displayMetrics.widthPixels;
         height = displayMetrics.heightPixels;
-        mScale = (float) height / BASE_SCREEN_WIDTH;
+        mScale = (float) width / BASE_SCREEN_WIDTH;
 //        mScaleH = (float) height / BASE_SCREEN_HEIGHT;
     }
 

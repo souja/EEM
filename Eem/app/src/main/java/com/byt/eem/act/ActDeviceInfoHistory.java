@@ -2,16 +2,23 @@ package com.byt.eem.act;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.byt.eem.R;
 import com.byt.eem.base.BaseAct;
@@ -25,7 +32,10 @@ import com.souja.lib.models.ODataPage;
 import com.souja.lib.utils.DialogFactory;
 import com.souja.lib.utils.MDateUtils;
 import com.souja.lib.utils.MTool;
+import com.souja.lib.utils.ScreenUtil;
+import com.souja.lib.utils.ScreenUtilHistory;
 
+import org.xutils.common.Callback;
 import org.xutils.common.util.LogUtil;
 
 import java.util.ArrayList;
@@ -35,7 +45,7 @@ import butterknife.ButterKnife;
 
 //设备状态历史记录
 //测试数据获取：2019-1-1 19:50 2019-1-1 19:52
-public class ActDeviceInfoHistory extends BaseAct {
+public class ActDeviceInfoHistory extends AppCompatActivity {
 
     @BindView(R.id.ib_back)
     ImageButton ibBack;
@@ -68,33 +78,39 @@ public class ActDeviceInfoHistory extends BaseAct {
     private String dateStr1, timeStr1,//起始日期，时间
             dateStr2, timeStr2;//截至日期，时间
     private final String tag1 = "起始日期：", tag2 = "截至日期：";
+    private ActDeviceInfoHistory _this;
 
     @Override
-    protected int setupViewRes() {
-        return R.layout.act_device_info_history;
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ScreenUtilHistory.setScale(this);
+        _this = this;
+        View contentView = getLayoutInflater().inflate(R.layout.act_device_info_history, null);
+        ScreenUtilHistory.initScale(contentView);
+        setContentView(contentView);
+        initMain();
     }
 
-    @Override
-    protected void initMain() {
+    private void initMain() {
         ButterKnife.bind(this);
         deviceId = getIntent().getIntExtra("id", 0);
         ibBack.setOnClickListener(view -> finish());
         fragText = new FragHistoryDataText();
         fragChart1 = new FragHistoryDataChart();
         Bundle bd1 = new Bundle();
-        bd1.putInt("type",1);
+        bd1.putInt("type", 1);
         fragChart1.setArguments(bd1);
         fragChart2 = new FragHistoryDataChart();
         Bundle bd2 = new Bundle();
-        bd2.putInt("type",2);
+        bd2.putInt("type", 2);
         fragChart2.setArguments(bd2);
         fragChart3 = new FragHistoryDataChart();
         Bundle bd3 = new Bundle();
-        bd3.putInt("type",3);
+        bd3.putInt("type", 3);
         fragChart3.setArguments(bd3);
         fragChart4 = new FragHistoryDataChart();
         Bundle bd4 = new Bundle();
-        bd4.putInt("type",4);
+        bd4.putInt("type", 4);
         fragChart4.setArguments(bd4);
         MTool.reflex(tbMenu, 0, 69);
         vpData.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
@@ -203,8 +219,10 @@ public class ActDeviceInfoHistory extends BaseAct {
         LogUtil.e(oriText);
     }
 
+    private Callback.Cancelable reqGetData;
+
     private void getHistory() {
-        Post(getDialog(), MConstants.URL.GET_DEVICES_HISTORY_STATE,
+        reqGetData = HttpUtil.Post(getDialog(), MConstants.URL.GET_DEVICES_HISTORY_STATE,
                 HttpUtil.formatParams(new Param(deviceId, beginDateTime, endDateTime).toString()),
                 History.class, new IHttpCallBack<History>() {
 
@@ -214,7 +232,7 @@ public class ActDeviceInfoHistory extends BaseAct {
                             mPlaceHolder.setVisibility(View.VISIBLE);
                             vpData.setVisibility(View.INVISIBLE);
                             vpData.setEnabled(false);
-                        } else  {
+                        } else {
                             vpData.setVisibility(View.VISIBLE);
                             mPlaceHolder.setVisibility(View.INVISIBLE);
                             vpData.setEnabled(true);
@@ -392,5 +410,42 @@ public class ActDeviceInfoHistory extends BaseAct {
             this.beginTime = beginTime;
             this.endTime = endTime;
         }
+    }
+
+    protected AlertDialog _mDialog;
+    protected TextView _tvProgressTip;
+
+    public AlertDialog getDialog() {
+        createDialog(null);
+        return _mDialog;
+    }
+
+    public AlertDialog getDialog(String msg) {
+        createDialog(msg);
+        return _mDialog;
+    }
+
+    private void createDialog(@Nullable String msg) {
+        if (_mDialog == null) {
+            _mDialog = new AlertDialog.Builder(this, com.souja.lib.R.style.CustomProgressDialog).create();
+            View loadView = LayoutInflater.from(this).inflate(com.souja.lib.R.layout.m_dialog_new, null);
+            ScreenUtil.initScale(loadView);
+            _mDialog.setView(loadView, 0, 0, 0, 0);
+            _mDialog.setCanceledOnTouchOutside(false);
+            _tvProgressTip = loadView.findViewById(com.souja.lib.R.id.tvTip);
+        }
+        _tvProgressTip.setText(TextUtils.isEmpty(msg) ? "加载中..." : msg);
+    }
+
+    public void showToast(String msg) {
+        if (msg == null || msg.contains("onNext")) return;
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (reqGetData != null && !reqGetData.isCancelled()) reqGetData.cancel();
+        _this = null;
+        super.onDestroy();
     }
 }

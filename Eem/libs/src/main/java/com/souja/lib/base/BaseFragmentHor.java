@@ -22,7 +22,6 @@ import android.view.inputmethod.InputMethodManager;
 import com.souja.lib.utils.MGlobal;
 import com.souja.lib.utils.MTool;
 import com.souja.lib.utils.ScreenUtil;
-import com.souja.lib.utils.ScreenUtilHor;
 
 import org.xutils.common.Callback;
 
