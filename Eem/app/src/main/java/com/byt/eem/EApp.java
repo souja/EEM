@@ -93,7 +93,7 @@ public class EApp extends MultiDexApplication implements IExceptionHandler {
         SDKInitializer.setCoordType(CoordType.GCJ02);
 
         x.Ext.init(mContext);
-        x.Ext.setDebug(true);
+        x.Ext.setDebug(false);
         LogUtil.customTagPrefix = "【EEM_APP】";
 
         CrashReport.initCrashReport(mContext, "cf64f14ee4", x.isDebug());

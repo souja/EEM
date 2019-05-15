@@ -64,7 +64,7 @@ public class MConstants {
 
 
         //Rui Url↓
-        String GET_MY_PROJECTS = "/Operate/GetMyProject";
+        String GET_MY_PROJECTS = "/Operate/GetMyProject?userId=";
         String DELETE_PROJECT = "/Operate/DeleteProject?projectId=";
         //获取所有省份
         String GET_PROVINCES = "/ProjectAndDevice/GetProvinces";

@@ -75,29 +75,28 @@ class ActMyProjects : BaseAct(), ProjectAdapter.OnItemClickListener {
         findViewById<TitleBar>(R.id.m_title)?.setRightClick {
             ActNewProject.launch(_this, 1)
         }
-        Post(getDialog(), MConstants.URL.GET_MY_PROJECTS, MyProjectBean::class.java, object : IHttpCallBack<MyProjectBean> {
+        getList()
+    }
+
+    private fun getList() {
+        Post(getDialog(), MConstants.URL.GET_MY_PROJECTS + EApp.getUserInfo().id,
+                MyProjectBean::class.java, object : IHttpCallBack<MyProjectBean> {
             override fun OnSuccess(msg: String?, page: ODataPage?, data: ArrayList<MyProjectBean>?) {
                 mAdapter?.setData(data!!)
             }
 
             override fun OnFailure(msg: String?) {
+                showToast(msg)
             }
-
         })
+
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-            Post(getDialog(), MConstants.URL.GET_MY_PROJECTS, MyProjectBean::class.java, object : IHttpCallBack<MyProjectBean> {
-                override fun OnSuccess(msg: String?, page: ODataPage?, data: ArrayList<MyProjectBean>?) {
-                    mAdapter?.setData(data!!)
-                }
-
-                override fun OnFailure(msg: String?) {
-                }
-
-            })
+            getList()
         }
     }
 
