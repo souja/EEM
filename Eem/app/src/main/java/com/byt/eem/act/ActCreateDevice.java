@@ -12,11 +12,11 @@ import com.byt.eem.R;
 import com.byt.eem.base.BaseAct;
 import com.byt.eem.util.HttpUtil;
 import com.byt.eem.util.MConstants;
-import com.souja.lib.base.ActBase;
 import com.souja.lib.inter.IHttpCallBack;
 import com.souja.lib.models.BaseModel;
 import com.souja.lib.models.ODataPage;
 import com.souja.lib.utils.DialogFactory;
+import com.souja.lib.utils.MDateUtils;
 import com.souja.lib.widget.TitleBar;
 import com.weigan.loopview.LoopView;
 
@@ -56,8 +56,8 @@ public class ActCreateDevice extends BaseAct {
     TextView tvSimType;
     @BindView(R.id.tv_simStartTime)
     TextView tvSimStartTime;
-    @BindView(R.id.ed_simEffPeriodTime)
-    EditText edSimEffPeriodTime;
+    //    @BindView(R.id.ed_simEffPeriodTime)
+//    EditText edSimEffPeriodTime;
     @BindView(R.id.tv_simEndTime)
     TextView tvSimEndTime;
     @BindView(R.id.wheelView1)
@@ -127,7 +127,6 @@ public class ActCreateDevice extends BaseAct {
         //卡类型
         initSimTypeWheel();
         tvSimType.setOnClickListener(view -> simCardType.setVisibility(View.VISIBLE));
-        initDatePickers();
         //启用时间
         tvStartTime.setOnClickListener(view -> startDialog.show());
         //截止时间
@@ -138,6 +137,16 @@ public class ActCreateDevice extends BaseAct {
         tvSimEndTime.setOnClickListener(view -> simEndDialog.show());
         //保存数据
         ((TitleBar) findViewById(R.id.m_title)).setRightClick(view -> saveDeviceInfo());
+        String today = MDateUtils.getCurrentDate();
+        tvStartTime.setText(today);
+        tvSimStartTime.setText(today);
+        int year = Integer.parseInt(MDateUtils.getCurrentYear());
+        int yeara = year + 1;
+        String endDay = yeara + today.substring(4);
+        tvEndTime.setText(endDay);
+        tvSimEndTime.setText(endDay);
+        initDatePickers(year, Integer.parseInt(today.substring(5, 7)),
+                Integer.parseInt(today.substring(8)), yeara);
     }
 
     private void saveDeviceInfo() {
@@ -188,11 +197,11 @@ public class ActCreateDevice extends BaseAct {
             showToast("请选择卡激活日期");
             return;
         }
-        String effPeriod = edSimEffPeriodTime.getText().toString().trim();
-        if (effPeriod.isEmpty()) {
-            showToast("请输入有效期");
-            return;
-        }
+//        String effPeriod = edSimEffPeriodTime.getText().toString().trim();
+//        if (effPeriod.isEmpty()) {
+//            showToast("请输入有效期");
+//            return;
+//        }
         String seTime = tvSimEndTime.getText().toString();
         if (seTime.isEmpty()) {
             showToast("请选择卡截止日期");
@@ -223,7 +232,7 @@ public class ActCreateDevice extends BaseAct {
         param.setIotCardNo(simNo);
         param.setIotCardType(selectedSimTypeStr);
         param.setIotCardEnableDate(ssTime);
-        param.setIotCardValidDays(Integer.parseInt(effPeriod));
+//        param.setIotCardValidDays(Integer.parseInt(effPeriod));
         param.setIotCardDisableDate(seTime);
 
         Post(getDialog("数据保存中..."), MConstants.URL.GET_SAVE_DEVICE_INFO,
@@ -243,11 +252,11 @@ public class ActCreateDevice extends BaseAct {
     }
 
 
-    private void initDatePickers() {
-        startDialog = DialogFactory.getDatePickerDialog(_this, tvStartTime);
-        simStartDialog = DialogFactory.getDatePickerDialog(_this, tvSimStartTime);
-        endDialog = DialogFactory.getDatePickerDialog(_this, tvEndTime);
-        simEndDialog = DialogFactory.getDatePickerDialog(_this, tvSimEndTime);
+    private void initDatePickers(int year, int month, int day, int yeara) {
+        startDialog = DialogFactory.getDatePickerDialog(_this, tvStartTime, year, month, day);
+        simStartDialog = DialogFactory.getDatePickerDialog(_this, tvSimStartTime, year, month, day);
+        endDialog = DialogFactory.getDatePickerDialog(_this, tvEndTime, yeara, month, day);
+        simEndDialog = DialogFactory.getDatePickerDialog(_this, tvSimEndTime, yeara, month, day);
     }
 
     private void getUserProjects() {
@@ -409,7 +418,7 @@ public class ActCreateDevice extends BaseAct {
         private String IotCardNo;
         private String IotCardType;
         private String IotCardEnableDate;
-        private int IotCardValidDays;
+        //        private int IotCardValidDays;
         private String IotCardDisableDate;
 
         public String getDeviceCode() {
@@ -492,13 +501,13 @@ public class ActCreateDevice extends BaseAct {
             this.IotCardEnableDate = IotCardEnableDate;
         }
 
-        public int getIotCardValidDays() {
-            return IotCardValidDays;
-        }
-
-        public void setIotCardValidDays(int IotCardValidDays) {
-            this.IotCardValidDays = IotCardValidDays;
-        }
+//        public int getIotCardValidDays() {
+//            return IotCardValidDays;
+//        }
+//
+//        public void setIotCardValidDays(int IotCardValidDays) {
+//            this.IotCardValidDays = IotCardValidDays;
+//        }
 
         public String getIotCardDisableDate() {
             return IotCardDisableDate;

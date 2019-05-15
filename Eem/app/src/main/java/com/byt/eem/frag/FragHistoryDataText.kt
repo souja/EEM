@@ -73,6 +73,7 @@ class HistoryHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
         itemView.tv_be.text = history.bxelectricity + "A"
         itemView.tv_ce.text = history.cxelectricity + "A"
         itemView.tv_lou.text = history.firstLeakage + "mA"
+        itemView.tv_tmp1.text = history.firstChannelTemperature + "\u2103"
         itemView.tv_tmp2.text = history.secondChannelTemperature + "\u2103"
         itemView.tv_tmp3.text = history.thirdChannelTemperature + "\u2103"
         itemView.tv_tmp4.text = history.fourthChannelTemperature + "\u2103"

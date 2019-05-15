@@ -63,6 +63,16 @@ public class MDateUtils {
     /**
      * 当前日期
      *
+     * @return yyyy-MM-dd
+     */
+    public static String getCurrentDate() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        return formatter.format(new Date());
+    }
+
+    /**
+     * 当前日期
+     *
      * @return yyyyMMdd
      */
     public static String getCurrentDate1() {

@@ -80,7 +80,7 @@ public class DialogFactory {
         return popupWindow;
     }
 
-     public static DatePickerDialog getDatePickerDialog(Context context, TextView tvDate) {
+    public static DatePickerDialog getDatePickerDialog(Context context, TextView tvDate) {
         Calendar calendar = Calendar.getInstance(Locale.CHINA);
         DatePickerDialog dialog = new DatePickerDialog(context, (view, year, monthOfYear, dayOfMonth) -> {
             String month, day;
@@ -98,6 +98,27 @@ public class DialogFactory {
             String dateStr = String.valueOf(year) + "-" + month + "-" + day;
             tvDate.setText(dateStr);
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+
+        return dialog;
+    }
+
+    public static DatePickerDialog getDatePickerDialog(Context context, TextView tvDate, int yeara, int montha, int daya) {
+        DatePickerDialog dialog = new DatePickerDialog(context, (view, year, monthOfYear, dayOfMonth) -> {
+            String month, day;
+            monthOfYear++;
+            if (monthOfYear < 10) {
+                month = "0" + monthOfYear;
+            } else {
+                month = String.valueOf(monthOfYear);
+            }
+            if (dayOfMonth < 10) {
+                day = "0" + dayOfMonth;
+            } else {
+                day = String.valueOf(dayOfMonth);
+            }
+            String dateStr = String.valueOf(year) + "-" + month + "-" + day;
+            tvDate.setText(dateStr);
+        }, yeara, montha - 1, daya);
 
         return dialog;
     }
