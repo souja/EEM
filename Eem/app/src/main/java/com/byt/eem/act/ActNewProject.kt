@@ -78,12 +78,17 @@ class ActNewProject : BaseActEd() {
             }
             intent.hasExtra("data")
         }
-        findViewById<TitleBar>(R.id.m_title)?.setLeftClick {
-            onBackPressed()
+        findViewById<TitleBar>(R.id.m_title)?.apply {
+            if (mUpdate) {
+                setTitle("编辑项目")
+            }
+            setLeftClick {
+                onBackPressed()
+            }
         }
         tv_province.setOnClickListener {
             if (mProvinceList.isEmpty()) {
-                Post(getDialog(), MConstants.URL.GET_PROVINCES, ProvinceBean::class.java, object : IHttpCallBack<ProvinceBean> {
+                Post(dialog, MConstants.URL.GET_PROVINCES, ProvinceBean::class.java, object : IHttpCallBack<ProvinceBean> {
                     override fun OnSuccess(msg: String?, page: ODataPage?, data: java.util.ArrayList<ProvinceBean>?) {
                         if (data == null || data.isEmpty()) {
                             showToast("暂无数据")
@@ -151,7 +156,8 @@ class ActNewProject : BaseActEd() {
             if (TextUtils.isEmpty(mCityName) || mCountyId == -1) {
                 showToast("请先选择城市!")
             } else {
-                ActMap.launch(this, mCityName, 1, mPostProjectInfo?.latitude?.toDouble()?:0.0, mPostProjectInfo?.longitude?.toDouble()?:0.0)
+                ActMap.launch(this, mCityName, 1, mPostProjectInfo?.latitude?.toDouble()
+                        ?: 0.0, mPostProjectInfo?.longitude?.toDouble() ?: 0.0)
             }
         }
 
@@ -237,7 +243,7 @@ class ActNewProject : BaseActEd() {
             return false
         }
         mPostProjectInfo.contactName = et_contact.text.toString()
-        if (mProvinceId < 1 || mCityId <1 || mCountyId < 1 || mPostProjectInfo.address.isEmpty()) {
+        if (mProvinceId < 1 || mCityId < 1 || mCountyId < 1 || mPostProjectInfo.address.isEmpty()) {
             showToast("请输入项目地址")
             return false
         }
@@ -324,8 +330,8 @@ class ActNewProject : BaseActEd() {
             data?.getParcelableExtra<PoiInfo>("poi")?.let {
                 updateAddress(it.address)
                 mPostProjectInfo.address = it.address
-                mPostProjectInfo.latitude = it.location.latitude.toString().substring(0,9)
-                mPostProjectInfo.longitude = it.location.longitude.toString().substring(0,9)
+                mPostProjectInfo.latitude = it.location.latitude.toString().substring(0, 9)
+                mPostProjectInfo.longitude = it.location.longitude.toString().substring(0, 9)
             }
         }
     }

@@ -161,7 +161,7 @@ class ProjectAdapter : RecyclerView.Adapter<ProjectAdapter.ProjectHolder>() {
 
     fun delete(position: Int) {
         mDataList.removeAt(position)
-        notifyItemRemoved(position)
+        notifyDataSetChanged()
     }
 
     inner class ProjectHolder(view: View) : RecyclerView.ViewHolder(view) {
