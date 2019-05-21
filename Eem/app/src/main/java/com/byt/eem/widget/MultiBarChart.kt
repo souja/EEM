@@ -42,7 +42,13 @@ class MultiBarChart(private val chart: BarChart) : IChart {
         xAxis.position = XAxis.XAxisPosition.BOTTOM
         xAxis.valueFormatter = object : ValueFormatter() {
             override fun getFormattedValue(value: Float): String {
-                return data[value.toInt()].operateTime.substring(data[value.toInt()].operateTime.lastIndexOf("T") + 1, data[value.toInt()].operateTime.lastIndexOf("T") + 6)
+                var v = 0
+                when {
+                    value.toInt() > data.size -> return ""
+                    value.toInt() == data.size -> v = data.size - 1
+                    value.toInt() > 0 -> v = value.toInt() - 1
+                }
+                return data[v].operateTime.substring(data[v].operateTime.lastIndexOf("T") + 1, data[v].operateTime.lastIndexOf("T") + 6)
             }
         }
         val leftAxis = chart.axisLeft
@@ -62,6 +68,7 @@ class MultiBarChart(private val chart: BarChart) : IChart {
         val values1 = ArrayList<BarEntry>()
         val values2 = ArrayList<BarEntry>()
         val values3 = ArrayList<BarEntry>()
+        val values4 = ArrayList<BarEntry>()
         for (i in 0 until data.size) {
             when (type) {
                 2 -> {
@@ -75,16 +82,17 @@ class MultiBarChart(private val chart: BarChart) : IChart {
                     values3.add(BarEntry(i.toFloat(), data[i].commonCxVoltage.toFloat() + 38f))
                 }
                 4 -> {
-                    values1.add(BarEntry(i.toFloat(), data[i].secondChannelTemperature.toFloat() + 38f))
-                    values2.add(BarEntry(i.toFloat(), data[i].thirdChannelTemperature.toFloat() + 38f))
-                    values3.add(BarEntry(i.toFloat(), data[i].fourthChannelTemperature.toFloat() + 38f))
-
+                    values1.add(BarEntry(i.toFloat(), data[i].firstChannelTemperature.toFloat() + 38f))
+                    values2.add(BarEntry(i.toFloat(), data[i].secondChannelTemperature.toFloat() + 38f))
+                    values3.add(BarEntry(i.toFloat(), data[i].thirdChannelTemperature.toFloat() + 38f))
+                    values4.add(BarEntry(i.toFloat(), data[i].fourthChannelTemperature.toFloat() + 38f))
                 }
             }
         }
         val set1: BarDataSet
         val set2: BarDataSet
         val set3: BarDataSet
+        var set4: BarDataSet? = null
         if (chart.data != null && chart.data.dataSetCount > 0) {
 
             set1 = chart.data.getDataSetByIndex(0) as BarDataSet
@@ -93,6 +101,10 @@ class MultiBarChart(private val chart: BarChart) : IChart {
             set1.values = values1
             set2.values = values2
             set3.values = values3
+            if (type == 4) {
+                set4 = chart.data.getDataSetByIndex(3) as BarDataSet
+                set4.values = values4
+            }
             chart.data.notifyDataChanged()
             chart.notifyDataSetChanged()
 
@@ -109,17 +121,24 @@ class MultiBarChart(private val chart: BarChart) : IChart {
                     set3 = BarDataSet(values3, "C相电压")
                 }
                 else -> {
-                    set1 = BarDataSet(values1, "2路温度")
-                    set2 = BarDataSet(values2, "3路温度")
-                    set3 = BarDataSet(values3, "4路温度")
+                    set1 = BarDataSet(values1, "1路温度")
+                    set2 = BarDataSet(values2, "2路温度")
+                    set3 = BarDataSet(values3, "3路温度")
+                    set4 = BarDataSet(values4, "4路温度")
                 }
             }
             // create 4 DataSets
             set1.color = Color.rgb(104, 241, 175)
             set2.color = Color.rgb(164, 228, 251)
             set3.color = Color.rgb(242, 247, 158)
+            val chartData: BarData
+            if (type == 4) {
+                set4!!.color = Color.rgb(180, 237, 128)
+                chartData = BarData(set1, set2, set3, set4)
+            } else {
+                chartData = BarData(set1, set2, set3)
+            }
 
-            val chartData = BarData(set1, set2, set3)
             chartData.setValueFormatter(LargeValueFormatter())
             chart.data = chartData
         }
