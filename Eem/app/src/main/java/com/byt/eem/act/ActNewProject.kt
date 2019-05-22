@@ -80,7 +80,7 @@ class ActNewProject : BaseActEd() {
         }
         findViewById<TitleBar>(R.id.m_title)?.apply {
             if (mUpdate) {
-                setTitle("编辑项目")
+                title = "编辑项目"
             }
             setLeftClick {
                 onBackPressed()

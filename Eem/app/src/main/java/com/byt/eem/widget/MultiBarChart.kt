@@ -55,8 +55,8 @@ class MultiBarChart(private val chart: BarChart) : IChart {
         leftAxis.axisMinimum = 0f // this replaces setStartAtZero(true)
         leftAxis.axisMaximum = when (type) {
             2 -> 86f
-            3 -> if (data[0].commonAxVoltage.toFloat() <= 0) 86f else data[0].commonAxVoltage.toFloat() + 38f
-            else -> if (data[0].secondChannelTemperature.toFloat() <= 0) 86f else data[0].secondChannelTemperature.toFloat() + 60f
+            3 -> if (data[0].commonAxVoltage.toFloat() <= 0) 86f else data[0].commonAxVoltage.toFloat() + 80f
+            else -> if (data[0].secondChannelTemperature.toFloat() <= 0) 86f else Math.abs(data[0].secondChannelTemperature.toFloat()) + 60f
         }
         leftAxis.labelCount = 10
         leftAxis.setDrawAxisLine(true)
@@ -139,7 +139,12 @@ class MultiBarChart(private val chart: BarChart) : IChart {
                 chartData = BarData(set1, set2, set3)
             }
 
-            chartData.setValueFormatter(LargeValueFormatter())
+//            chartData.setValueFormatter(LargeValueFormatter())
+            chartData.setValueFormatter(object : ValueFormatter() {
+                override fun getFormattedValue(value: Float): String {
+                    return String.format("%.1f", value - 38f)
+                }
+            })
             chart.data = chartData
         }
         // specify the width each bar should have
