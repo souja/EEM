@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/smartRefresh"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/page_bg"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="120px"
+            android:background="@color/white"
+            android:gravity="center">
+
+            <TextView
+                style="@style/text_45px"
+                android:text="搜索" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="375px">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="264px"
+                android:background="@drawable/ic_home_banner" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="189px"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="45px"
+                android:layout_marginRight="45px"
+                android:layout_marginBottom="15px"
+                app:cardCornerRadius="5dp">
+
+                <RelativeLayout
+                    android:layout_width="330px"
+                    android:layout_height="match_parent"
+                    android:paddingTop="36px">
+
+                    <ImageView
+                        android:layout_width="45px"
+                        android:layout_height="45px"
+                        android:layout_marginLeft="45px"
+                        android:layout_marginTop="6px"
+                        android:background="@drawable/ic_online_equip" />
+
+                    <TextView
+                        android:id="@+id/tv_onlineEquipCount"
+                        style="@style/text_51px"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="99px"
+                        android:layout_marginRight="24px"
+                        android:singleLine="true"
+                        android:text="0"
+                        android:textColor="@android:color/holo_purple"
+                        android:textStyle="bold"
+                        tools:text="1234567" />
+
+                    <TextView
+                        style="@style/text_36px"
+                        android:layout_below="@id/tv_onlineEquipCount"
+                        android:layout_marginLeft="99px"
+                        android:layout_marginTop="12px"
+                        android:text="在线设备" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="2px"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="330px"
+                    android:layout_marginTop="45px"
+                    android:layout_marginBottom="45px"
+                    android:background="@color/grey_pressed" />
+
+                <RelativeLayout
+                    android:layout_width="330px"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingTop="36px">
+
+                    <ImageView
+                        android:layout_width="48px"
+                        android:layout_height="48px"
+                        android:layout_marginLeft="45px"
+                        android:layout_marginTop="6px"
+                        android:background="@drawable/ic_offline_equip" />
+
+                    <TextView
+                        android:id="@+id/tv_offlineEquipCount"
+                        style="@style/text_51px"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="99px"
+                        android:layout_marginRight="24px"
+                        android:singleLine="true"
+                        android:text="0"
+                        android:textColor="@android:color/holo_orange_light"
+                        android:textStyle="bold"
+                        tools:text="1234567" />
+
+                    <TextView
+                        style="@style/text_36px"
+                        android:layout_below="@id/tv_offlineEquipCount"
+                        android:layout_marginLeft="102px"
+                        android:layout_marginTop="12px"
+                        android:text="离线设备" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="2px"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="660px"
+                    android:layout_marginTop="45px"
+                    android:layout_marginBottom="45px"
+                    android:background="@color/grey_pressed" />
+
+
+                <RelativeLayout
+                    android:layout_width="330px"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:paddingTop="36px">
+
+                    <ImageView
+                        android:layout_width="60px"
+                        android:layout_height="45px"
+                        android:layout_marginLeft="39px"
+                        android:layout_marginTop="6px"
+                        android:background="@drawable/ic_warning" />
+
+                    <TextView
+                        android:id="@+id/tv_warningEquipCount"
+                        style="@style/text_51px"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="102px"
+                        android:layout_marginRight="6px"
+                        android:singleLine="true"
+                        android:text="0"
+                        android:textColor="@android:color/holo_red_light"
+                        android:textStyle="bold"
+                        tools:text="1234567" />
+
+                    <TextView
+                        style="@style/text_36px"
+                        android:layout_below="@id/tv_warningEquipCount"
+                        android:layout_marginLeft="102px"
+                        android:layout_marginTop="12px"
+                        android:text="报警设备" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ViewFlipper
+                android:id="@+id/flipper"
+                android:layout_width="match_parent"
+                android:layout_height="150px"
+                android:layout_marginTop="18px"
+                android:background="@color/white"
+                android:flipInterval="3000"
+                android:inAnimation="@anim/push_up_in"
+                android:outAnimation="@anim/push_up_out"
+                android:persistentDrawingCache="animation">
+
+                <RelativeLayout
+                    android:id="@+id/layout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="36px"
+                    android:paddingTop="27px"
+                    android:paddingRight="36px">
+
+                    <ImageView
+                        android:layout_width="57px"
+                        android:layout_height="42px"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/ic_notice" />
+
+                    <TextView
+                        android:id="@+id/tv_warningType1"
+                        style="@style/text_36px"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/red_border"
+                        tools:text="掉线报警" />
+
+                    <TextView
+                        android:id="@+id/tv_equipName1"
+                        style="@style/text_45px"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="90px"
+                        android:layout_marginRight="24px"
+                        android:layout_toLeftOf="@id/tv_warningType1"
+                        android:singleLine="true"
+                        tools:text="0012019-03-14T11:14:45设备" />
+
+                    <ImageView
+                        android:layout_width="24px"
+                        android:layout_height="30px"
+                        android:layout_below="@id/tv_equipName1"
+                        android:layout_marginLeft="90px"
+                        android:layout_marginTop="9px"
+                        android:background="@drawable/ic_loc_black_s" />
+
+                    <TextView
+                        android:id="@+id/tv_equipLoc1"
+                        style="@style/text_30px"
+                        android:layout_below="@id/tv_equipName1"
+                        android:layout_marginLeft="120px"
+                        android:layout_marginTop="6px"
+                        tools:text="岳池创新创业园岳池设备" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="36px"
+                    android:paddingTop="27px"
+                    android:paddingRight="36px">
+
+                    <ImageView
+                        android:layout_width="57px"
+                        android:layout_height="42px"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/ic_notice" />
+
+                    <TextView
+                        android:id="@+id/tv_warningType2"
+                        style="@style/text_36px"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/red_border"
+                        tools:text="掉线报警" />
+
+                    <TextView
+                        android:id="@+id/tv_equipName2"
+                        style="@style/text_45px"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="90px"
+                        android:layout_marginRight="24px"
+                        android:layout_toLeftOf="@id/tv_warningType2"
+                        android:singleLine="true"
+                        tools:text="0012019-03-14T11:14:45设备" />
+
+                    <ImageView
+                        android:layout_width="24px"
+                        android:layout_height="30px"
+                        android:layout_below="@id/tv_equipName2"
+                        android:layout_marginLeft="90px"
+                        android:layout_marginTop="9px"
+                        android:background="@drawable/ic_loc_black_s" />
+
+                    <TextView
+                        android:id="@+id/tv_equipLoc2"
+                        style="@style/text_30px"
+                        android:layout_below="@id/tv_equipName2"
+                        android:layout_marginLeft="120px"
+                        android:layout_marginTop="6px"
+                        tools:text="岳池创新创业园岳池设备" />
+                </RelativeLayout>
+
+            </ViewFlipper>
+
+            <TextView
+                android:id="@+id/tv_empty"
+                style="@style/matchParent"
+                android:background="@color/white"
+                android:gravity="center"
+                android:text="暂无报警设备"
+                android:textColor="@color/grey_80"
+                android:textSize="42px" />
+        </FrameLayout>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_projects"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="36px"
+            android:background="@drawable/shape_home_item"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+    </LinearLayout>
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>

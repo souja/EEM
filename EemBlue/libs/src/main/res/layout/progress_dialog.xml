@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <ProgressBar
+            android:layout_width="81px"
+            android:layout_height="81px"
+            android:indeterminate="false"
+            android:indeterminateDuration="1000" />
+
+        <TextView
+            android:id="@+id/content"
+            style="@style/text_common"
+            android:layout_marginLeft="36px"
+            android:text="请稍候..."
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+
+</LinearLayout>

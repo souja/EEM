@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tv_time"
+        style="@style/text_24px"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingLeft="6px"
+        android:paddingTop="16px"
+        android:paddingRight="6px"
+        android:paddingBottom="16px"
+        android:text="时间"
+        android:textColor="#000" />
+
+    <TextView
+        android:id="@+id/tv_av"
+        style="@style/text_24px"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingLeft="6px"
+        android:paddingTop="16px"
+        android:paddingRight="6px"
+        android:paddingBottom="16px"
+        android:text="A相电压"
+        android:textColor="#000" />
+
+    <TextView
+        android:id="@+id/tv_bv"
+        style="@style/text_24px"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingLeft="6px"
+        android:paddingTop="16px"
+        android:paddingRight="6px"
+        android:paddingBottom="16px"
+        android:text="B相电压"
+        android:textColor="#000" />
+
+    <TextView
+        android:id="@+id/tv_cv"
+        style="@style/text_24px"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingLeft="6px"
+        android:paddingTop="16px"
+        android:paddingRight="6px"
+        android:paddingBottom="16px"
+        android:text="C相电压"
+        android:textColor="#000" />
+
+    <TextView
+        android:id="@+id/tv_ae"
+        style="@style/text_24px"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingLeft="6px"
+        android:paddingTop="16px"
+        android:paddingRight="6px"
+        android:paddingBottom="16px"
+        android:text="A相电流"
+        android:textColor="#000" />
+
+    <TextView
+        android:id="@+id/tv_be"
+        style="@style/text_24px"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingLeft="6px"
+        android:paddingTop="16px"
+        android:paddingRight="6px"
+        android:paddingBottom="16px"
+        android:text="B相电流"
+        android:textColor="#000" />
+
+    <TextView
+        android:id="@+id/tv_ce"
+        style="@style/text_24px"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingLeft="6px"
+        android:paddingTop="16px"
+        android:paddingRight="6px"
+        android:paddingBottom="16px"
+        android:text="C相电流"
+        android:textColor="#000" />
+
+    <TextView
+        android:id="@+id/tv_lou"
+        style="@style/text_24px"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingLeft="6px"
+        android:paddingTop="16px"
+        android:paddingRight="6px"
+        android:paddingBottom="16px"
+        android:text="漏电流"
+        android:textColor="#000" />
+
+    <TextView
+        android:id="@+id/tv_tmp1"
+        style="@style/text_24px"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingLeft="6px"
+        android:paddingTop="16px"
+        android:paddingRight="6px"
+        android:paddingBottom="16px"
+        android:text="1路温度"
+        android:textColor="#000" />
+
+    <TextView
+        android:id="@+id/tv_tmp2"
+        style="@style/text_24px"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingLeft="6px"
+        android:paddingTop="16px"
+        android:paddingRight="6px"
+        android:paddingBottom="16px"
+        android:text="2路温度"
+        android:textColor="#000" />
+
+    <TextView
+        android:id="@+id/tv_tmp3"
+        style="@style/text_24px"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingLeft="6px"
+        android:paddingTop="16px"
+        android:paddingRight="6px"
+        android:paddingBottom="16px"
+        android:text="3路温度"
+        android:textColor="#000" />
+
+    <TextView
+        android:id="@+id/tv_tmp4"
+        style="@style/text_24px"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingLeft="6px"
+        android:paddingTop="16px"
+        android:paddingRight="6px"
+        android:paddingBottom="16px"
+        android:text="4路温度"
+        android:textColor="#000" />
+
+</LinearLayout>

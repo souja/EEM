@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="174px"
+        android:paddingLeft="45px"
+        android:paddingTop="36px"
+        android:paddingRight="36px">
+
+        <ImageView
+            android:layout_width="30px"
+            android:layout_height="39px"
+            android:layout_marginTop="6px"
+            android:background="@drawable/ic_loc_purple" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            style="@style/text_45px"
+            android:layout_marginLeft="54px"
+            android:text="军区总医院"
+            android:textStyle="bold" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_number"
+            style="@style/text_36px"
+            android:layout_below="@id/tv_name"
+            android:layout_marginLeft="54px"
+            android:layout_marginTop="15px"
+            android:text="项目编号：091828918-1001"
+            android:textColor="@color/black_38" />
+
+        <TextView
+            android:id="@+id/tv_count"
+            style="@style/text_36px"
+            android:layout_below="@id/tv_number"
+            android:layout_marginLeft="54px"
+            android:layout_marginTop="15px"
+            android:text="报警次数：12345678次"
+            android:textColor="@android:color/holo_orange_dark" />
+
+        <View
+            android:id="@+id/v_bot"
+            style="@style/lineEb"
+            android:layout_height="3px"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="54px" />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/v_temp"
+        style="@style/lineEb"
+        android:layout_height="3px" />
+</LinearLayout>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        style="@style/lineEb"
+        android:background="@color/line_dc" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="180px"
+        android:background="@color/white"
+        android:paddingLeft="36px"
+        android:paddingTop="36px"
+        android:paddingRight="36px">
+
+        <ImageView
+            android:id="@+id/iv_temp"
+            android:layout_width="119px"
+            android:layout_height="111px"
+            android:layout_marginRight="36px"
+            android:background="@drawable/ic_msg_type" />
+
+        <TextView
+            android:id="@+id/tv_msgType"
+            style="@style/text_48px"
+            android:layout_toRightOf="@id/iv_temp"
+            android:text="告警消息" />
+
+        <TextView
+            android:id="@+id/tv_msgTime"
+            style="@style/text_36px"
+            android:layout_below="@id/tv_msgType"
+            android:layout_marginTop="12px"
+            android:layout_marginBottom="21px"
+            android:layout_toRightOf="@id/iv_temp"
+            android:text="报警时间:2019-11-11-12:00" />
+
+        <ImageView
+            android:layout_width="30px"
+            android:visibility="gone"
+            android:layout_height="39px"
+            android:layout_below="@id/tv_msgTime"
+            android:layout_toRightOf="@id/iv_temp"
+            android:background="@drawable/ic_loc_purple" />
+
+        <TextView
+            style="@style/text_36px"
+            android:visibility="gone"
+            android:layout_below="@id/tv_msgTime"
+            android:layout_marginLeft="45px"
+            android:layout_toRightOf="@id/iv_temp"
+            android:text="报警地点：岳池" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/shape_warn_count"
+            android:gravity="center_vertical"
+            android:paddingLeft="15px"
+            android:paddingTop="6px"
+            android:paddingRight="15px"
+            android:paddingBottom="6px">
+
+            <ImageView
+                android:layout_width="39px"
+                android:layout_height="30px"
+                android:scaleType="center"
+                android:src="@drawable/ic_notice_white" />
+
+            <TextView
+                android:id="@+id/tv_msgCount"
+                style="@style/text_33px"
+                android:layout_marginLeft="9px"
+                android:text="0"
+                android:textColor="@color/white"
+                tools:text="123" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <View
+        style="@style/lineEb"
+        android:layout_marginBottom="24px"
+        android:background="@color/line_dc" />
+</LinearLayout>

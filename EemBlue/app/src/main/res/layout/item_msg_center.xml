@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36px">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="36px"
+            android:layout_weight="1">
+
+            <TextView
+                style="@style/text_36px"
+                android:text="设备名称："
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_deviceType"
+                style="@style/text_36px"
+                android:singleLine="true"
+                android:textColor="@color/grey_66"
+                tools:text="测试名称" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15px"
+            android:layout_marginRight="36px"
+            android:layout_weight="1">
+
+            <TextView
+                style="@style/text_36px"
+                android:text="故障名称："
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_errName"
+                style="@style/text_36px"
+                android:singleLine="true"
+                android:textColor="@android:color/holo_red_dark"
+                tools:text="漏电告警" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15px">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="36px"
+            android:layout_weight="1">
+
+            <TextView
+                style="@style/text_36px"
+                android:text="设备编码："
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_deviceCode"
+                style="@style/text_36px"
+                android:singleLine="true"
+                android:textColor="@color/grey_66"
+                tools:text="asdf1234" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15px"
+            android:layout_marginRight="36px"
+            android:layout_weight="1">
+
+            <TextView
+                style="@style/text_36px"
+                android:text="处理状态："
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_handleStatus"
+                style="@style/text_36px"
+                android:singleLine="true"
+                android:textColor="@android:color/holo_orange_dark"
+                tools:text="未处理" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15px">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="36px"
+            android:layout_weight="1">
+
+            <TextView
+                style="@style/text_36px"
+                android:text="安装地址："
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_installAddress"
+                style="@style/text_36px"
+                android:singleLine="true"
+                android:textColor="@color/grey_66"
+                tools:text="神仙树" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15px"
+            android:layout_marginRight="36px"
+            android:layout_weight="1">
+
+            <TextView
+                style="@style/text_36px"
+                android:text="联系电话："
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_contactPhone"
+                style="@style/text_36px"
+                android:singleLine="true"
+                android:textColor="@color/grey_66"
+                tools:text="13344445555" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="36px"
+        android:layout_marginTop="15px">
+
+        <TextView
+            style="@style/text_36px"
+            android:text="发生时间："
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tv_occurTime"
+            style="@style/text_36px"
+            android:singleLine="true"
+            android:textColor="@color/grey_66"
+            tools:text="2011-11-11 11:11" />
+    </LinearLayout>
+
+
+    <View
+        style="@style/lineDc"
+        android:layout_marginTop="30px" />
+</LinearLayout>

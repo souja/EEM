@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/page_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="81px"
+        android:background="@color/white">
+
+        <ImageButton
+            android:id="@+id/ib_back"
+            style="@style/title_img_btn_style_hor"
+            android:src="@drawable/icon_back" />
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tb_menu"
+            style="@style/historyTab"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15px" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12px">
+
+        <LinearLayout
+            android:id="@+id/ll_chooseDate1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:padding="15px">
+
+            <ImageView
+                android:layout_width="21px"
+                android:layout_height="24px"
+                android:layout_marginLeft="30px"
+                android:background="@drawable/ic_calendar" />
+
+            <TextView
+                android:id="@+id/tv_date1"
+                style="@style/text_24px"
+                android:layout_marginLeft="6px"
+                android:text="起始日期：2018-11-12 00:00"
+                tools:text="起始日期：2018-11-12 00:00" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_chooseDate2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:padding="15px">
+
+            <ImageView
+                android:layout_width="21px"
+                android:layout_height="24px"
+                android:layout_marginLeft="30px"
+                android:background="@drawable/ic_calendar" />
+
+            <TextView
+                android:id="@+id/tv_date2"
+                style="@style/text_24px"
+                android:layout_marginLeft="6px"
+                android:text="截止日期：2018-11-12 23:59"
+                tools:text="截止日期：2018-11-12 23:59" />
+        </LinearLayout>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_confirm"
+            android:layout_width="135px"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
+            android:background="@drawable/main_grey_radius_btn_bg_selector"
+            android:text="确定"
+            android:textColor="@color/white"
+            android:textSize="24px" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_data"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:id="@+id/layout_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="暂无数据"
+                android:layout_marginRight="15px"
+                android:layout_marginTop="15px"
+                android:textColor="@color/grey_80"
+                android:textSize="36px" />
+        </LinearLayout>
+
+    </FrameLayout>
+</LinearLayout>

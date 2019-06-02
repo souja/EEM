@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="210px"
+        android:paddingRight="42px">
+
+        <TextView
+            android:id="@+id/tv_sortNumber"
+            android:layout_width="72px"
+            android:layout_height="72px"
+            android:layout_centerVertical="true"
+            android:background="@drawable/shape_number_bg"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="01"
+            android:textColor="@color/black_33"
+            android:textSize="33px" />
+
+        <ImageView
+            android:layout_width="150px"
+            android:layout_height="150px"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="99px"
+            android:src="@drawable/ic_loc" />
+
+        <TextView
+            android:id="@+id/tv_areaName"
+            style="@style/text_51px"
+            android:layout_marginLeft="270px"
+            android:layout_marginTop="36px"
+            android:text="四川"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_totalProjects"
+            style="@style/text_39px"
+            android:layout_marginLeft="15px"
+            android:layout_marginTop="45px"
+            android:layout_toRightOf="@id/tv_areaName"
+            android:text="共9个项目" />
+
+        <ImageView
+            android:layout_width="30px"
+            android:layout_height="51px"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="36px"
+            android:background="@drawable/ic_arrow_51" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_areaName"
+            android:layout_marginLeft="270px"
+            android:layout_marginTop="36px">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="33px"
+                    android:layout_height="33px"
+                    android:background="@drawable/ic_online" />
+
+                <TextView
+                    android:id="@+id/tv_onlineCount"
+                    style="@style/text_33px"
+                    android:layout_marginLeft="6px"
+                    android:text="在线  123" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="33px"
+                    android:layout_height="33px"
+                    android:background="@drawable/ic_offline_equip" />
+
+                <TextView
+                    android:id="@+id/tv_offlineCount"
+                    style="@style/text_33px"
+                    android:layout_marginLeft="6px"
+                    android:text="离线  123" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="45px"
+                    android:layout_height="33px"
+                    android:background="@drawable/ic_warning" />
+
+                <TextView
+                    android:id="@+id/tv_warnCount"
+                    style="@style/text_33px"
+                    android:layout_marginLeft="6px"
+                    android:text="报警  123" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/v_bot"
+        style="@style/lineEb" />
+</LinearLayout>

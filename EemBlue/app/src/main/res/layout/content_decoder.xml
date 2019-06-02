@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.dlazaro66.qrcodereaderview.QRCodeReaderView
+        android:id="@+id/qrDecoderView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
+
+    <TextView
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="480px"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="#55000000"
+        android:gravity="center"
+        android:padding="16dp"
+        android:textColor="#ffffff"
+        android:textSize="14sp" />
+
+
+    <CheckBox
+        android:id="@+id/flashlight_checkbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#99000000"
+        android:padding="45px"
+        android:text="打开/关闭 闪光灯"
+        android:textColor="#ffffff"
+        android:textSize="42px" />
+
+    <CheckBox
+        android:id="@+id/enable_decoding_checkbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/flashlight_checkbox"
+        android:background="#99000000"
+        android:checked="true"
+        android:padding="16dp"
+        android:text="On/Off QR decoding"
+        android:textColor="#ffffff"
+        android:textSize="14sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/bot"
+        android:layout_width="match_parent"
+        android:layout_height="450px"
+        android:layout_above="@id/flashlight_checkbox"
+        android:background="#55000000"
+        android:gravity="center"
+        android:textColor="#ffffff" />
+
+    <View
+        android:layout_width="120px"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bot"
+        android:layout_below="@id/top"
+        android:background="#55000000" />
+
+    <View
+        android:layout_width="120px"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bot"
+        android:layout_below="@id/top"
+        android:layout_alignParentRight="true"
+        android:background="#55000000" />
+
+    <com.souja.lib.widget.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:mBgColor="@color/transparent"
+        app:mLeftSrc="@drawable/ic_back_white"
+        app:mNoLine="true"
+        app:mRightText="手动输入"
+        app:mRightTextColor="@color/white"
+        app:mTitle="扫一扫"
+        app:mTitleColor="@color/white" />
+</RelativeLayout>

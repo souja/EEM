@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/page_bg"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/text_54px"
+        android:layout_width="match_parent"
+        android:layout_height="129px"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/white"
+        android:gravity="center"
+        android:text="个人中心" />
+
+    <View
+        style="@style/lineDc"
+        android:layout_marginTop="36px" />
+
+    <LinearLayout
+        android:id="@+id/scan"
+        android:layout_width="match_parent"
+        android:layout_height="144px"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="66px"
+            android:layout_height="66px"
+            android:layout_marginLeft="42px"
+            android:background="@drawable/ic_scan_mine" />
+
+        <TextView
+            style="@style/text_48px"
+            android:layout_marginLeft="36px"
+            android:layout_weight="1"
+            android:text="扫一扫" />
+
+        <ImageView
+            android:layout_width="27px"
+            android:layout_height="45px"
+            android:layout_marginRight="42px"
+            android:background="@drawable/ic_arrow_51" />
+    </LinearLayout>
+
+    <View style="@style/lineDc" />
+
+
+    <View
+        style="@style/lineDc"
+        android:visibility="gone"
+        android:layout_marginTop="36px" />
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/addDevice"
+        android:layout_width="match_parent"
+        android:layout_height="144px"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="72px"
+            android:layout_height="72px"
+            android:layout_marginLeft="42px"
+            android:background="@mipmap/ic_launcher" />
+
+        <TextView
+            style="@style/text_48px"
+            android:layout_marginLeft="36px"
+            android:layout_weight="1"
+            android:text="添加设备" />
+
+        <ImageView
+            android:layout_width="27px"
+            android:layout_height="45px"
+            android:layout_marginRight="42px"
+            android:background="@drawable/ic_arrow_51" />
+    </LinearLayout>
+
+    <View style="@style/lineDc" />
+
+    <View
+        style="@style/lineDc"
+        android:layout_marginTop="36px" />
+
+    <LinearLayout
+        android:id="@+id/myProjects"
+        android:layout_width="match_parent"
+        android:layout_height="144px"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="72px"
+            android:layout_height="66px"
+            android:layout_marginLeft="39px"
+            android:background="@drawable/ic_my_pros" />
+
+        <TextView
+            style="@style/text_48px"
+            android:layout_marginLeft="33px"
+            android:layout_weight="1"
+            android:text="我的项目" />
+
+        <ImageView
+            android:layout_width="27px"
+            android:layout_height="45px"
+            android:layout_marginRight="42px"
+            android:background="@drawable/ic_arrow_51" />
+    </LinearLayout>
+
+    <View style="@style/lineDc" />
+
+    <View
+        style="@style/lineDc"
+        android:layout_marginTop="36px" />
+
+    <LinearLayout
+        android:id="@+id/myProfile"
+        android:layout_width="match_parent"
+        android:layout_height="144px"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="60px"
+            android:layout_height="60px"
+            android:layout_marginLeft="42px"
+            android:background="@drawable/ic_my_profile" />
+
+        <TextView
+            style="@style/text_48px"
+            android:layout_marginLeft="42px"
+            android:layout_weight="1"
+            android:text="我的资料" />
+
+        <ImageView
+            android:layout_width="27px"
+            android:layout_height="45px"
+            android:layout_marginRight="42px"
+            android:background="@drawable/ic_arrow_51" />
+    </LinearLayout>
+
+    <View style="@style/lineDc" />
+
+    <View
+        style="@style/lineDc"
+        android:layout_marginTop="36px" />
+
+    <LinearLayout
+        android:id="@+id/aboutSys"
+        android:layout_width="match_parent"
+        android:layout_height="144px"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="60px"
+            android:layout_height="60px"
+            android:layout_marginLeft="42px"
+            android:background="@drawable/ic_about_sys" />
+
+        <TextView
+            style="@style/text_48px"
+            android:layout_marginLeft="42px"
+            android:layout_weight="1"
+            android:text="关于系统" />
+
+        <ImageView
+            android:layout_width="27px"
+            android:layout_height="45px"
+            android:layout_marginRight="42px"
+            android:background="@drawable/ic_arrow_51" />
+    </LinearLayout>
+
+    <View style="@style/lineDc" />
+
+</LinearLayout>

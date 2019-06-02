@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/page_bg"
+    android:orientation="vertical">
+
+    <com.souja.lib.widget.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:mTitle="消息中心" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120px"
+        android:layout_marginLeft="87px"
+        android:layout_marginTop="30px"
+        android:layout_marginRight="87px"
+        android:layout_marginBottom="30px"
+        android:background="@drawable/shape_search_bg"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="30px"
+            android:layout_height="33px"
+            android:layout_marginLeft="45px"
+            android:background="@drawable/ic_search" />
+
+        <EditText
+            android:id="@+id/ed_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            android:hint="搜索设备名称、故障名称或安装地址"
+            android:imeOptions="actionDone"
+            android:paddingLeft="15px"
+            android:paddingRight="45px"
+            android:singleLine="true"
+            android:textSize="36px" />
+    </LinearLayout>
+
+    <View style="@style/lineDc" />
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/smartRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_devices"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</LinearLayout>
