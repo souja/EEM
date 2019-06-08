@@ -5,9 +5,9 @@ package com.byt.eem.util;
  */
 
 public class MConstants {
-        public static String HTTP = "https://wxzz.chftne.cn/api";//test
-//    public static String HTTP = "https://wx.zzese.cn/api";//pro
-
+//        public static String HTTP = "https://wxzz.chftne.cn/api";//test
+//    public static String HTTP = "https://xcwxapp.chftne.cn/api";//pro
+        public static String HTTP = "https://wx.zzese.cn/api";//pro
     //用户信息缓存KEY
     public static final String USERINFO_KEY = "eemUserInfo";
 
