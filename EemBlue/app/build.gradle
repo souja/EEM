@@ -15,7 +15,7 @@ android {
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
-        applicationId "com.byt.eem"
+        applicationId "com.byt.eemblueblue"
         minSdkVersion 15
         targetSdkVersion 22
         versionCode 1
@@ -23,7 +23,8 @@ android {
         multiDexEnabled true
 
         ndk {
-            abiFilters "armeabi","x86"
+            abiFilters "armeabi"
+//            abiFilters "armeabi", "x86"
         }
     }
 
@@ -67,7 +68,6 @@ dependencies {
     //rui ipts↓
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
-
 
 
 tasks.withType(JavaCompile) {

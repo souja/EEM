@@ -11,7 +11,7 @@
         app:mTitle="关于系统" />
 
     <ImageView
-        android:layout_width="840px"
+        android:layout_width="776px"
         android:layout_height="150px"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="155px"

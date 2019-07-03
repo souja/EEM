@@ -59,7 +59,7 @@
         android:textSize="45px"
         android:visibility="gone" />
 
-    <com.byt.eem.widget.MCheckableImgView
+    <com.byt.eemblue.widget.MCheckableImgView
         android:id="@+id/ib_menu"
         android:layout_width="150px"
         android:layout_height="150px"
