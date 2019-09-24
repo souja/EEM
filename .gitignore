@@ -29,3 +29,6 @@ proguard/
 .idea/
 *.iml
 test/
+Eem.zip
+Eem/app/debug/output.json
+Eem/app/release/output.json
